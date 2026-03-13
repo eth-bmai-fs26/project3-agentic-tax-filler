@@ -1,0 +1,204 @@
+/* Tree-style sidebar for form editing pages */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #fff;
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+/* Prior year toggle at top of sidebar */
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-toggle-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+.sidebar-toggle-switch.active {
+  background: var(--color-primary);
+}
+
+.sidebar-toggle-switch.active::after {
+  transform: translateX(16px);
+}
+
+/* Back to overview link */
+.sidebar-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.sidebar-back:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
+.sidebar-back svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Section groups */
+.sidebar-section {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.sidebar-section-header:hover {
+  background: var(--color-bg-alt);
+}
+
+/* Status dot next to section header */
+.sidebar-section-header .section-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.sidebar-section-header .section-status-filled {
+  background: var(--color-primary);
+}
+
+.sidebar-section-header .section-status-error {
+  background: var(--color-error);
+}
+
+.sidebar-section-header .section-status-empty {
+  border: 1.5px solid #bbb;
+  background: transparent;
+}
+
+.sidebar-section-arrow {
+  font-size: 0.65rem;
+  color: var(--color-text-secondary);
+  transition: transform 0.2s;
+  margin-left: auto;
+}
+
+.sidebar-section-arrow.open {
+  transform: rotate(90deg);
+}
+
+/* Sub-items */
+.sidebar-items {
+  list-style: none;
+  padding: 0 0 8px 0;
+}
+
+.sidebar-items li {
+  margin: 0;
+}
+
+.sidebar-items a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px 7px 24px;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-items a:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
+.sidebar-items a.active {
+  color: var(--color-primary);
+  font-weight: 600;
+  background: var(--color-primary-light);
+  border-left-color: var(--color-primary);
+}
+
+/* Expand/collapse arrow for sub-items */
+.sidebar-items .expand-arrow {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: var(--color-text-secondary);
+}
+
+/* Status dots */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot-empty {
+  border: 1.5px solid #bbb;
+  background: transparent;
+}
+
+.status-dot-progress {
+  background: var(--color-primary);
+  opacity: 0.5;
+}
+
+.status-dot-complete {
+  background: var(--color-primary);
+}
+
+.status-dot-error {
+  background: var(--color-error);
+}

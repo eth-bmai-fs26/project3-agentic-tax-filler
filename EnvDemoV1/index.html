@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZH Private Tax 2025 — Simulator</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+(function () {
+  function snapshotFields() {
+    var snapshot = {};
+    document.querySelectorAll('input, select, textarea').forEach(function (el) {
+      if (el.id) {
+        snapshot[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+      }
+    });
+    return snapshot;
+  }
+
+  function isVisible(el) {
+    var style = getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+  }
+
+  window.TaxPortal = {
+    scanPage: function () {
+      try {
+        var hash = window.location.hash || '';
+        var page_name = hash.replace(/^#\/?/, '') || 'root';
+        var elements = [];
+        var seen = new Set();
+
+        document.querySelectorAll('input, select, textarea').forEach(function (el) {
+          if (!isVisible(el)) return;
+          if (seen.has(el.id)) return;
+          seen.add(el.id);
+          var entry = {
+            type: el.tagName.toLowerCase() === 'select' ? 'select' : (el.type || 'text'),
+            locator: el.id || null,
+            label: el.placeholder || el.name || el.id || '',
+            value: el.type === 'checkbox' ? el.checked : el.value,
+            required: el.required || false,
+          };
+          if (el.tagName.toLowerCase() === 'select') {
+            entry.options = Array.from(el.options).map(function (o) { return { value: o.value, text: o.text }; });
+          }
+          elements.push(entry);
+        });
+
+        document.querySelectorAll('button, a[role="button"]').forEach(function (el) {
+          if (!isVisible(el)) return;
+          var locator = el.id || null;
+          if (locator && seen.has(locator)) return;
+          if (locator) seen.add(locator);
+          elements.push({ type: 'button', locator: locator, content: el.textContent.trim() });
+        });
+
+        return JSON.stringify({ page_name: page_name, validation_errors: [], elements: elements });
+      } catch (e) {
+        return JSON.stringify({ error: e.message });
+      }
+    },
+
+    fillField: function (locator, value) {
+      try {
+        var el = document.getElementById(locator);
+        if (!el) return JSON.stringify({ success: false, field_id: locator, error: 'Element not found' });
+
+        var before = snapshotFields();
+
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value');
+        var nativeTextareaSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value');
+        var nativeSelectSetter = Object.getOwnPropertyDescriptor(window.HTMLSelectElement.prototype, 'value');
+        var nativeCheckedSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'checked');
+
+        var tag = el.tagName.toLowerCase();
+        var inputType = el.type ? el.type.toLowerCase() : '';
+
+        if (tag === 'input' && inputType === 'checkbox') {
+          nativeCheckedSetter.set.call(el, value === true || value === 'true');
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        } else if (tag === 'textarea') {
+          nativeTextareaSetter.set.call(el, value);
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        } else if (tag === 'select') {
+          nativeSelectSetter.set.call(el, value);
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+          nativeInputValueSetter.set.call(el, value);
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        var after = snapshotFields();
+        var triggered_changes = {};
+        Object.keys(after).forEach(function (id) {
+          if (id !== locator && after[id] !== before[id]) {
+            triggered_changes[id] = { from: before[id], to: after[id] };
+          }
+        });
+
+        var value_set = tag === 'input' && inputType === 'checkbox' ? el.checked : el.value;
+        return JSON.stringify({ success: true, field_id: locator, value_set: value_set, triggered_changes: triggered_changes });
+      } catch (e) {
+        return JSON.stringify({ success: false, field_id: locator, error: e.message });
+      }
+    },
+
+    clickElement: function (locator) {
+      try {
+        var el = document.getElementById(locator) || document.querySelector(locator);
+        if (!el) return JSON.stringify({ success: false, locator: locator, error: 'Element not found' });
+
+        var hashBefore = window.location.hash;
+        el.click();
+        var hashAfter = window.location.hash;
+
+        var navigated = hashAfter !== hashBefore;
+        return JSON.stringify({
+          success: true,
+          locator: locator,
+          action: navigated ? 'navigate' : 'click',
+          new_page: navigated ? hashAfter.replace(/^#\/?/, '') : null,
+        });
+      } catch (e) {
+        return JSON.stringify({ success: false, locator: locator, error: e.message });
+      }
+    },
+
+    submitForm: function () {
+      try {
+        if (!window.__taxPortalBridge) {
+          return JSON.stringify({ success: false, errors: [{ field_id: null, message: 'App bridge not yet initialized' }], warnings: [] });
+        }
+
+        var formData = window.__taxPortalBridge.getData();
+        var errors = [];
+
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(function (el) {
+          if (!isVisible(el)) return;
+          var val = el.type === 'checkbox' ? el.checked : el.value;
+          if (!val && val !== false) {
+            errors.push({ field_id: el.id || null, message: 'Required field is empty' });
+          }
+        });
+
+        return JSON.stringify({
+          success: errors.length === 0,
+          submission_json: formData,
+          errors: errors,
+          warnings: [],
+        });
+      } catch (e) {
+        return JSON.stringify({ success: false, errors: [{ field_id: null, message: e.message }], warnings: [] });
+      }
+    },
+  };
+
+  // Colab cross-frame bridge via postMessage (works even with sandboxed iframes).
+  // The main notebook window (where eval_js runs) sends call requests here;
+  // this listener executes them and posts the result back.
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data._portal !== 'TaxPortal') return;
+    var result;
+    try {
+      result = window.TaxPortal[e.data.fn].apply(window.TaxPortal, e.data.args || []);
+    } catch (err) {
+      result = JSON.stringify({ error: err.message });
+    }
+    (e.source || window.parent).postMessage({ _portal: 'TaxPortal', _id: e.data._id, result: result }, '*');
+  });
+})();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
