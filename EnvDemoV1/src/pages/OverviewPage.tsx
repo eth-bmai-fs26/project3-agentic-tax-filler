@@ -165,7 +165,14 @@ export default function OverviewPage() {
           />
           <OverviewItem
             label="Other Professional Expenses"
-            value={data.deductions.berufsauslagen.type === 'flat-rate' ? '2,000' : undefined}
+            // value={data.deductions.berufsauslagen.type === 'flat-rate' ? (() => {
+            //   const brutto = Number(data.income.employment.bruttolohn) || 0;
+            //   const ahv = Number(data.income.employment.ahvcontributions) || 0;
+            //   const bvg = Number(data.income.employment.bvgcontributions) || 0;
+            //   const nettolohn = brutto - ahv - bvg;
+            //   return Math.min(Math.max(Math.round(nettolohn * 0.03), 2000), 4000).toLocaleString('de-CH');
+            // })() : undefined}
+            value={data.deductions.berufsauslagen.type === 'flat-rate' ? Number(data.deductions.flatrate.amount || 2000).toLocaleString('de-CH') : undefined}
             status="filled"
             link="/deductions/professional"
             onClick={go}

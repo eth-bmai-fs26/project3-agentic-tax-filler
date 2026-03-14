@@ -48,7 +48,7 @@ const initialFormData: FormData = {
 
   deductions: {
     berufsauslagen: { type: 'flat-rate' },
-    flatrate: { amount: '2000' },
+    flatrate: { amount: '0' },
     effective: [],
     fahrkosten: { amount: '', description: '' },
     verpflegung: { amount: '' },
@@ -171,6 +171,26 @@ export function FormProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     window.__taxPortalBridge = { getData: () => data, updateField, addRow, removeRow, updateRowField };
   }, [data, updateField, addRow, removeRow, updateRowField]);
+
+  // Auto-compute Berufsauslagen Pauschale when income changes
+  useEffect(() => {
+    const brutto = Number(data.income.employment.bruttolohn) || 0;
+    const ahv = Number(data.income.employment.ahvcontributions) || 0;
+    const bvg = Number(data.income.employment.bvgcontributions) || 0;
+    const nettolohn = brutto - ahv - bvg;
+    const pauschale = Math.min(Math.max(Math.round(nettolohn * 0.03), 2000), 4000);
+    const current = data.deductions.flatrate.amount;
+    const newVal = String(pauschale);
+    if (current !== newVal) {
+      setData(prev => ({
+        ...prev,
+        deductions: {
+          ...prev.deductions,
+          flatrate: { amount: newVal },
+        },
+      }));
+    }
+  }, [data.income.employment.bruttolohn, data.income.employment.ahvcontributions, data.income.employment.bvgcontributions]);
 
   const getPageStatus = useCallback((page: string): PageStatus => {
     const checkFields = (obj: Record<string, unknown>): { filled: number; total: number } => {

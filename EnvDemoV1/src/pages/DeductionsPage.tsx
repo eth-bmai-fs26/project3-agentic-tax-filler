@@ -71,9 +71,21 @@ export default function DeductionsPage({ sub }: DeductionsPageProps) {
             page="deductions" section="berufsauslagen" name="type"
             label="Deduction Type" type="select" options={berufsauslagenOptions}
           />
+          {/* {!isEffective && (() => {
+            const brutto = Number(data.income.employment.bruttolohn) || 0;
+            const ahv = Number(data.income.employment.ahvcontributions) || 0;
+            const bvg = Number(data.income.employment.bvgcontributions) || 0;
+            const nettolohn = brutto - ahv - bvg;
+            const pauschale = Math.min(Math.max(Math.round(nettolohn * 0.03), 2000), 4000);
+            return (
+              <div className="flat-rate-display" style={{ marginTop: 16 }}>
+                Flat-rate deduction: CHF {pauschale.toLocaleString('de-CH')} (3% of net salary, min 2,000 / max 4,000)
+              </div>
+            );
+          })()} */}
           {!isEffective && (
             <div className="flat-rate-display" style={{ marginTop: 16 }}>
-              Flat-rate deduction: CHF 2,000 (automatically applied)
+              Flat-rate deduction: CHF {Number(data.deductions.flatrate.amount || 2000).toLocaleString('de-CH')} (3% of net salary, min 2,000 / max 4,000 — automatically calculated)
             </div>
           )}
           {isEffective && (
