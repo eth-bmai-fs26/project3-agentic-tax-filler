@@ -37,23 +37,23 @@ class ColabBridge(BrowserBridge):
         return self._colab_available
 
     def scan_page(self) -> dict:
-        return self._call("JSON.stringify(window.TaxPortal.scanPage())")
+        return self._call("(window.TaxPortal.scanPage())")
 
     def fill_field(self, locator: str, value: Any) -> dict:
         value_json = json.dumps(value, ensure_ascii=False)
         return self._call(
-            f"JSON.stringify(window.TaxPortal.fillField("
+            f"(window.TaxPortal.fillField("
             f"{json.dumps(locator)}, {value_json}))"
         )
 
     def click_element(self, locator: str) -> dict:
         return self._call(
-            f"JSON.stringify(window.TaxPortal.clickElement("
+            f"(window.TaxPortal.clickElement("
             f"{json.dumps(locator)}))"
         )
 
     def submit_form(self) -> dict:
-        return self._call("JSON.stringify(window.TaxPortal.submitForm())")
+        return self._call("(window.TaxPortal.submitForm())")
 
     # -- internal --------------------------------------------------------
 
