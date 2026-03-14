@@ -41,6 +41,15 @@ class MockFrontend:
         }
 
     def click_element(self, locator: str) -> dict:
+        # Handle login button — advance to personal page
+        if locator == "btn-login":
+            self.current_page = "personal"
+            return {
+                "success": True,
+                "locator": locator,
+                "action": "navigate",
+                "new_page": "personal",
+            }
         for page in self._PAGES:
             if locator == f"btn-nav-{page}":
                 self.current_page = page
