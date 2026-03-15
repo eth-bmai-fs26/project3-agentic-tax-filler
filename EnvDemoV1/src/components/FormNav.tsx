@@ -14,6 +14,7 @@ export default function FormNav({
   return (
     <div className="page-nav">
       <button
+        id="btn-back"
         className="btn-secondary"
         onClick={onBack}
         disabled={!onBack}
@@ -23,6 +24,7 @@ export default function FormNav({
         {backLabel}
       </button>
       <button
+        id="btn-save-draft"
         className="btn-secondary"
         data-testid="nav-save"
         aria-label="Save draft"
@@ -30,6 +32,7 @@ export default function FormNav({
         Save Draft
       </button>
       <button
+        id="btn-next"
         className="btn-primary"
         onClick={onNext}
         disabled={!onNext}

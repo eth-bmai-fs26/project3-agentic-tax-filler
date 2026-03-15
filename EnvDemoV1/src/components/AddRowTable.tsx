@@ -46,7 +46,7 @@ export default function AddRowTable({ page, section, columns, rows, tableId }: A
                 </td>
               ))}
               <td>
-                <button className="btn-danger" onClick={() => removeRow(page, section, i)} aria-label={`Remove row ${i + 1}`}>
+                <button id={`btn-remove-row-${page}-${section}-${i}`} className="btn-danger" onClick={() => removeRow(page, section, i)} aria-label={`Remove row ${i + 1}`}>
                   ✕
                 </button>
               </td>
@@ -54,7 +54,7 @@ export default function AddRowTable({ page, section, columns, rows, tableId }: A
           ))}
         </tbody>
       </table>
-      <button className="btn-secondary add-row-btn" onClick={() => addRow(page, section)}>
+      <button id={`btn-add-row-${page}-${section}`} className="btn-secondary add-row-btn" onClick={() => addRow(page, section)}>
         + Add Row
       </button>
     </div>
