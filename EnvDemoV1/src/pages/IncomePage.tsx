@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useForm } from '../context/FormContext';
 import FormField from '../components/FormField';
 import FormSection from '../components/FormSection';
 import FormNav from '../components/FormNav';
@@ -9,9 +8,7 @@ interface IncomePageProps {
 }
 
 export default function IncomePage({ sub }: IncomePageProps) {
-  const { data } = useForm();
   const navigate = useNavigate();
-  const isSelfEmployed = data.income.selfemployment.enabled;
 
   /* ---- Employment ---- */
   if (sub === 'employment') {
@@ -29,13 +26,11 @@ export default function IncomePage({ sub }: IncomePageProps) {
 
         <FormSection title="Self-Employment (Selbständige Erwerbstätigkeit)" id="section-income-selfemployment">
           <FormField page="income" section="selfemployment" name="enabled" label="I have self-employment income" type="checkbox" />
-          {isSelfEmployed && (
             <div className="form-grid" style={{ marginTop: 16 }}>
               <FormField page="income" section="selfemployment" name="revenue" label="Revenue" type="number" />
               <FormField page="income" section="selfemployment" name="expenses" label="Business Expenses" type="number" />
               <FormField page="income" section="selfemployment" name="netincome" label="Net Income" type="number" />
             </div>
-          )}
         </FormSection>
 
         <FormNav
