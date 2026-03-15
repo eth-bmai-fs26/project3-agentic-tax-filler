@@ -1,0 +1,15 @@
+=== INVOICE ===
+Invoice No: PC-2025-004
+Date: 2025-11-20
+
+From: Priya Chakraborty, Militärstrasse 76, 8004 Zürich
+To:   Novartis Pharma AG, Lichtstrasse 35, 4056 Basel
+
+Description: Clinical trial data analysis automation (September–November 2025)
+Hours: 32 hours @ CHF 125/h
+
+Amount:          CHF  4,000.00
+VAT:             Exempt (below CHF 100,000 threshold)
+
+Payment terms: 30 days net
+IBAN: CH93 0076 2011 6238 5295 7

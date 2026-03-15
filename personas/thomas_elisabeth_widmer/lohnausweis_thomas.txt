@@ -1,0 +1,30 @@
+=== LOHNAUSWEIS / CERTIFICAT DE SALAIRE ===
+Steuerperiode: 2025 (Januar–August)
+
+Arbeitgeber: Zurich Insurance Group AG
+Adresse:     Mythenquai 2, 8002 Zürich
+
+Arbeitnehmer: Thomas Widmer
+AHV-Nr:       756.3312.8847.65
+
+ 1. Lohn (brutto)                          CHF   96,000.00
+ 2. Gehaltsnebenleistungen                 CHF        0.00
+ 3. Unentgeltliche Befoerderung            Nein
+ 4. Kantinenverpflegung                    Ja
+ 5. Andere Gehaltsnebenleistungen          CHF        0.00
+ 6. Dienstaltersgeschenke                  CHF    5,000.00
+ 7. Verwaltungsratsentschaedigungen        CHF        0.00
+ 8. Weitere Leistungen                     CHF        0.00
+ 9. Beitraege AHV/IV/EO/ALV               CHF    5,088.00
+    Beitraege NBU                          CHF      384.00
+10. BVG ordentlich                         CHF    5,760.00
+    Einkauf BVG                            CHF        0.00
+11. Beitraege an Vorsorge (Saeulen 3a)     CHF        0.00
+12. Nettolohn                              CHF   84,768.00
+13. Pauschalspesen                         CHF    3,200.00
+14. Weitere Gehaltsnebenleistungen         CHF        0.00
+    14.1 Kantinenverpflegung/Lunch-Checks: Ja
+
+15. Bemerkungen: Pensum 100%. Beschäftigungsdauer 01.01.2025–31.08.2025.
+    Austritt per 31.08.2025 (Pensionierung). 35 Dienstjahre.
+    Dienstaltersgeschenk (Ziff. 6) anlässlich der Pensionierung.

@@ -1,0 +1,21 @@
+=== ZUSAMMENSTELLUNG KRANKHEITSKOSTEN 2025 ===
+(Selbstbehalt / nicht von Krankenkasse gedeckt)
+
+Patient: Thomas Widmer
+─────────────────────────────────────────────
+15.03.2025  Dr. med. R. Keller, Zahnarzt, Küsnacht
+            Zahnkrone + Behandlung                    CHF  2,800.00
+
+Patient: Elisabeth Widmer
+─────────────────────────────────────────────
+22.05.2025  TopPharm Apotheke Küsnacht
+            Diverse Medikamente (Selbstbehalt)        CHF    900.00
+
+10.09.2025  Physiotherapie Küsnacht
+            12 Sitzungen à CHF 125 (Selbstbehalt)    CHF  1,500.00
+
+─────────────────────────────────────────────
+Total Krankheitskosten 2025:                          CHF  5,200.00
+
+Hinweis: Nur der Betrag, der 5% des Reineinkommens übersteigt,
+ist steuerlich abzugsfähig.

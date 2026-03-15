@@ -1,0 +1,46 @@
+=== INTERACTIVE BROKERS — ANNUAL ACTIVITY STATEMENT ===
+Account: U8847291
+Period: January 1, 2025 – December 31, 2025
+Account Holder: Priya Chakraborty
+Base Currency: USD
+
+─── PORTFOLIO SUMMARY (as of Dec 31, 2025) ───
+Asset Class         Market Value (USD)
+Equities            $38,200.00
+ETFs                 $6,800.00
+Cash                    $0.00
+─────────────────────────────────
+Total               $45,000.00
+
+─── DIVIDEND INCOME ───
+Date        Symbol    Description                      Gross (USD)  WHT (USD)  Net (USD)
+2025-03-15  AAPL      Apple Inc — Dividend                  96.00     14.40      81.60
+2025-05-10  MSFT      Microsoft Corp — Dividend            180.00     27.00     153.00
+2025-06-15  AAPL      Apple Inc — Dividend                  96.00     14.40      81.60
+2025-08-12  VTI       Vanguard Total Stock Market ETF      210.00     31.50     178.50
+2025-09-15  AAPL      Apple Inc — Dividend                  96.00     14.40      81.60
+2025-11-10  MSFT      Microsoft Corp — Dividend            180.00     27.00     153.00
+2025-12-15  AAPL      Apple Inc — Dividend                  96.00     14.40      81.60
+2025-12-20  VTI       Vanguard Total Stock Market ETF      246.00     36.90     209.10
+─────────────────────────────────────────────────────────────────────
+Total Dividends                                         1,200.00    180.00   1,020.00
+
+─── REALIZED GAINS/LOSSES ───
+Date        Symbol  Qty   Buy Price  Sell Price  Proceeds (USD)  Cost (USD)  Gain/Loss (USD)
+2025-04-22  NVDA    20    $140.00    $180.00         $3,600.00   $2,800.00       $800.00
+2025-09-08  TSLA    15    $210.00    $290.00         $4,350.00   $3,150.00     $1,200.00
+2025-11-25  AMZN    10    $155.00    $275.00         $2,750.00   $1,550.00     $1,200.00
+─────────────────────────────────────────────────────────────────────
+Total Realized Gains                                                          $3,200.00
+
+─── WITHHOLDING TAX SUMMARY ───
+Country     Tax Withheld (USD)
+USA (30%)       $180.00
+(Treaty rate 15% may apply — consult tax advisor for DA-1 reclaim)
+
+─── FEES ───
+Commissions: $142.50
+Currency conversion fees: $28.00
+
+This statement is provided for informational purposes.
+Interactive Brokers LLC, One Pickwick Plaza, Greenwich, CT 06830

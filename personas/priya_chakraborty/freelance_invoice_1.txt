@@ -1,0 +1,15 @@
+=== INVOICE ===
+Invoice No: PC-2025-001
+Date: 2025-02-28
+
+From: Priya Chakraborty, Militärstrasse 76, 8004 Zürich
+To:   DataFlow GmbH, Baarerstrasse 12, 6300 Zug
+
+Description: ML pipeline optimization consulting (January–February 2025)
+Hours: 40 hours @ CHF 125/h
+
+Amount:          CHF  5,000.00
+VAT:             Exempt (below CHF 100,000 threshold)
+
+Payment terms: 30 days net
+IBAN: CH93 0076 2011 6238 5295 7
