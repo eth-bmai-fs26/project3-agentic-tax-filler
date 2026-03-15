@@ -25,7 +25,7 @@ export default function IncomePage({ sub }: IncomePageProps) {
         </FormSection>
 
         <FormSection title="Self-Employment (Selbständige Erwerbstätigkeit)" id="section-income-selfemployment">
-          <FormField page="income" section="selfemployment" name="enabled" label="I have self-employment income" type="checkbox" />
+          {/* <FormField page="income" section="selfemployment" name="enabled" label="I have self-employment income" type="checkbox" /> */}
             <div className="form-grid" style={{ marginTop: 16 }}>
               <FormField page="income" section="selfemployment" name="revenue" label="Revenue" type="number" />
               <FormField page="income" section="selfemployment" name="expenses" label="Business Expenses" type="number" />
