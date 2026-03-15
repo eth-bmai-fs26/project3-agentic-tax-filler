@@ -1,0 +1,28 @@
+=== LOHNAUSWEIS / CERTIFICAT DE SALAIRE ===
+Steuerperiode: 2025
+
+Arbeitgeber: Spotify AB, Zurich Branch
+Adresse:     Hardturmstrasse 253, 8005 Zürich
+
+Arbeitnehmerin: Yuki Tanaka
+AHV-Nr:         756.7745.2298.41
+
+ 1. Lohn (brutto)                          CHF  108,000.00
+ 2. Gehaltsnebenleistungen                 CHF        0.00
+ 3. Unentgeltliche Befoerderung            Nein
+ 4. Kantinenverpflegung                    Ja
+ 5. Andere Gehaltsnebenleistungen          CHF        0.00
+ 6. Dienstaltersgeschenke                  CHF        0.00
+ 7. Verwaltungsratsentschaedigungen        CHF        0.00
+ 8. Weitere Leistungen                     CHF        0.00
+ 9. Beitraege AHV/IV/EO/ALV               CHF    5,724.00
+    Beitraege NBU                          CHF      432.00
+10. BVG ordentlich                         CHF    6,480.00
+    Einkauf BVG                            CHF        0.00
+11. Beitraege an Vorsorge (Saeulen 3a)     CHF        0.00
+12. Nettolohn                              CHF   95,364.00
+13. Pauschalspesen                         CHF    3,600.00
+14. Weitere Gehaltsnebenleistungen         CHF        0.00
+    14.1 Kantinenverpflegung/Lunch-Checks: Ja
+
+15. Bemerkungen: Pensum 100%.

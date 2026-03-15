@@ -1,0 +1,13 @@
+{
+  "name": "Yuki Tanaka",
+  "address": "Langstrasse 88, 8004 Zürich",
+  "date_of_birth": "1989-06-03",
+  "ahv_number": "756.7745.2298.41",
+  "zivilstand": "geschieden",
+  "nationality": "JP",
+  "permit": "C",
+  "children": [
+    {"name": "Hana Tanaka", "date_of_birth": "2020-04-11"}
+  ],
+  "brief": "I'm a UX designer at Spotify in Zurich. I got divorced in October this year — it was finalized on the 15th. My daughter Hana (5) lives with me most of the time. My ex-husband pays child support and spousal support starting November. I have a mortgage on my apartment but I can't find the property documents right now. My German is okay but not great (B1), so I sometimes struggle with official forms. I also took a German B2 course this year to improve. I don't think I contributed to Pillar 3a this year — things were too chaotic with the divorce."
+}
