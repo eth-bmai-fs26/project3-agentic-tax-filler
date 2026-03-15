@@ -1,0 +1,15 @@
+=== INVOICE ===
+Invoice No: PC-2025-002
+Date: 2025-05-15
+
+From: Priya Chakraborty, Militärstrasse 76, 8004 Zürich
+To:   Roche Diagnostics International AG, Forrenstrasse 2, 6343 Rotkreuz
+
+Description: Predictive maintenance model development (March–May 2025)
+Hours: 56 hours @ CHF 125/h
+
+Amount:          CHF  7,000.00
+VAT:             Exempt (below CHF 100,000 threshold)
+
+Payment terms: 30 days net
+IBAN: CH93 0076 2011 6238 5295 7

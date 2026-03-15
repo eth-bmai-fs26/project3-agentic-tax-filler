@@ -1,0 +1,13 @@
+=== FREELANCE EXPENSES 2025 ===
+(handwritten list, transcribed)
+
+Priya's freelance business expenses:
+
+- Laptop (MacBook Pro M3, bought March 2025): CHF 1,800
+- Software subscriptions (GitHub Copilot, AWS, Weights & Biases): CHF 600
+- Home office stuff (monitor stand, keyboard, cables): CHF 300
+
+Total: CHF 2,700
+
+Note: I kept receipts for the laptop and software but not for the
+small home office items. Is that going to be a problem?
