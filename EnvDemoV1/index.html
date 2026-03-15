@@ -38,7 +38,9 @@
           if (seen.has(el.id)) return;
           seen.add(el.id);
           var entry = {
-            type: el.tagName.toLowerCase() === 'select' ? 'select' : (el.type || 'text'),
+            type: el.tagName.toLowerCase() === 'select' ? 'select' : 
+            (el.tagName.toLowerCase() === 'input' ? ('input-' + (el.type || 'text')) : 
+            (el.tagName.toLowerCase() === 'textarea' ? 'textarea' : (el.type || 'text'))),
             locator: el.id || null,
             label: el.placeholder || el.name || el.id || '',
             value: el.type === 'checkbox' ? el.checked : el.value,
