@@ -1,0 +1,42 @@
+=== WERTSCHRIFTENVERZEICHNIS / SECURITIES PORTFOLIO ===
+UBS Switzerland AG — Jahresabschluss 2025
+
+Depot-Nr: 234-567890.01
+Inhaber: Thomas Widmer & Elisabeth Widmer
+
+── Bestand per 31. Dezember 2025 ──────────────────────────
+Titel                          ISIN              Stück   Kurswert (CHF)
+Nestlé SA                      CH0038863350       500     52,500.00
+Novartis AG                    CH0012005267       400     38,000.00
+Roche Holding AG               CH0012032048       150     42,750.00
+Zurich Insurance Group AG      CH0011075394       120     62,400.00
+Swiss Re AG                    CH0126881561        80     9,200.00
+UBS Group AG                   CH0244767585       600     17,400.00
+iShares Core SPI (CH)          CH0237935652       200     36,800.00
+Vanguard FTSE All-World ETF    IE00BK5BQT80       450    55,350.00
+UBS ETF SMI                    CH0017142719       300     39,600.00
+CS / UBS Money Market Fund     CH0102295455     1,000     66,000.00
+──────────────────────────────────────────────────────────────
+Total Kurswert per 31.12.2025:                            CHF  420,000.00
+
+── Erträge 2025 ──────────────────────────────────────────
+Titel                    Bruttodividende (CHF)  Verrechnungssteuer (CHF)  Nettodividende (CHF)
+Nestlé SA                        3,000.00                1,050.00               1,950.00
+Novartis AG                      1,360.00                  476.00                 884.00
+Roche Holding AG                 1,425.00                  498.75                 926.25
+Zurich Insurance Group AG        2,880.00                1,008.00               1,872.00
+Swiss Re AG                        480.00                  168.00                 312.00
+UBS Group AG                       420.00                  147.00                 273.00
+iShares Core SPI (CH)              590.00                  206.50                 383.50
+Vanguard FTSE All-World ETF      1,125.00                  ---                  1,125.00
+UBS ETF SMI                        792.00                  277.20                 514.80
+CS / UBS Money Market Fund         528.00                  184.80                 343.20
+──────────────────────────────────────────────────────────────
+Total Bruttodividende:                                    CHF   8,600.00  (davon CHF 4,016.25 Verrechnungssteuer)
+Anspruch auf Rückerstattung Verrechnungssteuer:           CHF   3,010.00  (nur CH-Titel, exkl. ausländische)
+
+Hinweis: Die Verrechnungssteuer auf Schweizer Titel kann bei vollständiger
+Deklaration aller Erträge zurückgefordert werden (DA-1 / R-Formular).
+
+Zürich, 31. Januar 2026
+UBS Switzerland AG

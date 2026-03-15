@@ -1,0 +1,24 @@
+=== AHV-RENTENBESCHEINIGUNG ===
+Steuerjahr: 2025
+
+Ausgleichskasse: SVA Zürich
+Versichertennummer: 756.3312.8847.65
+
+Rentenberechtigter: Thomas Widmer
+
+Art der Rente:       Altersrente (ordentlich)
+Rentenbeginn:        01. September 2025
+Monatliche Rente:    CHF  2,390.00
+
+Auszahlungen 2025:
+  September 2025     CHF  2,390.00
+  Oktober 2025       CHF  2,390.00
+  November 2025      CHF  2,390.00
+  Dezember 2025      CHF  2,390.00
+  ─────────────────────────────
+  Total 2025:        CHF  9,560.00
+
+Diese Bescheinigung dient als Nachweis für die Steuererklärung.
+
+Zürich, 15. Januar 2026
+SVA Zürich — Ausgleichskasse
