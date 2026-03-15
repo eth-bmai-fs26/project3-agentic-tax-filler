@@ -48,7 +48,6 @@ export default function PersonalPage({ sub }: PersonalPageProps) {
   const { data } = useForm();
   const navigate = useNavigate();
   const isMarried = data.personal.main.maritalstatus === 'married';
-  const [activeTab, setActiveTab] = useState<'taxpayer' | 'partner'>('taxpayer');
 
   const fullName = [data.personal.main.firstName, data.personal.main.lastName].filter(Boolean).join(' ') || 'Taxpayer';
   const partnerName = [data.personal.partner.firstName, data.personal.partner.lastName].filter(Boolean).join(' ') || 'Partner';
@@ -59,62 +58,47 @@ export default function PersonalPage({ sub }: PersonalPageProps) {
       <div>
         <h1>Taxpayer Details</h1>
 
-        {isMarried && (
-          <div className="person-tabs">
-            <button
-              className={`person-tab${activeTab === 'taxpayer' ? ' active' : ''}`}
-              onClick={() => setActiveTab('taxpayer')}
-            >
-              {fullName}
-              <span className="tab-warning">!</span>
-            </button>
-            <button
-              className={`person-tab${activeTab === 'partner' ? ' active' : ''}`}
-              onClick={() => setActiveTab('partner')}
-            >
-              {partnerName}
-              <span className="tab-warning">!</span>
-            </button>
+        {/* ── FIX: Both taxpayer and partner
+            sections render simultaneously so scanPage() can discover
+            ALL fields. Previously partner fields were behind an
+            activeTab === 'partner' condition, making them invisible
+            to the agent's scanPage() call. ── */}
+
+        <FormSection title={isMarried ? `Personal Details — ${fullName}` : 'Personal Details'} id="section-personal-main">
+          <div className="form-grid-3">
+            <FormField page="personal" section="main" name="firstName" label="First Name" required />
+            <FormField page="personal" section="main" name="lastName" label="Last Name" required />
+            <FormField page="personal" section="main" name="dateofbirth" label="Date of Birth" type="date" required />
           </div>
-        )}
+          <div className="form-grid-3" style={{ marginTop: 20 }}>
+            <FormField page="personal" section="main" name="street" label="Street" required />
+            <FormField page="personal" section="main" name="streetNumber" label="Number" required />
+            <FormField page="personal" section="main" name="apartment" label="Apartment / Suite" />
+          </div>
+          <div className="form-grid" style={{ marginTop: 20 }}>
+            <FormField page="personal" section="main" name="zip" label="ZIP Code" required />
+            <FormField page="personal" section="main" name="city" label="City" required />
+          </div>
+          <div className="form-grid" style={{ marginTop: 20 }}>
+            <FormField page="personal" section="main" name="phone" label="Phone" />
+            <FormField page="personal" section="main" name="email" label="Email" />
+          </div>
+          <div className="form-grid" style={{ marginTop: 20 }}>
+            <FormField page="personal" section="main" name="maritalstatus" label="Marital Status" type="select" options={maritalOptions} required />
+            <FormField page="personal" section="main" name="religion" label="Religion" type="select" options={religionOptions} />
+          </div>
+          <div className="form-grid-3" style={{ marginTop: 20 }}>
+            <FormField page="personal" section="main" name="ahvnumber" label="AHV Number" required />
+            <FormField page="personal" section="main" name="occupation" label="Occupation" required />
+            <FormField page="personal" section="main" name="employer" label="Employer" />
+          </div>
+          <div className="form-grid" style={{ marginTop: 20 }}>
+            <FormField page="personal" section="main" name="workplace" label="Workplace" />
+          </div>
+        </FormSection>
 
-        {(!isMarried || activeTab === 'taxpayer') && (
-          <FormSection title="Personal Details" id="section-personal-main">
-            <div className="form-grid-3">
-              <FormField page="personal" section="main" name="firstName" label="First Name" required />
-              <FormField page="personal" section="main" name="lastName" label="Last Name" required />
-              <FormField page="personal" section="main" name="dateofbirth" label="Date of Birth" type="date" required />
-            </div>
-            <div className="form-grid-3" style={{ marginTop: 20 }}>
-              <FormField page="personal" section="main" name="street" label="Street" required />
-              <FormField page="personal" section="main" name="streetNumber" label="Number" required />
-              <FormField page="personal" section="main" name="apartment" label="Apartment / Suite" />
-            </div>
-            <div className="form-grid" style={{ marginTop: 20 }}>
-              <FormField page="personal" section="main" name="zip" label="ZIP Code" required />
-              <FormField page="personal" section="main" name="city" label="City" required />
-            </div>
-            <div className="form-grid" style={{ marginTop: 20 }}>
-              <FormField page="personal" section="main" name="phone" label="Phone" />
-              <FormField page="personal" section="main" name="email" label="Email" />
-            </div>
-            <div className="form-grid" style={{ marginTop: 20 }}>
-              <FormField page="personal" section="main" name="maritalstatus" label="Marital Status" type="select" options={maritalOptions} required />
-              <FormField page="personal" section="main" name="religion" label="Religion" type="select" options={religionOptions} />
-            </div>
-            <div className="form-grid-3" style={{ marginTop: 20 }}>
-              <FormField page="personal" section="main" name="ahvnumber" label="AHV Number" required />
-              <FormField page="personal" section="main" name="occupation" label="Occupation" required />
-              <FormField page="personal" section="main" name="employer" label="Employer" />
-            </div>
-            <div className="form-grid" style={{ marginTop: 20 }}>
-              <FormField page="personal" section="main" name="workplace" label="Workplace" />
-            </div>
-          </FormSection>
-        )}
-
-        {isMarried && activeTab === 'partner' && (
-          <FormSection title="Partner Details" id="section-personal-partner">
+      
+          <FormSection title={`Partner Details — ${partnerName}`} id="section-personal-partner">
             <div className="form-grid-3">
               <FormField page="personal" section="partner" name="firstName" label="First Name" required />
               <FormField page="personal" section="partner" name="lastName" label="Last Name" required />
@@ -129,7 +113,7 @@ export default function PersonalPage({ sub }: PersonalPageProps) {
               <FormField page="personal" section="partner" name="employer" label="Employer" />
             </div>
           </FormSection>
-        )}
+      
 
         <FormNav
           onNext={() => navigate('/personal/children')}

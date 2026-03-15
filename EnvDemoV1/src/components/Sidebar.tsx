@@ -59,6 +59,11 @@ const sections: SidebarSection[] = [
     label: 'Securities',
     items: [
       { path: '/wealth', label: 'Securities Register', key: 'wealth' },
+      /* fix: Added bank accounts as a visible nav item.
+         Bank accounts were rendered on the securities page (WealthPage sub='securities')
+         but the agent couldn't navigate to them because there was no sidebar link.
+         This points to the same /wealth route where bank accounts live. ── */
+      { path: '/wealth', label: 'Bank Accounts', key: 'wealth-bankaccounts' },
     ],
   },
   {
@@ -113,8 +118,6 @@ export default function Sidebar() {
 
   return (
     <nav className="sidebar" aria-label="Tax filing navigation">
-      {/* Prior year toggle removed for demo */}
-
       <a
         id="nav-back-overview"
         className="sidebar-back"
@@ -155,7 +158,7 @@ export default function Sidebar() {
             {openSections[section.key] && (
               <ul className="sidebar-items">
                 {section.items.map(item => (
-                  <li key={item.path}>
+                  <li key={item.path + item.key}>
                     <a
                       id={`nav-${item.key}`}
                       className={isItemActive(item.path) ? 'active' : ''}
