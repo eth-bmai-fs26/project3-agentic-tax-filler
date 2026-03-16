@@ -9,7 +9,8 @@
       "bvgcontributions": "direct from lohnausweis field 10",
       "berufsauslagen_flatrate": "calculated: 3% of (142000-7526.60-8400)=126073.40, 3%=3782.20 -> rounded=3782, within [2000,4000]",
       "verpflegung": "lohnausweis 14.1 = Ja -> 1600 CHF",
-      "fahrkosten": "ZVV Jahresabo = 2840 CHF",
+      "fahrkosten": "ZVV Jahresabo 2840 + Velo-Pauschale 700 = 3540 CHF (prompt explicitly instructs adding CHF 700)",
+      "weitereberufsauslagen": "prompt says MUST fill weitereberufsauslagen-amount with Pauschale = 3782"
       "pillar3a": "VIAC confirmation = 7056 CHF (max for BVG-insured)",
       "interest": "bank_statement Zinsabschluss: 6.25 + 6.25 = 12.50 CHF",
       "donations": "Spende SRK 200 CHF (>= 100 CHF threshold)",
@@ -48,8 +49,12 @@
       "amount": "3782"
     },
     "fahrkosten": {
-      "amount": "2840",
-      "description": "ZVV Jahresabonnement Zone 110"
+      "amount": "3540",
+      "description": "ZVV Jahresabonnement Zone 110 (CHF 2840) + Velo-Pauschale (CHF 700)"
+    },
+    "weitereberufsauslagen": {
+      "amount": "3782",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     },
     "verpflegung": {
       "amount": "1600"
