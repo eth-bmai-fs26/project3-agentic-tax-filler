@@ -18,7 +18,8 @@
       "property_steuerwert": "580000 CHF",
       "bankbalance": "last row Dec 31 = 203644.99",
       "no_donations": "no Spende entries in bank_statement",
-      "physiosuisse": "Laura's Physiosuisse membership 450 CHF - could be berufsauslagen effective, but we use flatrate mode"
+      "physiosuisse": "Laura's Physiosuisse membership 450 CHF - could be berufsauslagen effective, but we use flatrate mode",
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 5140 (same as flatrate)"
     }
   },
   "personal": {
@@ -85,6 +86,10 @@
     },
     "schuldzinsen": {
       "amount": "11760"
+    },
+    "weitereberufsauslagen": {
+      "amount": "5140",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
   "wealth": {

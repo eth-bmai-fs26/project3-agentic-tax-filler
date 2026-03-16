@@ -22,7 +22,8 @@
       "property_steuerwert": "1200000 CHF",
       "schuldzinsen": "0 (no mortgage per property assessment)",
       "freizuegigkeitskonto": "180000 CHF balance to be declared as wealth (bank account)",
-      "securities_value": "420000 CHF total portfolio"
+      "securities_value": "420000 CHF total portfolio",
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 4555 (same as flatrate)"
     }
   },
   "personal": {
@@ -86,6 +87,10 @@
     },
     "schuldzinsen": {
       "amount": "0"
+    },
+    "weitereberufsauslagen": {
+      "amount": "4555",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
   "wealth": {

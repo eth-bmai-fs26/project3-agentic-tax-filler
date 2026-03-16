@@ -19,7 +19,8 @@
       "donations": "Spende MSF 500 CHF (>= 100 CHF threshold)",
       "weiterbildung": "Migros Klubschule Deutsch B2 = 890 CHF (work-related language course)",
       "bankbalance": "last row Dec 31 = 148386.80",
-      "no_zvv": "no ZVV receipt found - no fahrkosten claimed"
+      "no_zvv": "no ZVV receipt found - no fahrkosten claimed",
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 3592 (same as flatrate)"
     }
   },
   "personal": {
@@ -71,6 +72,10 @@
     },
     "weiterbildungskosten": {
       "amount": "890"
+    },
+    "weitereberufsauslagen": {
+      "amount": "3592",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
   "wealth": {

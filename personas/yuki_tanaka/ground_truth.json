@@ -18,7 +18,8 @@
       "weiterbildung": "Goethe-Institut Deutsch B2 = 1200 CHF (language course for work)",
       "pillar3a": "0 (no contributions in 2025 per profile brief)",
       "bankbalance": "last row Dec 31 = 87008.20",
-      "property": "owns apartment per divorce decree (Langstrasse 88), no steuerwert document available"
+      "property": "owns apartment per divorce decree (Langstrasse 88), no steuerwert document available",
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 2874 (same as flatrate)"
     }
   },
   "personal": {
@@ -75,6 +76,10 @@
     },
     "pillar3a": {
       "amount": "0"
+    },
+    "weitereberufsauslagen": {
+      "amount": "2874",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
   "wealth": {
