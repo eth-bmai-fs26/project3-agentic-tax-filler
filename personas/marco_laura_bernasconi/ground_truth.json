@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "persona": "marco_laura_bernasconi",
+    "difficulty": "medium",
+    "notes": "Married couple filing jointly. Marco (100%) at ABB, Laura (60%) at USZ. Two children (Sofia 7, Luca 3 in KiTa). Own apartment in Winterthur with mortgage. Both employed = Zweiverdienerabzug applies.",
+    "_confidence": {
+      "bruttolohn": "sum of both lohnausweise: 118000 + 52000 = 170000",
+      "ahvcontributions": "sum: 6254.60 + 2756 = 9010.60",
+      "bvgcontributions": "sum: 7080 + 3120 = 10200",
+      "berufsauslagen_flatrate": "Marco: 3% of (118000-6254.60-7080)=104665.40 -> 3139.96 -> 3140; Laura: 3% of (52000-2756-3120)=46124 -> 1383.72 -> min 2000; total 5140",
+      "verpflegung": "Marco lohnausweis 14.1=Ja->1600, Laura 14.1=Nein->3200; total 4800",
+      "interest": "Zinsabschluss: 18.75 + 18.75 = 37.50",
+      "schuldzinsen": "Hypothekarzins 980/month * 12 = 11760",
+      "pillar3a": "Marco 4500 (Raiffeisen) + Laura 3000 (Frankly) = 7500",
+      "zweiverdienerabzug": "both spouses employed = 5900",
+      "kinderbetreuung": "KiTa Sonnenschein 1500/month * 12 = 18000 (Luca only - Sofia 7 years old, not in KiTa per brief)",
+      "property_eigenmietwert": "from property assessment: 21600 CHF (cantonal)",
+      "property_steuerwert": "580000 CHF",
+      "bankbalance": "last row Dec 31 = 203644.99",
+      "no_donations": "no Spende entries in bank_statement",
+      "physiosuisse": "Laura's Physiosuisse membership 450 CHF - could be berufsauslagen effective, but we use flatrate mode"
+    }
+  },
+  "personal": {
+    "main": {
+      "firstName": "Marco",
+      "lastName": "Bernasconi",
+      "dateofbirth": "1987-05-22",
+      "ahvnumber": "756.8821.4455.12",
+      "street": "Rychenbergstrasse",
+      "streetNumber": "18",
+      "zip": "8400",
+      "city": "Winterthur",
+      "maritalstatus": "married",
+      "occupation": "Project Manager",
+      "employer": "ABB Schweiz AG"
+    },
+    "partner": {
+      "firstName": "Laura",
+      "lastName": "Bernasconi",
+      "dateofbirth": "1987-11-03",
+      "ahvnumber": "756.8821.4455.34",
+      "occupation": "Physiotherapist",
+      "employer": "Universitätsspital Zürich (USZ)"
+    },
+    "children": [
+      {
+        "name": "Sofia Bernasconi",
+        "dateOfBirth": "2018-03-15",
+        "relationship": "child"
+      },
+      {
+        "name": "Luca Bernasconi",
+        "dateOfBirth": "2022-08-20",
+        "relationship": "child"
+      }
+    ],
+    "supported": []
+  },
+  "income": {
+    "employment": {
+      "bruttolohn": "170000",
+      "ahvcontributions": "9010.60",
+      "bvgcontributions": "10200"
+    },
+    "investment": {
+      "interest": "37.50"
+    }
+  },
+  "deductions": {
+    "flatrate": {
+      "amount": "5140"
+    },
+    "verpflegung": {
+      "amount": "4800"
+    },
+    "pillar3a": {
+      "amount": "7500"
+    },
+    "zweiverdienerabzug": {
+      "amount": "5900"
+    },
+    "kinderbetreuungskosten": {
+      "amount": "18000"
+    },
+    "schuldzinsen": {
+      "amount": "11760"
+    }
+  },
+  "wealth": {
+    "bankaccounts": [
+      {
+        "bankName": "Raiffeisen / ZKB",
+        "balance": "203644.99",
+        "interest": "37.50"
+      }
+    ],
+    "realestate": {
+      "eigenmietwert": "21600",
+      "steuerwert": "580000",
+      "address": "Rychenbergstrasse 18, 8400 Winterthur"
+    },
+    "debts": [
+      {
+        "creditor": "Hypothek",
+        "amount": "11760"
+      }
+    ]
+  }
+}

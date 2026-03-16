@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "persona": "thomas_elisabeth_widmer",
+    "difficulty": "hard",
+    "notes": "Married couple (Thomas retired Aug 2025, Elisabeth still working). Mixed income: employment (Jan-Aug Thomas, full year Elisabeth) + AHV pension + BVG pension + capital withdrawal (separate taxation) + Freizuegigkeitskonto interest + securities dividends. No mortgage (fully paid). Medical costs 5200 CHF but below 5% threshold -> 0 deduction.",
+    "_confidence": {
+      "thomas_employment": "lohnausweis shows period Jan-Aug 2025, brutto 96000 (for 8 months)",
+      "thomas_ahv_lohnausweis": "5088 CHF (employment period only)",
+      "thomas_bvg_lohnausweis": "5760 CHF (employment period only)",
+      "thomas_ahv_pension": "2390/month * 4 months (Sep-Dec) = 9560 CHF",
+      "thomas_bvg_pension": "3200/month * 4 months (Sep-Dec) = 12800 CHF",
+      "capital_withdrawal": "250000 CHF one-time lump sum - declared separately under capitalwithdrawals, taxed separately",
+      "freizuegigkeit_interest": "900 CHF taxable interest (not in bank_statement, from separate document)",
+      "securities_dividends": "8600 CHF gross dividends from UBS portfolio",
+      "bank_interest": "22.50 + 22.50 = 45 CHF",
+      "verpflegung": "Thomas lohnausweis 14.1=Ja->1600, Elisabeth 14.1=Nein->3200; total 4800",
+      "berufsauslagen": "Thomas: 3% of 85152=2554.56->2555; Elisabeth: 3% of 33706=1011.18->min 2000; total 4555",
+      "pillar3a": "Only Elisabeth (BVG-insured still working) = 7056 CHF. Thomas retired Aug 2025 - no further pillar 3a contributions possible after retirement.",
+      "medical": "Total 5200 CHF. Threshold = 5% of reineinkommen. Gross approx 198000+, deductions reduce. Even conservatively at 5% of 150000 net = 7500 > 5200 -> NO deduction",
+      "zweiverdienerabzug": "Thomas worked Jan-Aug (income-earning), Elisabeth full year -> both spouses had employment income -> 5900 CHF applies",
+      "property_eigenmietwert": "32400 CHF (cantonal) from property assessment",
+      "property_steuerwert": "1200000 CHF",
+      "schuldzinsen": "0 (no mortgage per property assessment)",
+      "freizuegigkeitskonto": "180000 CHF balance to be declared as wealth (bank account)",
+      "securities_value": "420000 CHF total portfolio"
+    }
+  },
+  "personal": {
+    "main": {
+      "firstName": "Thomas",
+      "lastName": "Widmer",
+      "dateofbirth": "1961-04-18",
+      "ahvnumber": "756.3312.8847.65",
+      "street": "Seestrasse",
+      "streetNumber": "142",
+      "zip": "8700",
+      "city": "Küsnacht",
+      "maritalstatus": "married",
+      "occupation": "Retired (former Risk Manager)",
+      "employer": "Zurich Insurance Group AG"
+    },
+    "partner": {
+      "firstName": "Elisabeth",
+      "lastName": "Widmer",
+      "dateofbirth": "1964-08-30",
+      "ahvnumber": "756.3312.8847.87",
+      "occupation": "Librarian",
+      "employer": "Zentralbibliothek Zürich (ZB)"
+    },
+    "children": [],
+    "supported": []
+  },
+  "income": {
+    "employment": {
+      "bruttolohn": "134000",
+      "ahvcontributions": "7102",
+      "bvgcontributions": "8040"
+    },
+    "pension": {
+      "ahvpension": "9560",
+      "bvgpension": "12800"
+    },
+    "capitalwithdrawals": {
+      "amount": "250000"
+    },
+    "investment": {
+      "dividends": "8600",
+      "interest": "945"
+    }
+  },
+  "deductions": {
+    "flatrate": {
+      "amount": "4555"
+    },
+    "verpflegung": {
+      "amount": "4800"
+    },
+    "pillar3a": {
+      "amount": "7056"
+    },
+    "zweiverdienerabzug": {
+      "amount": "5900"
+    },
+    "medical": {
+      "amount": "0"
+    },
+    "schuldzinsen": {
+      "amount": "0"
+    }
+  },
+  "wealth": {
+    "bankaccounts": [
+      {
+        "bankName": "UBS Switzerland AG",
+        "balance": "646271.84",
+        "interest": "45"
+      },
+      {
+        "bankName": "Stiftung Auffangeinrichtung BVG (Freizügigkeit)",
+        "balance": "180000",
+        "interest": "900"
+      }
+    ],
+    "realestate": {
+      "eigenmietwert": "32400",
+      "steuerwert": "1200000",
+      "address": "Seestrasse 142, 8700 Küsnacht"
+    }
+  }
+}
