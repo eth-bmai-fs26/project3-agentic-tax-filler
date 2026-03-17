@@ -1,0 +1,47 @@
+=== ZURICH TAX POLICY RULES (Wegleitung) ===
+
+1. INCOME CLASSIFICATION
+- Dienstaltersgeschenke (field 6) are ALREADY INCLUDED in Bruttolohn (field 1). Do NOT add them as separate income or add them to Bruttolohn again.
+- Lohnausweis (Formular 11) is authoritative for employment income.
+- Bruttolohn (field 1) = gross salary. Dienstaltersgeschenke (field 6) are ALREADY INCLUDED in field 1.
+- Spesenvergütungen (field 13) are NOT income — do not add or re-claim.
+- Two Lohnausweise (job change): sum both gross salaries.
+- Self-employment: declare as Nebentätigkeit. If total > CHF 2,300/year → AHV registration required.
+- AHV/BVG pensions: ordinary income. Capital withdrawals: separate, reduced-rate taxation.
+- Freizügigkeitskonto: balance = wealth, interest = income.
+- Bank interest: sum all Zinsabschluss entries.
+- Swiss dividends: declare gross. Claim 35% Verrechnungssteuer refund.
+- Foreign dividends: convert to CHF at ESTV year-end rate.
+- Private capital gains (stocks, crypto): TAX-FREE.
+- Spousal support received: taxable income. Child support received: NOT income.
+
+2. DEDUCTIONS
+- Verpflegung: field 14.1 Ja → CHF 1,600; Nein → CHF 3,200. Prorate for part-time.
+- Berufsauslagen Pauschale: 3% of Nettolohn (field 12), min CHF 2,000, max CHF 4,000 per person.
+- Fahrkosten: annual public transport pass. Velo-Pauschale CHF 700 for qualifying distances.
+- Home office: CHF 3/day but reduces commuting deduction proportionally.
+- Pillar 3a: max CHF 7,056 (employed with BVG), max CHF 35,280 (self-employed without BVG).
+- Donations: min CHF 100, to recognized organizations.
+- Kinderbetreuung: max CHF 10,100 per child, under 14 years.
+- Medical: deductible ONLY above 5% of net income.
+- Zweiverdienerabzug: CHF 5,900 (Zurich Kantonssteuer) when both spouses employed.
+- Alleinerziehenden-Abzug: for single/divorced parents with primary custody.
+- Schuldzinsen: sum all mortgage interest payments.
+- No double-counting: flat-rate Berufsauslagen covers all professional expenses.
+
+3. PROPERTY
+- Eigenmietwert: declare as income (use Kantonssteuer value from Gemeinde assessment).
+- Steuerwert: declare as wealth.
+- Mortgage interest: deductible. Mortgage balance: declare as debt.
+- Mortgage in bank statement but no property docs → ask user for Eigenmietwert/Steuerwert.
+
+4. WEALTH
+- Bank balances as of Dec 31.
+- Securities: market value Dec 31. Fill Wertschriftenverzeichnis.
+- Crypto: market value Dec 31. Private gains TAX-FREE.
+- Dividends declared → securities register MUST be populated (consistency check).
+
+5. FILING STATUS
+- Divorce finalized before Dec 31 → file separately for full year.
+- Quellensteuer transition: declare full-year income, enter Quellensteuer as credit.
+"""
