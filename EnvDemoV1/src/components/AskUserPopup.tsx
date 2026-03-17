@@ -103,7 +103,7 @@ export default function AskUserPopup() {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     position: 'fixed',
-    bottom: '24px',
+    top: '24px',
     right: '24px',
     width: '380px',
     maxWidth: 'calc(100vw - 48px)',
