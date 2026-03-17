@@ -1,0 +1,100 @@
+{
+  "_meta": {
+    "persona": "priya_chakraborty",
+    "purpose": "Hidden knowledge for NPC only — NOT given to main LLM"
+  },
+  "verbal_knowledge": [
+    {
+      "topic": "self-employment registration",
+      "question_patterns": ["self-employment", "selbständig", "freelance", "ahv", "registration", "angemeldet", "nebenberuf", "nebentätigkeit", "registered"],
+      "answer": "Yes, I am registered as self-employed for AHV purposes. I registered as a sole proprietor (Einzelunternehmen) when I started freelancing seriously — my first year doing it properly. My freelance work is ML consulting on weekends.",
+      "tax_relevance": "Confirms income.selfemployment.enabled = true. The LLM often misses setting this boolean flag."
+    },
+    {
+      "topic": "canteen",
+      "question_patterns": ["canteen", "mensa", "kantine", "lunch", "verpflegung", "14.1", "subsidized"],
+      "answer": "Yes, Swiss Re has a subsidized canteen on site. I eat there most days — it's very convenient.",
+      "tax_relevance": "Confirms Lohnausweis field 14.1 = Ja → verpflegung deduction CHF 1,600 applies"
+    },
+    {
+      "topic": "exchange rate USD to CHF",
+      "question_patterns": ["exchange rate", "wechselkurs", "usd", "dollar", "conversion", "chf", "dividends", "interactive brokers"],
+      "answer": "For my US dividends from Interactive Brokers, I used the ESTV official year-end exchange rate. The rate I used was approximately 0.88 CHF per USD — I looked it up on the ESTV website for December 31, 2025.",
+      "tax_relevance": "USD 1,200 gross dividends × 0.88 = CHF 1,056. This is what should be declared as dividend income."
+    },
+    {
+      "topic": "freelance AHV",
+      "question_patterns": ["ahv", "social security", "selbständigerwerbende", "independent", "freelance ahv", "beiträge"],
+      "answer": "I pay AHV contributions separately as a self-employed person on my freelance income. The Ausgleichskasse bills me directly for that.",
+      "tax_relevance": "Freelance AHV contributions are deductible as part of self-employment expenses or separately."
+    },
+    {
+      "topic": "freelance revenue details",
+      "question_patterns": ["freelance", "invoices", "clients", "revenue", "umsatz", "einnahmen", "consulting"],
+      "answer": "I had four freelance ML consulting clients this year. The invoices total CHF 22,000 for the year — you can see them in my invoice documents.",
+      "tax_relevance": "Total self-employment revenue = CHF 22,000 (from 4 invoices: 5000+7000+6000+4000)"
+    },
+    {
+      "topic": "freelance expenses and receipts",
+      "question_patterns": ["expenses", "ausgaben", "receipts", "belege", "laptop", "macbook", "software", "home office items"],
+      "answer": "My main freelance expenses are: the MacBook Pro I bought in March for CHF 1,800 (I have the receipt), software subscriptions like GitHub Copilot and AWS totaling CHF 600 (receipts available), and some small home office items like a monitor stand and cables for about CHF 300 — I didn't keep receipts for those small items though.",
+      "tax_relevance": "Total expenses CHF 2,700. Small items without receipts (CHF 300) may still be accepted. Net income = CHF 19,300."
+    },
+    {
+      "topic": "capital gains",
+      "question_patterns": ["capital gains", "kursgewinne", "realized gains", "stocks sold", "profit", "nvda", "tsla", "amzn"],
+      "answer": "I did sell some stocks this year through Interactive Brokers — made about USD 3,200 in gains. But my financial advisor told me that capital gains from private investing are tax-free in Switzerland, so I don't need to declare that as income, right?",
+      "tax_relevance": "Correct — private capital gains are not taxable in Switzerland. Only dividends are declared as income. Do NOT add USD 3,200 as income."
+    },
+    {
+      "topic": "commute",
+      "question_patterns": ["commute", "pendeln", "fahrkosten", "zvv", "public transport", "sbahn", "tram"],
+      "answer": "I commute by public transport — I have an SBB Halbtax card but not a Jahresabo. I buy individual tickets or use the app. Actually, I don't think I have an annual pass — I should check if I can still claim commuting costs.",
+      "tax_relevance": "No annual pass → no Fahrkosten deduction. Individual tickets are not deductible. Halbtax is a discount card, not a commuting receipt."
+    },
+    {
+      "topic": "property",
+      "question_patterns": ["property", "eigentum", "apartment", "wohnung", "own", "mortgage", "rent", "miete"],
+      "answer": "I rent my apartment on Militärstrasse. I don't own any property in Switzerland.",
+      "tax_relevance": "No real estate to declare."
+    },
+    {
+      "topic": "donations",
+      "question_patterns": ["donation", "spende", "charity", "msf", "médecins"],
+      "answer": "I donated CHF 500 to Médecins Sans Frontières this year — I support their work in conflict zones.",
+      "tax_relevance": "CHF 500 donation to MSF qualifies (above CHF 100 threshold)."
+    },
+    {
+      "topic": "German course",
+      "question_patterns": ["german course", "deutschkurs", "sprachkurs", "weiterbildung", "migros", "klubschule", "b2"],
+      "answer": "Yes, I took a German B2 course at Migros Klubschule this year. It cost CHF 890. I need good German for my client meetings at Swiss Re and for the Swiss tax forms!",
+      "tax_relevance": "CHF 890 Weiterbildungskosten for work-related language course — deductible."
+    },
+    {
+      "topic": "pillar 3a",
+      "question_patterns": ["pillar 3a", "säule 3a", "3a", "finpension", "vorsorge", "pension"],
+      "answer": "Yes, I contribute to my Pillar 3a at Finpension. I put in the maximum I'm allowed — CHF 7,056 this year.",
+      "tax_relevance": "Finpension confirmation = CHF 7,056 (maximum for BVG-insured employees)"
+    },
+    {
+      "topic": "securities portfolio",
+      "question_patterns": ["portfolio", "interactive brokers", "securities", "wertschriften", "stocks", "etf", "ib account"],
+      "answer": "My Interactive Brokers portfolio is worth about USD 45,000 at the end of the year. I have US stocks and ETFs — Apple, Microsoft, VTI, Nvidia, Tesla, Amazon.",
+      "tax_relevance": "Securities portfolio USD 45,000 converted to CHF at year-end rate (~0.88) = ~CHF 39,600 for wealth declaration."
+    }
+  ],
+  "clarifications": [
+    {
+      "field": "income.selfemployment.enabled",
+      "question_patterns": ["self-employment enabled", "selbständig", "freelance income", "nebenberuf"],
+      "answer": "Yes, I definitely have self-employment income from my ML consulting. I registered for it. You need to mark that I am self-employed as a side activity.",
+      "tax_relevance": "income.selfemployment.enabled must be set to true (boolean). This is often missed."
+    },
+    {
+      "field": "income.investment.dividends",
+      "question_patterns": ["dividends", "dividenden", "interest from investments", "ib dividends"],
+      "answer": "My Interactive Brokers dividends were USD 1,200 gross for the year. At 0.88 CHF/USD that's about CHF 1,056 in Swiss francs.",
+      "tax_relevance": "CHF 1,056 in dividend income to declare. Capital gains (USD 3,200) are NOT taxable."
+    }
+  ]
+}

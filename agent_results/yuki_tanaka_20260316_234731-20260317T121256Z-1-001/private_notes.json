@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "persona": "yuki_tanaka",
+    "score_percent": 93.3,
+    "total_errors": 2,
+    "purpose": "llm_prompt_hints: errors where info WAS in docs — study these to improve the main LLM prompt. missing_information: info NOT in any document — add to NPC private knowledge once the NPC is implemented."
+  },
+  "llm_prompt_hints": [
+    {
+      "field": "deductions.kinderbetreuungskosten.amount",
+      "correct_value": "17400",
+      "got": "10100",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.kinderbetreuungskosten.amount' was filled as '10100' but the correct value is '17400'.",
+      "cause": "info_in_documents"
+    },
+    {
+      "field": "deductions.weitereberufsauslagen.amount",
+      "correct_value": "2874",
+      "got": "2861",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.weitereberufsauslagen.amount' was filled as '2861' but the correct value is '2874'.",
+      "cause": "info_in_documents"
+    }
+  ],
+  "missing_information": []
+}

@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "persona": "yuki_tanaka",
+    "purpose": "Hidden knowledge for NPC only — NOT given to main LLM"
+  },
+  "verbal_knowledge": [
+    {
+      "topic": "KiTa costs — blurry receipt",
+      "question_patterns": ["kita", "kinderbetreuung", "childcare", "daycare", "regenbogen", "hana", "betrag", "amount", "monatsbeitrag", "receipt blurry", "unlesbar"],
+      "answer": "The KiTa Regenbogen receipt I have is really hard to read — I photographed it and it came out blurry. But I know exactly what I pay: CHF 1,450 per month for Hana, 3 days a week. I can see it in my bank statements every month — it's debited on around the 10th of each month. Over the year that's CHF 17,400 total.",
+      "tax_relevance": "KiTa Regenbogen: CHF 1,450 × 12 months = CHF 17,400 total. Confirmed in bank_statement.csv (monthly KiTa Regenbogen entries of CHF 1,450 from Feb through Dec = 12 payments). The blurry receipt shows '...450 pro Monat' which matches."
+    },
+    {
+      "topic": "KiTa days per week",
+      "question_patterns": ["how many days", "kita days", "betreuungstage", "woche", "3 tage"],
+      "answer": "Hana goes to KiTa 3 days a week — Monday, Wednesday, and Friday. That's the '3 Tage' model. The monthly fee is CHF 1,450 regardless of the exact days, it's a fixed monthly rate.",
+      "tax_relevance": "3 days per week KiTa confirmed. Monthly fee = CHF 1,450 fixed. Annual total = CHF 17,400."
+    },
+    {
+      "topic": "alimony — child support vs spousal support",
+      "question_patterns": ["alimony", "unterhalt", "child support", "kinderunterhalt", "spousal support", "ehegattenunterhalt", "kenji", "ex-husband", "taxable", "steuerpflichtig"],
+      "answer": "My ex-husband Kenji pays CHF 1,500 per month in Kinderunterhalt (child support) and CHF 800 per month in Ehegattenunterhalt (spousal support) per the divorce decree, starting November. But he only paid CHF 1,700 per month in November and December — so CHF 3,400 total. The child support is NOT taxable income for me. Only the spousal support (Ehegattenunterhalt) is taxable. Per the divorce decree, CHF 800 per month was ordered for spousal support, so for 2 months that's CHF 1,600 taxable alimony income.",
+      "tax_relevance": "Taxable alimony income = CHF 1,600 (CHF 800 Ehegattenunterhalt × 2 months). Child support CHF 3,000 (1,500×2) is NOT income. Even though only CHF 3,400 total was received, the declared taxable portion uses the decree amount for spousal support."
+    },
+    {
+      "topic": "alimony payments received",
+      "question_patterns": ["how much received", "kenji payment", "november payment", "december payment", "total received", "bank statement unterhalt"],
+      "answer": "Kenji paid CHF 1,700 in November and CHF 1,700 in December — I can see it in my bank statement as 'Eingang Kenji Tanaka (Unterhalt)'. That's CHF 3,400 total received. He was supposed to pay CHF 2,300 per month (1,500 + 800) but he's short by CHF 600 for the two months. I might need to pursue the arrears.",
+      "tax_relevance": "Total received = CHF 3,400. Of this, CHF 3,000 is child support (non-taxable) and CHF 400 is partial spousal support received. However, taxable declared amount = CHF 1,600 based on court-ordered spousal support for 2 months."
+    },
+    {
+      "topic": "divorce finalization date",
+      "question_patterns": ["divorce date", "scheidung datum", "when divorced", "october", "legal date", "rechtskraft"],
+      "answer": "The divorce was finalized on October 15, 2025. The court issued the judgment that day and it came into legal force immediately. So I'm officially divorced as of October 15, 2025.",
+      "tax_relevance": "Divorce before Dec 31, 2025 → file as 'divorced' (geschieden) for the full tax year 2025. Marital status = divorced."
+    },
+    {
+      "topic": "apartment ownership after divorce",
+      "question_patterns": ["apartment", "langstrasse", "property", "wohnung", "mortgage", "hypothek", "own", "eigentum"],
+      "answer": "Per the divorce settlement, the apartment at Langstrasse 88 is now fully mine. I'm taking over the mortgage on my own. I pay CHF 1,200 per month in mortgage interest — I can see it in my bank statements every month.",
+      "tax_relevance": "Schuldzinsen = CHF 1,200 × 12 = CHF 14,400. Confirmed in bank_statement.csv. Property ownership confirmed by divorce decree."
+    },
+    {
+      "topic": "property documents missing",
+      "question_patterns": ["steuerwert", "eigenmietwert", "property assessment", "liegenschaft", "property value", "gemeinde"],
+      "answer": "I don't have the official property assessment from the Gemeinde yet — it was supposed to come but with the divorce chaos I may have misplaced it. I don't know the official Steuerwert or Eigenmietwert off the top of my head.",
+      "tax_relevance": "No Steuerwert or Eigenmietwert available. Leave these fields empty — do not guess values."
+    },
+    {
+      "topic": "German course",
+      "question_patterns": ["german course", "deutschkurs", "goethe", "b2", "weiterbildung", "sprache", "language"],
+      "answer": "Yes, I took a German B2 course at Goethe-Institut in August. It cost CHF 1,200. I need better German for my work at Spotify and for navigating Swiss bureaucracy — especially with the divorce paperwork.",
+      "tax_relevance": "Weiterbildungskosten = CHF 1,200 (Goethe-Institut Deutsch B2). Work-related language course is deductible."
+    },
+    {
+      "topic": "canteen at Spotify",
+      "question_patterns": ["canteen", "kantine", "spotify canteen", "verpflegung", "14.1", "lunch", "mensa"],
+      "answer": "Yes, Spotify has a subsidized canteen in the Zurich office. I eat there regularly — it's one of the perks.",
+      "tax_relevance": "Lohnausweis field 14.1 = Ja → verpflegung deduction CHF 1,600 applies."
+    },
+    {
+      "topic": "pillar 3a",
+      "question_patterns": ["pillar 3a", "säule 3a", "3a", "vorsorge", "contribution", "einzahlung"],
+      "answer": "I didn't contribute to Pillar 3a this year. Things were too chaotic with the divorce, the legal fees, and managing everything on my own. I know I should have, but I just didn't get around to it.",
+      "tax_relevance": "Pillar 3a = CHF 0 for 2025. Do not declare any 3a amount."
+    },
+    {
+      "topic": "Japan transfers",
+      "question_patterns": ["japan", "überweisung", "transfer", "送金", "family support", "ausland"],
+      "answer": "I send money to my family in Japan a few times a year — about CHF 500 each time. It's just to help my parents out, not charity. I've been doing this since I moved to Switzerland.",
+      "tax_relevance": "Personal family transfers abroad are NOT tax-deductible charitable donations. Do not count these as Spenden."
+    },
+    {
+      "topic": "car",
+      "question_patterns": ["car", "auto", "vehicle", "fahrzeug"],
+      "answer": "I don't have a car. I use public transport and bike around Zurich city.",
+      "tax_relevance": "No vehicle wealth to declare."
+    },
+    {
+      "topic": "legal costs",
+      "question_patterns": ["anwaltskosten", "legal fees", "lawyer", "rechtsanwalt", "scheidungskosten", "divorce costs"],
+      "answer": "I paid CHF 3,500 in lawyer fees for the divorce proceedings in June. It was expensive.",
+      "tax_relevance": "Divorce legal fees are NOT tax-deductible in Switzerland. Do not claim as deduction."
+    }
+  ],
+  "clarifications": [
+    {
+      "field": "deductions.kinderbetreuungskosten.amount",
+      "question_patterns": ["kinderbetreuung", "kita", "childcare", "hana kita", "betrag", "amount", "kosten total"],
+      "answer": "Hana's KiTa costs me CHF 1,450 per month, all 12 months of the year. The receipt is blurry but I can confirm from my bank statements: CHF 1,450 every month. Total for the year = CHF 17,400.",
+      "tax_relevance": "Total childcare = CHF 1,450 × 12 = CHF 17,400. Confirmed by bank_statement.csv. The blurry receipt shows the correct '...450 per month' figure."
+    },
+    {
+      "field": "income.alimony.amount",
+      "question_patterns": ["alimony", "unterhalt", "taxable alimony", "steuerpflichtiger unterhalt", "how much declare"],
+      "answer": "Only the Ehegattenunterhalt (spousal support) is taxable income for me — the Kinderunterhalt for Hana is not. Per the divorce decree, the ordered spousal support is CHF 800 per month, and I received it for November and December. So the taxable alimony is CHF 1,600.",
+      "tax_relevance": "income.alimony.amount = CHF 1,600 (CHF 800 × 2 months of court-ordered spousal support). Even though total received was CHF 3,400, only the spousal portion is taxable income."
+    },
+    {
+      "field": "deductions.schuldzinsen.amount",
+      "question_patterns": ["schuldzinsen", "mortgage interest", "hypothekarzins", "how much interest", "annual interest"],
+      "answer": "I pay CHF 1,200 per month in mortgage interest for Langstrasse 88. Over 12 months that's CHF 14,400 per year. You can verify this in my bank statement — it shows up every month as 'Hypothekarzins Langstrasse 88'.",
+      "tax_relevance": "Schuldzinsen = CHF 1,200 × 12 = CHF 14,400. Confirmed in bank_statement.csv."
+    }
+  ]
+}

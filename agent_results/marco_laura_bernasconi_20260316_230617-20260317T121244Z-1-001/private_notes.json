@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "persona": "marco_laura_bernasconi",
+    "score_percent": 90.7,
+    "total_errors": 4,
+    "purpose": "llm_prompt_hints: errors where info WAS in docs — study these to improve the main LLM prompt. missing_information: info NOT in any document — add to NPC private knowledge once the NPC is implemented."
+  },
+  "llm_prompt_hints": [
+    {
+      "field": "deductions.flatrate.amount",
+      "correct_value": "5140",
+      "got": "4000",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.flatrate.amount' was filled as '4000' but the correct value is '5140'.",
+      "cause": "info_in_documents"
+    },
+    {
+      "field": "deductions.verpflegung.amount",
+      "correct_value": "4800",
+      "got": "3520",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.verpflegung.amount' was filled as '3520' but the correct value is '4800'.",
+      "cause": "info_in_documents"
+    },
+    {
+      "field": "deductions.kinderbetreuungskosten.amount",
+      "correct_value": "18000",
+      "got": "10100",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.kinderbetreuungskosten.amount' was filled as '10100' but the correct value is '18000'.",
+      "cause": "info_in_documents"
+    },
+    {
+      "field": "wealth.debts[0].amount",
+      "correct_value": "11760",
+      "got": null,
+      "error_type": "missing",
+      "hint": "Field 'wealth.debts[0].amount' was left empty but should be '11760'. Check all documents.",
+      "cause": "info_in_documents"
+    }
+  ],
+  "missing_information": []
+}

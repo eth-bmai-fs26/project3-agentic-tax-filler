@@ -93,6 +93,24 @@ class PlaywrightBridge(BrowserBridge):
 
         return self._pw_submit_form()
 
+    def notify_ask_user(self, question: str, answer: str) -> None:
+        """Push an ask_user exchange to the frontend popup via Playwright.
+
+        Calls ``window.TaxPortal.notifyAskUser(question, answer)`` in the
+        browser page if the method is available.
+        """
+        try:
+            self._page.evaluate(
+                """([q, a]) => {
+                    if (window.TaxPortal && typeof window.TaxPortal.notifyAskUser === 'function') {
+                        window.TaxPortal.notifyAskUser(q, a);
+                    }
+                }""",
+                [question, answer],
+            )
+        except Exception as exc:
+            logger.warning("notify_ask_user playwright evaluate failed: %s", exc)
+
     def close(self):
         self._browser.close()
         self._pw.stop()

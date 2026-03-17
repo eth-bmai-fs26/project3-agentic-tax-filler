@@ -3,6 +3,7 @@
 import json
 import logging
 from pathlib import Path
+from typing import Any
 
 logger = logging.getLogger("mcp_server.ask_user")
 
@@ -109,6 +110,122 @@ def make_llm_ask_user(
         "Neither 'anthropic' nor 'openai' package found. "
         "Install one to use LLM-backed ask_user."
     )
+
+
+# -------------------------------------------------------------------
+# NPC ask_user backed by private_notes.json (Phase 2+)
+# -------------------------------------------------------------------
+
+def make_llm_ask_user_with_notes(
+    persona_folder: str,
+    model: str,
+    client: Any,  # OpenAI-compatible client
+) -> callable:
+    """Create an NPC ask_user that uses private_notes.json as hidden knowledge.
+
+    The NPC role-plays as the taxpayer using verbal knowledge that is NOT
+    in any document — things a real person would just know.
+
+    Parameters
+    ----------
+    persona_folder : str
+        Path to the persona's document folder (contains profile.json and
+        private_notes.json).
+    model : str
+        Model identifier (OpenAI-compatible).
+    client : OpenAI-compatible client
+        An instantiated client with a ``chat.completions.create`` method.
+
+    Returns
+    -------
+    callable — (question: str, conversation_history: list) → str
+    """
+    folder = Path(persona_folder)
+
+    # Load profile
+    profile_path = folder / "profile.json"
+    profile = {}
+    if profile_path.exists():
+        try:
+            profile = json.loads(profile_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    # Load private_notes
+    notes_path = folder / "private_notes.json"
+    private_notes = {}
+    if notes_path.exists():
+        try:
+            private_notes = json.loads(notes_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    persona_name = profile.get("name", folder.name)
+
+    # Build knowledge text from verbal_knowledge and clarifications
+    knowledge_parts = []
+
+    verbal = private_notes.get("verbal_knowledge", [])
+    if verbal:
+        knowledge_parts.append("## Things I know verbally (not in any document)")
+        for item in verbal:
+            knowledge_parts.append(
+                f"- Topic: {item.get('topic', '')}\n"
+                f"  What I know: {item.get('answer', '')}"
+            )
+
+    clarifications = private_notes.get("clarifications", [])
+    if clarifications:
+        knowledge_parts.append("\n## Clarifications on specific fields")
+        for item in clarifications:
+            knowledge_parts.append(
+                f"- Field: {item.get('field', '')}\n"
+                f"  My answer: {item.get('answer', '')}"
+            )
+
+    knowledge_text = "\n".join(knowledge_parts) if knowledge_parts else "(No additional verbal knowledge available.)"
+
+    brief = profile.get("brief", "")
+
+    system_prompt = f"""You are {persona_name}, a Swiss taxpayer filling in your tax return.
+
+## Your background
+{brief}
+
+## Your verbal knowledge (things you know but that aren't in any document)
+{knowledge_text}
+
+## Instructions
+- Answer questions naturally and conversationally, as this person would speak.
+- Keep answers short and direct — 1-4 sentences maximum.
+- If you know the answer from your verbal knowledge above, give it confidently.
+- If someone asks about something not covered above, say you're not sure and suggest they check your documents.
+- You are NOT a tax expert — you speak as a layperson who knows their own situation.
+- Do NOT mention that you have "verbal knowledge" or "private notes" — just answer naturally.
+- Respond in the same language the question is asked in (German or English).
+"""
+
+    def _ask(question: str, conversation_history: list[dict] | None = None) -> str:
+        messages = [{"role": "system", "content": system_prompt}]
+        messages.extend(conversation_history or [])
+        messages.append({"role": "user", "content": question})
+
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                max_tokens=256,
+            )
+            return response.choices[0].message.content
+        except Exception as exc:
+            logger.warning("NPC LLM call failed: %s", exc)
+            return "I'm not sure about that. You might need to check my documents."
+
+    logger.info(
+        "NPC ask_user ready for %s (model=%s, %d verbal items, %d clarifications)",
+        persona_name, model, len(verbal), len(clarifications),
+    )
+    return _ask
 
 
 # -------------------------------------------------------------------

@@ -1,0 +1,255 @@
+{
+  "success": true,
+  "submission_json": {
+    "login": {
+      "auth": {
+        "ahvnumber": "",
+        "zugangscode": ""
+      }
+    },
+    "personal": {
+      "main": {
+        "firstName": "Priya",
+        "lastName": "Chakraborty",
+        "dateofbirth": "1991-09-12",
+        "street": "Militärstrasse",
+        "streetNumber": "76",
+        "apartment": "",
+        "zip": "8004",
+        "city": "Zürich",
+        "phone": "",
+        "email": "",
+        "ahvnumber": "756.9934.7712.58",
+        "maritalstatus": "single",
+        "religion": "",
+        "occupation": "Data Scientist",
+        "employer": "Swiss Re Management Ltd.",
+        "workplace": ""
+      },
+      "partner": {
+        "firstName": "",
+        "lastName": "",
+        "dateofbirth": "",
+        "ahvnumber": "",
+        "occupation": "",
+        "employer": "",
+        "religion": ""
+      },
+      "children": [
+        {
+          "name": "",
+          "dateOfBirth": "",
+          "relationship": ""
+        }
+      ],
+      "supported": [
+        {
+          "name": "",
+          "relationship": "",
+          "contribution": ""
+        }
+      ],
+      "representative": {
+        "name": "",
+        "address": "",
+        "phone": ""
+      },
+      "giftsreceived": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "giftsgiven": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "capitalbenefits": {
+        "amount": "",
+        "description": ""
+      },
+      "bankdetails": {
+        "iban": "CH93 0076 2011 6238 5295 7",
+        "bankname": "",
+        "accountholder": "Priya Chakraborty"
+      }
+    },
+    "income": {
+      "employment": {
+        "bruttolohn": "135000",
+        "ahvcontributions": "7155",
+        "bvgcontributions": "8100"
+      },
+      "selfemployment": {
+        "enabled": false,
+        "revenue": "22000",
+        "expenses": "2700",
+        "netincome": "19300"
+      },
+      "pension": {
+        "ahvpension": "",
+        "bvgpension": "",
+        "otherpension": ""
+      },
+      "capitalwithdrawals": {
+        "amount": ""
+      },
+      "investment": {
+        "dividends": "1056",
+        "interest": "16.80"
+      },
+      "alimony": {
+        "amount": ""
+      },
+      "otherincome": {
+        "description": "",
+        "amount": ""
+      },
+      "rental": {
+        "eigenmietwert": "",
+        "rentalincome": "",
+        "maintenancecosts": ""
+      }
+    },
+    "deductions": {
+      "berufsauslagen": {
+        "type": "flat-rate"
+      },
+      "flatrate": {
+        "amount": "3592"
+      },
+      "effective": [],
+      "fahrkosten": {
+        "amount": "",
+        "description": ""
+      },
+      "verpflegung": {
+        "amount": "1600"
+      },
+      "weitereberufsauslagen": {
+        "amount": "3592",
+        "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+      },
+      "pillar3a": {
+        "amount": "7056"
+      },
+      "insurance": {
+        "amount": ""
+      },
+      "schuldzinsen": {
+        "amount": ""
+      },
+      "unterhaltsbeitraege": {
+        "amount": "",
+        "recipient": ""
+      },
+      "kinderbetreuungskosten": {
+        "amount": ""
+      },
+      "weiterbildungskosten": {
+        "amount": "890"
+      },
+      "donations": {
+        "amount": "500",
+        "recipient": "Médecins Sans Frontières"
+      },
+      "medical": {
+        "amount": ""
+      },
+      "zweiverdienerabzug": {
+        "amount": ""
+      },
+      "otherdeductions": {
+        "description": "",
+        "amount": ""
+      }
+    },
+    "wealth": {
+      "movableassets": {
+        "cashgold": ""
+      },
+      "businessshares": [
+        {
+          "date": "",
+          "description": "",
+          "wealthAmount": "",
+          "incomeAmount": ""
+        }
+      ],
+      "securities": [
+        {
+          "name": "US Equities Portfolio (AAPL, MSFT)",
+          "isin": "",
+          "quantity": "1",
+          "value": "33616",
+          "grossReturn": "765.60"
+        },
+        {
+          "name": "VTI ETF",
+          "isin": "",
+          "quantity": "1",
+          "value": "5984",
+          "grossReturn": "387.20"
+        }
+      ],
+      "bankaccounts": [
+        {
+          "bankName": "UBS / Kantonalbank",
+          "balance": "148386.80",
+          "interest": "16.80"
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        }
+      ],
+      "insurances": [
+        {
+          "company": "",
+          "policyNumber": "",
+          "surrenderValue": ""
+        }
+      ],
+      "vehicles": [
+        {
+          "type": "",
+          "brand": "",
+          "year": "",
+          "value": ""
+        }
+      ],
+      "realestate": {
+        "eigenmietwert": "",
+        "steuerwert": "",
+        "address": ""
+      },
+      "otherassets": {
+        "description": "",
+        "value": ""
+      },
+      "debts": [
+        {
+          "creditor": "",
+          "amount": ""
+        }
+      ]
+    },
+    "attachments": {
+      "uploads": {
+        "lohnausweis": "",
+        "bankstatements": "",
+        "pillar3a": "",
+        "deductions": "",
+        "property": "",
+        "other": ""
+      }
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,243 @@
+{
+  "success": true,
+  "submission_json": {
+    "login": {
+      "auth": {
+        "ahvnumber": "",
+        "zugangscode": ""
+      }
+    },
+    "personal": {
+      "main": {
+        "firstName": "Anna",
+        "lastName": "Meier",
+        "dateofbirth": "1996-07-14",
+        "street": "Bederstrasse",
+        "streetNumber": "45",
+        "apartment": "",
+        "zip": "8002",
+        "city": "Zürich",
+        "phone": "",
+        "email": "",
+        "ahvnumber": "756.1234.5678.90",
+        "maritalstatus": "single",
+        "religion": "",
+        "occupation": "Software Engineer",
+        "employer": "Google Switzerland GmbH",
+        "workplace": ""
+      },
+      "partner": {
+        "firstName": "",
+        "lastName": "",
+        "dateofbirth": "",
+        "ahvnumber": "",
+        "occupation": "",
+        "employer": "",
+        "religion": ""
+      },
+      "children": [
+        {
+          "name": "",
+          "dateOfBirth": "",
+          "relationship": ""
+        }
+      ],
+      "supported": [
+        {
+          "name": "",
+          "relationship": "",
+          "contribution": ""
+        }
+      ],
+      "representative": {
+        "name": "",
+        "address": "",
+        "phone": ""
+      },
+      "giftsreceived": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "giftsgiven": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "capitalbenefits": {
+        "amount": "",
+        "description": ""
+      },
+      "bankdetails": {
+        "iban": "",
+        "bankname": "",
+        "accountholder": ""
+      }
+    },
+    "income": {
+      "employment": {
+        "bruttolohn": "142000",
+        "ahvcontributions": "7526.60",
+        "bvgcontributions": "8400"
+      },
+      "selfemployment": {
+        "enabled": false,
+        "revenue": "",
+        "expenses": "",
+        "netincome": ""
+      },
+      "pension": {
+        "ahvpension": "",
+        "bvgpension": "",
+        "otherpension": ""
+      },
+      "capitalwithdrawals": {
+        "amount": ""
+      },
+      "investment": {
+        "dividends": "",
+        "interest": "12.50"
+      },
+      "alimony": {
+        "amount": ""
+      },
+      "otherincome": {
+        "description": "",
+        "amount": ""
+      },
+      "rental": {
+        "eigenmietwert": "",
+        "rentalincome": "",
+        "maintenancecosts": ""
+      }
+    },
+    "deductions": {
+      "berufsauslagen": {
+        "type": "flat-rate"
+      },
+      "flatrate": {
+        "amount": "3782"
+      },
+      "effective": [],
+      "fahrkosten": {
+        "amount": "3540",
+        "description": "ZVV Jahresabonnement Zone 110 (CHF 2840) + Velo-Pauschale (CHF 700)"
+      },
+      "verpflegung": {
+        "amount": "1600"
+      },
+      "weitereberufsauslagen": {
+        "amount": "3765",
+        "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+      },
+      "pillar3a": {
+        "amount": "7056"
+      },
+      "insurance": {
+        "amount": ""
+      },
+      "schuldzinsen": {
+        "amount": ""
+      },
+      "unterhaltsbeitraege": {
+        "amount": "",
+        "recipient": ""
+      },
+      "kinderbetreuungskosten": {
+        "amount": ""
+      },
+      "weiterbildungskosten": {
+        "amount": ""
+      },
+      "donations": {
+        "amount": "200",
+        "recipient": "SRK (Schweizerisches Rotes Kreuz)"
+      },
+      "medical": {
+        "amount": ""
+      },
+      "zweiverdienerabzug": {
+        "amount": ""
+      },
+      "otherdeductions": {
+        "description": "",
+        "amount": ""
+      }
+    },
+    "wealth": {
+      "movableassets": {
+        "cashgold": ""
+      },
+      "businessshares": [
+        {
+          "date": "",
+          "description": "",
+          "wealthAmount": "",
+          "incomeAmount": ""
+        }
+      ],
+      "securities": [
+        {
+          "name": "",
+          "isin": "",
+          "quantity": "",
+          "value": "",
+          "grossReturn": ""
+        }
+      ],
+      "bankaccounts": [
+        {
+          "bankName": "UBS / Kantonalbank",
+          "balance": "150806.68",
+          "interest": "12.50"
+        }
+      ],
+      "insurances": [
+        {
+          "company": "",
+          "policyNumber": "",
+          "surrenderValue": ""
+        }
+      ],
+      "vehicles": [
+        {
+          "type": "",
+          "brand": "",
+          "year": "",
+          "value": ""
+        }
+      ],
+      "realestate": {
+        "eigenmietwert": "",
+        "steuerwert": "",
+        "address": ""
+      },
+      "otherassets": {
+        "description": "",
+        "value": ""
+      },
+      "debts": [
+        {
+          "creditor": "",
+          "amount": ""
+        }
+      ]
+    },
+    "attachments": {
+      "uploads": {
+        "lohnausweis": "",
+        "bankstatements": "",
+        "pillar3a": "",
+        "deductions": "",
+        "property": "",
+        "other": ""
+      }
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

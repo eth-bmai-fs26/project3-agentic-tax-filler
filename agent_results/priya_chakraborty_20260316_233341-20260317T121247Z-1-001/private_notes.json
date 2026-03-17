@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "persona": "priya_chakraborty",
+    "score_percent": 96.7,
+    "total_errors": 1,
+    "purpose": "llm_prompt_hints: errors where info WAS in docs — study these to improve the main LLM prompt. missing_information: info NOT in any document — add to NPC private knowledge once the NPC is implemented."
+  },
+  "llm_prompt_hints": [
+    {
+      "field": "income.selfemployment.enabled",
+      "correct_value": true,
+      "got": null,
+      "error_type": "missing",
+      "hint": "Field 'income.selfemployment.enabled' was left empty but should be 'True'. Check all documents.",
+      "cause": "info_in_documents"
+    }
+  ],
+  "missing_information": []
+}

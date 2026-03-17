@@ -97,6 +97,11 @@ class MockBridge(BrowserBridge):
     def submit_form(self) -> dict:
         return self._fe.submit_form()
 
+    def notify_ask_user(self, question: str, answer: str) -> None:
+        """No-op for mock bridge — just log to stdout."""
+        print(f"[MockBridge] ask_user Q: {question}")
+        print(f"[MockBridge] ask_user A: {answer}")
+
 
 # -------------------------------------------------------------------
 # Stub page elements — minimal structure matching the spec

@@ -1,0 +1,351 @@
+{
+  "success": true,
+  "submission_json": {
+    "login": {
+      "auth": {
+        "ahvnumber": "",
+        "zugangscode": ""
+      }
+    },
+    "personal": {
+      "main": {
+        "firstName": "Thomas",
+        "lastName": "Widmer",
+        "dateofbirth": "1961-04-18",
+        "street": "Seestrasse",
+        "streetNumber": "142",
+        "apartment": "",
+        "zip": "8700",
+        "city": "Küsnacht",
+        "phone": "",
+        "email": "",
+        "ahvnumber": "756.3312.8847.65",
+        "maritalstatus": "married",
+        "religion": "",
+        "occupation": "Retired (former Risk Manager)",
+        "employer": "Zurich Insurance Group AG",
+        "workplace": ""
+      },
+      "partner": {
+        "firstName": "Elisabeth",
+        "lastName": "Widmer",
+        "dateofbirth": "1964-08-30",
+        "ahvnumber": "756.3312.8847.87",
+        "occupation": "Librarian",
+        "employer": "Zentralbibliothek Zürich (ZB)",
+        "religion": ""
+      },
+      "children": [
+        {
+          "name": "",
+          "dateOfBirth": "",
+          "relationship": ""
+        }
+      ],
+      "supported": [
+        {
+          "name": "",
+          "relationship": "",
+          "contribution": ""
+        }
+      ],
+      "representative": {
+        "name": "",
+        "address": "",
+        "phone": ""
+      },
+      "giftsreceived": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "giftsgiven": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "capitalbenefits": {
+        "amount": "250000",
+        "description": "Kapitalbezug Pensionskasse Zurich Insurance"
+      },
+      "bankdetails": {
+        "iban": "",
+        "bankname": "",
+        "accountholder": ""
+      }
+    },
+    "income": {
+      "employment": {
+        "bruttolohn": "134000",
+        "ahvcontributions": "7102",
+        "bvgcontributions": "8040"
+      },
+      "selfemployment": {
+        "enabled": false,
+        "revenue": "",
+        "expenses": "",
+        "netincome": ""
+      },
+      "pension": {
+        "ahvpension": "9560",
+        "bvgpension": "12800",
+        "otherpension": ""
+      },
+      "capitalwithdrawals": {
+        "amount": ""
+      },
+      "investment": {
+        "dividends": "8600",
+        "interest": "945"
+      },
+      "alimony": {
+        "amount": ""
+      },
+      "otherincome": {
+        "description": "",
+        "amount": ""
+      },
+      "rental": {
+        "eigenmietwert": "32400",
+        "rentalincome": "",
+        "maintenancecosts": ""
+      }
+    },
+    "deductions": {
+      "berufsauslagen": {
+        "type": "flat-rate"
+      },
+      "flatrate": {
+        "amount": "3566"
+      },
+      "effective": [],
+      "fahrkosten": {
+        "amount": "",
+        "description": ""
+      },
+      "verpflegung": {
+        "amount": "4800"
+      },
+      "weitereberufsauslagen": {
+        "amount": "4555",
+        "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+      },
+      "pillar3a": {
+        "amount": "7056"
+      },
+      "insurance": {
+        "amount": ""
+      },
+      "schuldzinsen": {
+        "amount": "0"
+      },
+      "unterhaltsbeitraege": {
+        "amount": "",
+        "recipient": ""
+      },
+      "kinderbetreuungskosten": {
+        "amount": ""
+      },
+      "weiterbildungskosten": {
+        "amount": ""
+      },
+      "donations": {
+        "amount": "",
+        "recipient": ""
+      },
+      "medical": {
+        "amount": "0"
+      },
+      "zweiverdienerabzug": {
+        "amount": "5900"
+      },
+      "otherdeductions": {
+        "description": "",
+        "amount": ""
+      }
+    },
+    "wealth": {
+      "movableassets": {
+        "cashgold": ""
+      },
+      "businessshares": [
+        {
+          "date": "",
+          "description": "",
+          "wealthAmount": "",
+          "incomeAmount": ""
+        }
+      ],
+      "securities": [
+        {
+          "name": "Nestlé SA",
+          "isin": "CH0038863350",
+          "quantity": "500",
+          "value": "52500",
+          "grossReturn": "3000"
+        },
+        {
+          "name": "Novartis AG",
+          "isin": "CH0012005267",
+          "quantity": "400",
+          "value": "38000",
+          "grossReturn": "1360"
+        },
+        {
+          "name": "Roche Holding AG",
+          "isin": "CH0012032048",
+          "quantity": "150",
+          "value": "42750",
+          "grossReturn": "1425"
+        },
+        {
+          "name": "Zurich Insurance Group AG",
+          "isin": "CH0011075394",
+          "quantity": "120",
+          "value": "62400",
+          "grossReturn": "2880"
+        },
+        {
+          "name": "Swiss Re AG",
+          "isin": "CH0126881561",
+          "quantity": "80",
+          "value": "9200",
+          "grossReturn": "480"
+        },
+        {
+          "name": "UBS Group AG",
+          "isin": "CH0244767585",
+          "quantity": "600",
+          "value": "17400",
+          "grossReturn": "420"
+        },
+        {
+          "name": "iShares Core SPI (CH)",
+          "isin": "CH0237935652",
+          "quantity": "200",
+          "value": "36800",
+          "grossReturn": "590"
+        },
+        {
+          "name": "Vanguard FTSE All-World ETF",
+          "isin": "IE00BK5BQT80",
+          "quantity": "450",
+          "value": "55350",
+          "grossReturn": "1125"
+        },
+        {
+          "name": "UBS ETF SMI",
+          "isin": "CH0017142719",
+          "quantity": "300",
+          "value": "39600",
+          "grossReturn": "792"
+        },
+        {
+          "name": "CS / UBS Money Market Fund",
+          "isin": "CH0102295455",
+          "quantity": "1000",
+          "value": "66000",
+          "grossReturn": "528"
+        }
+      ],
+      "bankaccounts": [
+        {
+          "bankName": "UBS Switzerland AG",
+          "balance": "646271.84",
+          "interest": "45"
+        },
+        {
+          "bankName": "Stiftung Auffangeinrichtung BVG (Freizügigkeit)",
+          "balance": "180000",
+          "interest": "900"
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        },
+        {
+          "bankName": "",
+          "balance": "",
+          "interest": ""
+        }
+      ],
+      "insurances": [
+        {
+          "company": "",
+          "policyNumber": "",
+          "surrenderValue": ""
+        }
+      ],
+      "vehicles": [
+        {
+          "type": "",
+          "brand": "",
+          "year": "",
+          "value": ""
+        }
+      ],
+      "realestate": {
+        "eigenmietwert": "32400",
+        "steuerwert": "1200000",
+        "address": "Seestrasse 142, 8700 Küsnacht"
+      },
+      "otherassets": {
+        "description": "",
+        "value": ""
+      },
+      "debts": [
+        {
+          "creditor": "",
+          "amount": ""
+        }
+      ]
+    },
+    "attachments": {
+      "uploads": {
+        "lohnausweis": "",
+        "bankstatements": "",
+        "pillar3a": "",
+        "deductions": "",
+        "property": "",
+        "other": ""
+      }
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

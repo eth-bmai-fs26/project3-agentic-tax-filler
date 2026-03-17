@@ -121,6 +121,9 @@ class MCPServer:
     def list_documents(self) -> list[str]:
         """List all files in the persona's document folder."""
         t0 = time.time()
+        # Files that must NOT be exposed to the main LLM
+        _HIDDEN_FILES = {"submitted_return.json", "interaction_log.json", "private_notes.json"}
+
         if not self.persona_folder.exists():
             result: list[str] = []
         else:
@@ -128,7 +131,7 @@ class MCPServer:
                 [
                     f.name
                     for f in self.persona_folder.iterdir()
-                    if f.is_file() and f.name not in ("submitted_return.json", "interaction_log.json")
+                    if f.is_file() and f.name not in _HIDDEN_FILES
                 ]
             )
         self.log.record("list_documents", {}, result, duration_ms=_ms(t0))

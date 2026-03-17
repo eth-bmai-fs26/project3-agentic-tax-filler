@@ -55,6 +55,23 @@ class ColabBridge(BrowserBridge):
     def submit_form(self) -> dict:
         return self._call("(window.TaxPortal.submitForm())")
 
+    def notify_ask_user(self, question: str, answer: str) -> None:
+        """Push an ask_user exchange to the React frontend popup via eval_js.
+
+        Calls ``window.TaxPortal.notifyAskUser(question, answer)`` in the
+        Colab output cell that rendered the frontend HTML.
+        """
+        q = json.dumps(question)
+        a = json.dumps(answer)
+        js = (
+            f"window.TaxPortal && typeof window.TaxPortal.notifyAskUser === 'function' "
+            f"&& window.TaxPortal.notifyAskUser({q}, {a})"
+        )
+        try:
+            self._eval_js(js)
+        except Exception as exc:
+            logger.warning("notify_ask_user eval_js failed: %s", exc)
+
     # -- internal --------------------------------------------------------
 
     def _call(self, js_expression: str) -> Any:

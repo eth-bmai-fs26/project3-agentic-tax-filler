@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import TabNav from './components/TabNav';
 import Sidebar from './components/Sidebar';
+import AskUserPopup from './components/AskUserPopup';
 // import LoginPage from './pages/LoginPage';
 import OverviewPage from './pages/OverviewPage';
 import PersonalPage from './pages/PersonalPage';
@@ -118,6 +119,8 @@ export default function App() {
     <HashRouter>
       <Header />
       <AppRoutes />
+      {/* Floating popup shown when the tax agent asks the NPC a question */}
+      <AskUserPopup />
     </HashRouter>
   );
 }

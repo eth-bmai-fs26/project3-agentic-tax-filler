@@ -1,0 +1,85 @@
+{
+  "personal": {
+    "field-personal-main-firstName": "Marco",
+    "field-personal-main-lastName": "Bernasconi",
+    "field-personal-main-dateofbirth": "1987-05-22",
+    "field-personal-main-street": "Rychenbergstrasse",
+    "field-personal-main-streetNumber": "18",
+    "field-personal-main-zip": "8400",
+    "field-personal-main-city": "Winterthur",
+    "field-personal-main-maritalstatus": "married",
+    "field-personal-main-ahvnumber": "756.8821.4455.12",
+    "field-personal-main-occupation": "Project Manager",
+    "field-personal-main-employer": "ABB Schweiz AG",
+    "field-personal-partner-firstName": "Laura",
+    "field-personal-partner-lastName": "Bernasconi",
+    "field-personal-partner-dateofbirth": "1987-11-03",
+    "field-personal-partner-ahvnumber": "756.8821.4455.34",
+    "field-personal-partner-occupation": "Physiotherapist",
+    "field-personal-partner-employer": "Universitätsspital Zürich (USZ)"
+  },
+  "personal/children": {
+    "field-personal-children-0-name": "Sofia Bernasconi",
+    "field-personal-children-0-dateOfBirth": "2018-03-15",
+    "field-personal-children-0-relationship": "child",
+    "field-personal-children-1-name": "Luca Bernasconi",
+    "field-personal-children-1-dateOfBirth": "2022-08-20",
+    "field-personal-children-1-relationship": "child"
+  },
+  "personal/bank-details": {
+    "field-personal-bankdetails-iban": "",
+    "field-personal-bankdetails-bankname": "",
+    "field-personal-bankdetails-accountholder": ""
+  },
+  "income": {
+    "field-income-employment-bruttolohn": "170000",
+    "field-income-employment-ahvcontributions": "9010.60",
+    "field-income-employment-bvgcontributions": "10200"
+  },
+  "income/securities-income": {
+    "field-income-investment-interest": "37.50"
+  },
+  "income/property-income": {
+    "field-income-rental-eigenmietwert": "21600"
+  },
+  "deductions": {
+    "field-deductions-verpflegung-amount": "3520"
+  },
+  "deductions/professional": {
+    "field-deductions-berufsauslagen-type": "flat-rate",
+    "field-deductions-weitereberufsauslagen-amount": "5140",
+    "field-deductions-weitereberufsauslagen-description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+  },
+  "deductions/debt-interest": {
+    "field-deductions-schuldzinsen-amount": "11760"
+  },
+  "deductions/alimony": {
+    "field-deductions-kinderbetreuungskosten-amount": "10100",
+    "field-deductions-zweiverdienerabzug-amount": "5900"
+  },
+  "deductions/insurance": {
+    "field-deductions-pillar3a-amount": "7500"
+  },
+  "deductions/medical": {
+    "field-deductions-medical-amount": ""
+  },
+  "deductions/other": {
+    "field-deductions-donations-amount": "",
+    "field-deductions-donations-recipient": "",
+    "field-deductions-otherdeductions-description": "",
+    "field-deductions-otherdeductions-amount": ""
+  },
+  "wealth": {
+    "field-wealth-bankaccounts-0-bankName": "Raiffeisen / ZKB",
+    "field-wealth-bankaccounts-0-balance": "203644.99",
+    "field-wealth-bankaccounts-0-interest": "37.50"
+  },
+  "wealth/real-estate": {
+    "field-wealth-realestate-address": "Rychenbergstrasse 18, 8400 Winterthur",
+    "field-wealth-realestate-eigenmietwert": "21600",
+    "field-wealth-realestate-steuerwert": "580000"
+  },
+  "wealth/debts": {
+    "field-wealth-debts-0-creditor": "Hypothek"
+  }
+}

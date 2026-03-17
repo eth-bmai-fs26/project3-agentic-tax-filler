@@ -161,6 +161,14 @@
         return JSON.stringify({ success: false, errors: [{ field_id: null, message: e.message }], warnings: [] });
       }
     },
+
+    notifyAskUser: function (question, answer) {
+      // Dispatch to the React AskUserPopup component via a custom event
+      var event = new CustomEvent('taxportal:askuser', {
+        detail: { question: question, answer: answer, timestamp: Date.now() }
+      });
+      window.dispatchEvent(event);
+    },
   };
 
   // Colab cross-frame bridge via postMessage (works even with sandboxed iframes).
