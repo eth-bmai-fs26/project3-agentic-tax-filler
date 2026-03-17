@@ -79,6 +79,18 @@
   ],
   "clarifications": [
     {
+      "field": "deductions.fahrkosten.amount",
+      "question_patterns": ["fahrkosten", "commute cost", "zvv", "annual pass", "velo", "bike", "bicycle", "transport"],
+      "answer": "I have a ZVV Jahresabonnement — the annual pass for all zones in Zurich. I paid CHF 2,840 for it. I also sometimes cycle to work, so there might be a Velo-Pauschale on top of that.",
+      "tax_relevance": "Fahrkosten = ZVV Jahresabo CHF 2,840 + Velo-Pauschale CHF 700 = CHF 3,540 total"
+    },
+    {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal deduction", "canteen", "kantine", "14.1", "lunch deduction"],
+      "answer": "Google has a subsidized canteen — I eat there every day. I think that means I get the CHF 1,600 verpflegung deduction. Field 14.1 on my Lohnausweis is marked as Ja.",
+      "tax_relevance": "verpflegung = CHF 1,600 (Lohnausweis 14.1 = Ja)"
+    },
+    {
       "field": "deductions.weitereberufsauslagen.amount",
       "question_patterns": ["weitereberufsauslagen", "professional expenses", "berufsauslagen", "3%", "nettolohn", "pauschale"],
       "answer": "I'm not exactly sure what the Pauschale calculation is — you'd need to calculate 3% of my net salary from the Lohnausweis.",

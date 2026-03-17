@@ -79,6 +79,12 @@
   ],
   "clarifications": [
     {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal deduction", "canteen", "kantine", "14.1", "lunch"],
+      "answer": "Thomas had a canteen at Zurich Insurance — field 14.1 on his Lohnausweis says Ja, so CHF 1,600 for him. Elisabeth works at the Zentralbibliothek where there's no subsidized canteen — her 14.1 says Nein, so that's CHF 3,200 for her. Together CHF 4,800.",
+      "tax_relevance": "Total verpflegung = CHF 1,600 (Thomas) + CHF 3,200 (Elisabeth) = CHF 4,800"
+    },
+    {
       "field": "income.capitalwithdrawals.amount",
       "question_patterns": ["capital withdrawal", "kapitalbezug", "kapitalleistung", "lump sum", "pensionskasse withdrawal"],
       "answer": "I withdrew CHF 250,000 from my Pensionskasse when I retired. It's a one-time lump sum payment documented in the Pensionskasse letter. This is taxed separately — I believe it goes on a separate form for Kapitalleistungen.",

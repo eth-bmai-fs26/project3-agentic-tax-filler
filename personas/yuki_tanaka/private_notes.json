@@ -85,6 +85,12 @@
   ],
   "clarifications": [
     {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal deduction", "canteen", "kantine", "14.1", "lunch", "spotify canteen"],
+      "answer": "Spotify has a subsidized canteen here in Zurich — I eat there most days. My Lohnausweis field 14.1 says Ja. So I should claim the CHF 1,600 verpflegung deduction.",
+      "tax_relevance": "verpflegung = CHF 1,600 (Lohnausweis 14.1 = Ja)"
+    },
+    {
       "field": "deductions.kinderbetreuungskosten.amount",
       "question_patterns": ["kinderbetreuung", "kita", "childcare", "hana kita", "betrag", "amount", "kosten total"],
       "answer": "Hana's KiTa costs me CHF 1,450 per month, all 12 months of the year. The receipt is blurry but I can confirm from my bank statements: CHF 1,450 every month. Total for the year = CHF 17,400.",

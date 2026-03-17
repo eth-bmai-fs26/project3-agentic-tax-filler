@@ -85,6 +85,18 @@
   ],
   "clarifications": [
     {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal deduction", "canteen", "kantine", "14.1", "lunch"],
+      "answer": "Yes, Swiss Re has a subsidized canteen and I use it most days. On my Lohnausweis, field 14.1 says Ja. So I should get the CHF 1,600 verpflegung deduction.",
+      "tax_relevance": "verpflegung = CHF 1,600 (Lohnausweis 14.1 = Ja)"
+    },
+    {
+      "field": "deductions.weitereberufsauslagen.amount",
+      "question_patterns": ["weitereberufsauslagen", "professional expenses", "pauschale", "3%", "berufsauslagen"],
+      "answer": "I'm not sure how to calculate the Berufsauslagen Pauschale exactly — you need to take 3% of my net salary from the Lohnausweis.",
+      "tax_relevance": "3% of Nettolohn = CHF 3,592 (within CHF 2,000-4,000 range)"
+    },
+    {
       "field": "income.selfemployment.enabled",
       "question_patterns": ["self-employment enabled", "selbständig", "freelance income", "nebenberuf"],
       "answer": "Yes, I definitely have self-employment income from my ML consulting. I registered for it. You need to mark that I am self-employed as a side activity.",
