@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo:*)",
+      "Bash(which python3:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git push:*)",
+      "Bash(find /home/deli/ETH_projects/project3-agentic-tax-filler/EnvDemoV1 -type f \\\\\\(-name *.tsx -o -name *.ts -o -name *.jsx -o -name *.js \\\\\\))",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:d.get\\(k\\) for k in [''''scripts'''',''''dependencies'''',''''devDependencies'''']}, indent=2\\)\\)\")",
+      "Read(//home/deli/.nvm/versions/**)",
+      "Read(//usr/local/bin/**)"
+    ]
+  }
+}
