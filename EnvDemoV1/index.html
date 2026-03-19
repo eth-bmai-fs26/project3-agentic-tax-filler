@@ -134,6 +134,18 @@
       }
     },
 
+    setPersona: function (name) {
+      try {
+        var persona = name ? String(name) : 'No persona set';
+        if (window.__taxPortalSetPersona) {
+          window.__taxPortalSetPersona(persona);
+        }
+        return JSON.stringify({ success: true, persona: persona });
+      } catch (e) {
+        return JSON.stringify({ success: false, error: e.message });
+      }
+    },
+
     submitForm: function () {
       try {
         if (!window.__taxPortalBridge) {
