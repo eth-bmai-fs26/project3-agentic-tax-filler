@@ -1,0 +1,28 @@
+=== LOHNAUSWEIS / CERTIFICAT DE SALAIRE ===
+Steuerperiode: 2025
+
+Arbeitgeber: Swisscom (Schweiz) AG
+Adresse:     Alte Tiefenaustrasse 6, 3048 Worblaufen
+
+Arbeitnehmer: Konstantinos Chasiotis
+AHV-Nr:       756.9393.2323.12
+
+ 1. Lohn (brutto)                          CHF   82,000.00
+ 2. Gehaltsnebenleistungen                 CHF        0.00
+ 3. Unentgeltliche Befoerderung            Nein
+ 4. Kantinenverpflegung                    Ja
+ 5. Andere Gehaltsnebenleistungen          CHF        0.00
+ 6. Dienstaltersgeschenke                  CHF        0.00
+ 7. Verwaltungsratsentschaedigungen        CHF        0.00
+ 8. Weitere Leistungen                     CHF        0.00
+ 9. Beitraege AHV/IV/EO/ALV               CHF    4,223.00
+    Beitraege NBU                          CHF        0.00
+10. BVG ordentlich                         CHF    3,100.00
+    Einkauf BVG                            CHF        0.00
+11. Beitraege an Vorsorge (Saeulen 3a)     CHF        0.00
+12. Nettolohn                              CHF   74,677.00
+13. Pauschalspesen                         CHF        0.00
+14. Weitere Gehaltsnebenleistungen         CHF        0.00
+    14.1 Kantinenverpflegung/Lunch-Checks: Ja
+
+15. Bemerkungen: Keine

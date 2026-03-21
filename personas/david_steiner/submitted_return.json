@@ -1,0 +1,231 @@
+{
+  "login": {
+    "auth": {
+      "ahvnumber": "",
+      "zugangscode": ""
+    }
+  },
+  "personal": {
+    "main": {
+      "firstName": "David",
+      "lastName": "Meier",
+      "dateofbirth": "1990-05-15",
+      "street": "Bahnhofstrasse 22",
+      "streetNumber": "12",
+      "apartment": "3",
+      "zip": "8001",
+      "city": "Zürich",
+      "phone": "044 200 12 34",
+      "email": "david.meier@example.com",
+      "ahvnumber": "123456-7890",
+      "maritalstatus": "single",
+      "religion": "",
+      "occupation": "Software Engineer",
+      "employer": "Innovatech AG",
+      "workplace": "Hauptstrasse 10"
+    },
+    "partner": {
+      "firstName": "Anna",
+      "lastName": "Schmidt",
+      "dateofbirth": "1992-10-28",
+      "ahvnumber": "987654-3210",
+      "occupation": "Teacher",
+      "employer": "Grundschule Zürich",
+      "religion": "catholic"
+    },
+    "children": [
+      {
+        "name": "David Steiner",
+        "dateOfBirth": "1995-06-28",
+        "relationship": "Child"
+      }
+    ],
+    "supported": [
+      {
+        "name": "David Steiner",
+        "relationship": "Child",
+        "contribution": "0"
+      }
+    ],
+    "representative": {
+      "name": "David Steiner",
+      "address": "Universitätstrasse 15, 8006 Zürich",
+      "phone": "044 200 12 34"
+    },
+    "giftsreceived": [
+      {
+        "description": "Kantinenverpflegung",
+        "date": "2025-01-01",
+        "amount": "48000"
+      }
+    ],
+    "giftsgiven": [
+      {
+        "description": "Kantinenverpflegung",
+        "date": "2025-01-01",
+        "amount": "48000"
+      }
+    ],
+    "capitalbenefits": {
+      "amount": "48000",
+      "description": "Kantinenverpflegung"
+    },
+    "bankdetails": {
+      "iban": "CH8000000000000000000000",
+      "bankname": "UBS AG",
+      "accountholder": "David Steiner"
+    }
+  },
+  "income": {
+    "employment": {
+      "bruttolohn": "20000",
+      "ahvcontributions": "5000",
+      "bvgcontributions": "3000"
+    },
+    "selfemployment": {
+      "enabled": false,
+      "revenue": "",
+      "expenses": "",
+      "netincome": ""
+    },
+    "pension": {
+      "ahvpension": "5000",
+      "bvgpension": "3000",
+      "otherpension": ""
+    },
+    "capitalwithdrawals": {
+      "amount": ""
+    },
+    "investment": {
+      "dividends": "2000",
+      "interest": "100"
+    },
+    "alimony": {
+      "amount": ""
+    },
+    "otherincome": {
+      "description": "",
+      "amount": ""
+    },
+    "rental": {
+      "eigenmietwert": "",
+      "rentalincome": "",
+      "maintenancecosts": ""
+    }
+  },
+  "deductions": {
+    "berufsauslagen": {
+      "type": "flat-rate"
+    },
+    "flatrate": {
+      "amount": "3200"
+    },
+    "effective": [],
+    "fahrkosten": {
+      "amount": "0",
+      "description": "Public transport pass and Velo-Pauschale"
+    },
+    "verpflegung": {
+      "amount": "3200"
+    },
+    "weitereberufsauslagen": {
+      "amount": "0",
+      "description": "Verpflegung"
+    },
+    "pillar3a": {
+      "amount": ""
+    },
+    "insurance": {
+      "amount": ""
+    },
+    "schuldzinsen": {
+      "amount": ""
+    },
+    "unterhaltsbeitraege": {
+      "amount": "",
+      "recipient": ""
+    },
+    "kinderbetreuungskosten": {
+      "amount": ""
+    },
+    "weiterbildungskosten": {
+      "amount": ""
+    },
+    "donations": {
+      "amount": "",
+      "recipient": ""
+    },
+    "medical": {
+      "amount": ""
+    },
+    "zweiverdienerabzug": {
+      "amount": ""
+    },
+    "otherdeductions": {
+      "description": "",
+      "amount": ""
+    }
+  },
+  "wealth": {
+    "movableassets": {
+      "cashgold": "100000"
+    },
+    "businessshares": [],
+    "securities": [
+      {
+        "name": "SWX 3860001000",
+        "isin": "SWX3860001000",
+        "quantity": "1",
+        "value": "10000",
+        "grossReturn": "0"
+      }
+    ],
+    "bankaccounts": [
+      {
+        "bankName": "UBS AG",
+        "balance": "100000",
+        "interest": "100"
+      }
+    ],
+    "insurances": [
+      {
+        "company": "",
+        "policyNumber": "",
+        "surrenderValue": ""
+      }
+    ],
+    "vehicles": [
+      {
+        "type": "",
+        "brand": "",
+        "year": "",
+        "value": ""
+      }
+    ],
+    "realestate": {
+      "eigenmietwert": "120000",
+      "steuerwert": "300000",
+      "address": "Universitätstrasse 15, 8006 Zürich"
+    },
+    "otherassets": {
+      "description": "Crypto - Bitcoin",
+      "value": "5000"
+    },
+    "debts": [
+      {
+        "creditor": "",
+        "amount": ""
+      }
+    ]
+  },
+  "attachments": {
+    "uploads": {
+      "lohnausweis": "",
+      "bankstatements": "",
+      "pillar3a": "",
+      "deductions": "",
+      "property": "",
+      "other": ""
+    }
+  }
+}
