@@ -1,72 +1,270 @@
-# AgenTekki — MCP Tax Agent Server
+# AgenTekki — Agentic Swiss Tax Filler
 
-MCP (Model Context Protocol) server that exposes the tools an AI agent needs to autonomously file a Zurich tax return against the ZHprivateTax simulator.
+AgenTekki is an AI-powered agent that autonomously fills out Zurich Canton tax return forms. It reads taxpayer documents (salary certificates, bank statements, pension confirmations), interprets them using an LLM, and fills the correct fields across a multi-page tax form — all without human intervention.
 
-Built by **Squad B** (Middleware) as part of the AgenTekki teaching exercise. This package provides:
-
-- **9 MCP tools** for browser interaction, document reading, knowledge lookup, and human-in-the-loop communication
-- **3 browser bridges** — Colab (JS injection), Playwright (real browser), Mock (testing)
-- **2 running modes** — direct Python import (Colab notebooks) and standalone MCP protocol server (Claude Code, Gemini CLI, Cursor, etc.)
+The system supports multiple LLM backends including local models via **Ollama**, making it fully usable offline with no API keys required.
 
 ---
 
-## Table of Contents
+## How It Works
 
-1. [Quick Start](#quick-start)
-2. [Package Structure](#package-structure)
-3. [Tools Reference](#tools-reference)
-4. [Browser Bridges](#browser-bridges)
-5. [Usage Modes](#usage-modes)
-   - [Colab Notebook](#1-colab-notebook)
-   - [Local Testing with Mock](#2-local-testing-with-mock)
-   - [Playwright with Real Browser](#3-playwright-with-real-browser)
-   - [Standalone MCP Server](#4-standalone-mcp-server-claude-code--gemini-cli)
-6. [Agent Loop](#agent-loop)
-7. [Simulated Taxpayer (ask_user)](#simulated-taxpayer-ask_user)
-8. [Frontend Contract (Squad A)](#frontend-contract-squad-a)
-9. [Configuration Reference](#configuration-reference)
+```
+┌─────────────┐     ┌──────────────┐     ┌────────────────┐
+│  Taxpayer    │     │  Agent Loop  │     │  React Form    │
+│  Documents   │────▶│  (LLM +      │────▶│  (auto-filled  │
+│  + Profile   │     │   MCP Tools) │     │   in real-time)│
+└─────────────┘     └──────────────┘     └────────────────┘
+```
+
+1. **Select a persona** — Each persona represents a taxpayer with a unique financial situation and a set of uploaded documents (salary certificates, bank statements, receipts, etc.)
+2. **Agent starts** — The LLM-powered agent reads the persona's documents, interprets the financial data, and maps values to the correct tax form fields
+3. **Watch it fill** — The React frontend updates in real-time as the agent navigates through Personal, Income, Deductions, and Wealth sections
+4. **Review & download** — Once complete, review the filled form, see an accuracy score (if ground truth exists), and download the result as JSON
 
 ---
 
 ## Quick Start
 
-### Install dependencies
+### Prerequisites
+
+- **Python 3.10+**
+- **Node.js 18+** and **pnpm**
+- **Ollama** (for local LLM — no API key needed)
+
+### One-Click Setup
+
+The setup scripts handle everything: installing dependencies, downloading Ollama, choosing an LLM model, and launching the app.
+
+**macOS:**
+```bash
+bash setup_mac.sh
+```
+
+**Windows (PowerShell):**
+```powershell
+powershell -ExecutionPolicy Bypass -File setup_windows.ps1
+```
+
+The script will:
+1. Install Python, Node.js, and pnpm if missing
+2. Create a virtual environment and install backend dependencies
+3. Install frontend dependencies via pnpm
+4. Install Ollama if missing
+5. Let you choose from 4 LLM models:
+   - `gemma3:1b` (~1 GB) — Fastest, lower accuracy
+   - `gemma3:4b` (~3 GB) — Balanced speed/quality
+   - `gemma3:12b` (~8 GB) — **Recommended**, best accuracy
+   - `llama3.1:8b` (~5 GB) — Solid alternative
+6. Download the selected model and launch everything
+
+Once running, open **http://localhost:5173** in your browser.
+
+> If you re-run the script, it will skip everything already installed and jump straight to model selection and launch.
+
+### Manual Setup
+
+If you prefer to set things up yourself:
 
 ```bash
-# Core (always needed)
-pip install mcp
+# 1. Clone and enter the project
+git clone <repo-url>
+cd project3-agentic-tax-filler
 
-# For Playwright bridge (standalone mode)
-pip install playwright
-playwright install chromium
+# 2. Python backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
 
-# For PDF document reading (optional)
-pip install PyPDF2
-# or
-pip install pdfplumber
+# 3. React frontend
+cd "frontend"
+pnpm install
+cd ..
 
-# For LLM-backed simulated taxpayer (optional)
-pip install anthropic
-# or
-pip install openai
+# 4. Install and start Ollama
+brew install ollama        # macOS (or: winget install Ollama.Ollama on Windows)
+ollama serve &             # Start the server
+ollama pull gemma3:12b     # Download the model
+
+# 5. Launch the app
+export LLM_PROVIDER=ollama
+export LLM_MODEL=gemma3:12b
+bash start.sh
 ```
 
-### Run locally with the mock frontend
+### Using Cloud LLM Providers
 
-```python
-from mcp_server import MCPServer
+To use a cloud provider instead of Ollama:
 
-server = MCPServer(persona_folder="personas/anna_meier")
+```bash
+# Gemini
+export LLM_PROVIDER=gemini
+export GEMINI_API_KEY=AIza...
 
-page = server.scan_page()
-print(page["page_name"], "—", len(page["elements"]), "elements")
+# OpenAI
+export LLM_PROVIDER=openai
+export OPENAI_API_KEY=sk-...
 
-server.click_element("btn-nav-income")
-server.fill_field("field-income-employment-bruttolohn", 142000)
-server.submit_form()
+# Anthropic
+export LLM_PROVIDER=anthropic
+export ANTHROPIC_API_KEY=sk-ant-...
+
+bash start.sh
 ```
 
-### Run as an MCP server for Claude Code
+---
+
+## Architecture
+
+### System Overview
+
+- **Flask Backend** (`backend/`) — REST API managing sessions, personas, and the agent loop. Exposes SSE streams for real-time progress updates.
+- **React Frontend** (`frontend/`) — Multi-page tax form UI built with React 19, TypeScript, and Vite. Shows live updates as the agent fills fields.
+- **MCP Server** (`mcp_server/`) — Model Context Protocol server exposing 9 domain-specific tools the agent uses to interact with the form.
+- **Bridge Pattern** — Abstraction layer between the agent and the form, with multiple implementations for different environments.
+
+### LLM Support
+
+AgenTekki is **LLM-agnostic** — it uses the OpenAI-compatible SDK to communicate with any provider:
+
+| Provider | Default Model | Requires |
+|----------|--------------|----------|
+| **Ollama** (local) | `gemma3:12b` | Ollama installed, no API key |
+| Gemini | `gemini-2.5-flash` | `GEMINI_API_KEY` |
+| OpenAI | `gpt-4o-mini` | `OPENAI_API_KEY` |
+| Anthropic | `claude-sonnet-4-6` | `ANTHROPIC_API_KEY` |
+
+### Project Structure
+
+```
+project3-agentic-tax-filler/
+├── setup_mac.sh                # One-click setup (macOS)
+├── setup_windows.ps1           # One-click setup (Windows)
+├── start.sh                    # Launch backend + frontend
+│
+├── backend/                    # Flask REST API
+│   ├── app.py                  # App factory, CORS, blueprints
+│   ├── config.py               # LLM provider config, paths
+│   ├── routes/
+│   │   ├── personas.py         # GET/POST /api/personas
+│   │   └── agent_routes.py     # Session create/run/stream/score
+│   ├── services/
+│   │   ├── agent_service.py    # Session management, LLM client
+│   │   └── think_service.py    # Agent loop (perceive-think-act)
+│   └── bridges/
+│       └── flask_bridge.py     # In-memory form state bridge
+│
+├── frontend/             # React frontend (Vite + TypeScript)
+│   ├── src/
+│   │   ├── pages/              # Form pages (Personal, Income, etc.)
+│   │   ├── components/         # UI components
+│   │   ├── context/            # React contexts (Form, Session)
+│   │   └── api/client.ts       # Backend API client
+│   └── package.json
+│
+├── mcp_server/                 # MCP protocol server
+│   ├── server.py               # 9 MCP tools
+│   ├── agent.py                # Agent loop
+│   ├── ask_user.py             # Simulated taxpayer (NPC)
+│   └── bridges/                # Mock, Colab, Playwright bridges
+│
+├── personas/                   # Taxpayer personas + documents
+│   ├── anna_meier/
+│   ├── marco_laura_bernasconi/
+│   └── ...
+│
+├── guides/                     # Zurich Canton tax reference guides
+└── scripts/
+    └── score.py                # Evaluate agent accuracy vs ground truth
+```
+
+---
+
+## Personas
+
+AgenTekki ships with 9 pre-built taxpayer personas, each with realistic Swiss tax scenarios and supporting documents:
+
+| Persona | Scenario | Difficulty |
+|---------|----------|------------|
+| **Anna Meier** | Single professional, employment income, standard deductions | Easy |
+| **Konstantinos Chasiotis** | Junior data engineer, Greek expat, standard deductions | Easy |
+| **David Steiner** | PhD student, part-time TA, education deductions | Easy |
+| **Priya Chakraborty** | Expat employee, international considerations, Pillar 3a | Medium |
+| **Thomas & Elisabeth Widmer** | Retired couple, pension income, investment portfolio | Medium |
+| **Sophie Mueller** | Marketing manager, divorced, one child, alimony | Medium |
+| **Marco & Laura Bernasconi** | Married couple, dual income, children, property | Hard |
+| **Yuki Tanaka** | Self-employed freelancer, complex deductions, securities | Hard |
+| **Li Wei Zhang** | Research scientist, married, dual income, two children | Hard |
+| **Elena Rossi** | Restaurant owner, widowed, self-employed, property income | Hard |
+
+Each persona folder (`personas/<name>/`) contains:
+- `profile.json` — Biographical data (name, address, AHV number, marital status)
+- `lohnausweis.txt` — Salary certificate
+- `bank_statement.csv` — Bank transactions
+- Additional documents as relevant: Pillar 3a confirmations, receipts, rental income, etc.
+- `ground_truth.json` — Expected correct answers (for scoring)
+
+### Custom Personas
+
+You can create your own personas through the UI:
+1. Click **"+ Create Persona"** on the dashboard
+2. Fill in the taxpayer profile (name, address, DOB, AHV number, marital status)
+3. Upload documents (salary statements, bank statements, receipts)
+4. The new persona appears in the Pending Tax Forms list
+
+---
+
+## Frontend Features
+
+### Dashboard
+- **Pending Tax Forms** — All personas ready to be processed, with document counts and one-click start
+- **Completed Tax Forms** — Previously processed personas with accuracy scores and JSON download
+
+### Tax Form
+The form covers all sections of the Zurich Canton tax return:
+- **Personal** — Taxpayer details, children, supported persons, bank details
+- **Income** — Employment, pensions, securities income, property income, other income
+- **Deductions** — Commuting costs, professional expenses, debt interest, insurance, Pillar 3a, medical costs
+- **Wealth** — Securities, bank accounts, movable assets, real estate, debts
+- **Review** — Summary of all filled fields and final submission
+
+### Real-Time Agent Monitoring
+- Live status bar showing agent progress and fields filled count
+- Page-by-page navigation locking (can't jump ahead of the agent)
+- Sidebar highlights which sections the agent has completed
+- Score card displayed on completion with accuracy percentage
+
+---
+
+## MCP Server
+
+The MCP (Model Context Protocol) server exposes 9 tools that the agent uses to interact with the tax form. It can also run as a standalone server for use with Claude Code, Gemini CLI, Cursor, or any MCP-compatible client.
+
+### Tools Reference
+
+| Tool | Description |
+|------|-------------|
+| `scan_page()` | Returns all visible elements on the current page (inputs, selects, buttons) with their locators |
+| `fill_field(locator, value)` | Sets a form field value. Locator must come from a previous `scan_page()` call |
+| `click_element(locator)` | Clicks a button or navigation link |
+| `submit_form()` | Submits the completed tax return and generates `submitted_return.json` |
+| `list_documents()` | Lists all files in the persona's document folder |
+| `read_document(filepath)` | Reads `.txt`, `.csv`, `.pdf`, or `.json` files with automatic parsing |
+| `list_guides()` | Returns available Zurich Canton tax guide topics |
+| `fetch_guide(url)` | Returns the full text of a specific tax guide |
+| `ask_user(question)` | Sends a question to the simulated taxpayer (logged and penalized if unnecessary) |
+
+### Browser Bridges
+
+| Bridge | Use Case |
+|--------|----------|
+| `FlaskBridge` | In-memory server-side form state (default, used with the React frontend) |
+| `MockBridge` | In-memory simulation for testing — no browser needed |
+| `ColabBridge` | Google Colab integration via JavaScript injection |
+| `PlaywrightBridge` | Real browser automation via Playwright |
+
+### Standalone MCP Server
+
+Run the MCP server for use with external AI tools:
 
 ```bash
 # Register with Claude Code
@@ -75,276 +273,12 @@ claude mcp add agentekki -- python -m mcp_server \
     --bridge playwright \
     --url http://localhost:3000
 
-# Then in Claude Code, the 9 tools are available automatically
-```
-
----
-
-## Package Structure
-
-```
-mcp_server/
-├── __init__.py          Public API — re-exports MCPServer, run_agent, bridges, etc.
-├── __main__.py          CLI entry point: python -m mcp_server
-├── server.py            MCPServer class — all 9 tools, bridge-agnostic
-├── agent.py             run_agent() — the perceive-think-act loop
-├── ask_user.py          Simulated taxpayer — LLM-backed and rule-based
-├── log.py               InteractionLog — records every tool call for scoring
-├── protocol.py          MCP JSON-RPC server over stdio (uses mcp SDK)
-└── bridges/
-    ├── __init__.py      Bridge exports and lazy loaders
-    ├── base.py          BrowserBridge — abstract base class (4 methods)
-    ├── colab.py         ColabBridge — google.colab.output.eval_js()
-    ├── mock.py          MockBridge + MockFrontend — in-memory fake
-    └── playwright.py    PlaywrightBridge — real browser automation
-```
-
-### Dependency graph
-
-```
-__init__.py ─────┐
-                 ├─▶ server.py ──▶ bridges/base.py
-__main__.py ─────┤                   ▲
-                 ├─▶ protocol.py     │
-                 ├─▶ agent.py     bridges/{colab,mock,playwright}.py
-                 ├─▶ ask_user.py
-                 └─▶ log.py
-```
-
-`server.py` depends only on `bridges/base.py` (the ABC). Concrete bridges are injected at instantiation time, so the core is fully decoupled from transport.
-
----
-
-## Tools Reference
-
-### Browser & UI Tools (Discovery-Based)
-
-| Tool | Parameters | Description |
-|------|-----------|-------------|
-| `scan_page()` | — | Returns a JSON representation of the current page: page name, validation errors, and all visible elements (inputs, selects, buttons, text) with their locators. |
-| `fill_field(locator, value)` | `locator: str`, `value: str\|number` | Enters a value into a form field. The locator must come from a previous `scan_page()` call. |
-| `click_element(locator)` | `locator: str` | Clicks a button or link (e.g. `"btn-nav-deductions"` for page navigation). |
-| `submit_form()` | — | Submits the completed tax return. Generates `submitted_return.json` for scoring. |
-
-### Document & Knowledge Tools
-
-| Tool | Parameters | Description |
-|------|-----------|-------------|
-| `list_documents()` | — | Lists all files in the persona's document folder. |
-| `read_document(filepath)` | `filepath: str` | Reads `.txt`, `.csv`, `.pdf`, or `.json` files. Returns extracted text and structured data (parsed rows for CSV, parsed object for JSON). |
-| `list_guides()` | — | Returns available tax guide topics and their file paths. |
-| `fetch_guide(url)` | `url: str` | Returns the full text of a specific tax guide. |
-
-### Human-in-the-Loop
-
-| Tool | Parameters | Description |
-|------|-----------|-------------|
-| `ask_user(question)` | `question: str` | Sends a question to the simulated taxpayer. Every call is logged — unnecessary questions are penalized during scoring. |
-
-### Return schemas
-
-**`scan_page()` returns:**
-```json
-{
-  "page_name": "income",
-  "validation_errors": [{"field_id": "...", "message": "..."}],
-  "elements": [
-    {"type": "input", "locator": "field-income-employment-bruttolohn", "label": "1. Gross Salary (CHF)", "value": "", "required": true},
-    {"type": "select", "locator": "field-income-canteen", "label": "Subsidized canteen?", "options": ["Yes", "No"], "value": "No", "required": true},
-    {"type": "button", "locator": "btn-nav-deductions", "label": "Continue to Deductions"},
-    {"type": "text", "content": "Please declare your employment income here."}
-  ]
-}
-```
-
-**`fill_field()` returns:**
-```json
-{
-  "success": true,
-  "field_id": "field-income-employment-bruttolohn",
-  "value_set": 142000,
-  "error": null,
-  "triggered_changes": []
-}
-```
-
-**`submit_form()` returns:**
-```json
-{
-  "success": true,
-  "submission_json": {"field-personal-main-name": "Anna Meier", "...": "..."},
-  "errors": [],
-  "warnings": []
-}
-```
-
----
-
-## Browser Bridges
-
-The `BrowserBridge` ABC defines 4 methods that every bridge must implement:
-
-```python
-class BrowserBridge(ABC):
-    def scan_page(self) -> dict: ...
-    def fill_field(self, locator: str, value: Any) -> dict: ...
-    def click_element(self, locator: str) -> dict: ...
-    def submit_form(self) -> dict: ...
-    @property
-    def is_available(self) -> bool: ...
-    def close(self): ...  # optional cleanup
-```
-
-### MockBridge
-
-In-memory simulation of the 6-page tax form. No external dependencies. Used for unit tests, CI, and local development.
-
-```python
-from mcp_server import MCPServer, MockBridge
-
-server = MCPServer(persona_folder="personas/anna_meier", bridge=MockBridge())
-```
-
-### ColabBridge
-
-Communicates with a frontend rendered inside a Google Colab cell output via `google.colab.output.eval_js()`. The frontend must expose a `window.TaxPortal` JS object (see [Frontend Contract](#frontend-contract-squad-a)).
-
-```python
-from mcp_server import MCPServer
-from mcp_server.bridges.colab import ColabBridge
-
-server = MCPServer(persona_folder="personas/anna_meier", bridge=ColabBridge())
-```
-
-> Only works inside a Google Colab runtime.
-
-### PlaywrightBridge
-
-Drives a real browser (Chromium/Firefox/WebKit) against the ZHprivateTax simulator. Dual strategy: prefers the `window.TaxPortal` JS API if the frontend exposes it, otherwise falls back to generic DOM scraping.
-
-```python
-from mcp_server import MCPServer
-from mcp_server.bridges.playwright import PlaywrightBridge
-
-bridge = PlaywrightBridge(
-    url="http://localhost:3000",
-    headless=True,          # False to see the browser
-    browser_type="chromium", # or "firefox", "webkit"
-)
-server = MCPServer(persona_folder="personas/anna_meier", bridge=bridge)
-
-# Don't forget to clean up
-bridge.close()
-```
-
----
-
-## Usage Modes
-
-### 1. Colab Notebook
-
-Students import the package directly and call tools from their `think()` function.
-
-```python
-# In a Colab cell:
-from mcp_server import MCPServer
-
-server = MCPServer(persona_folder="personas/anna_meier")
-
-# Discover the page
-page = server.scan_page()
-for el in page["elements"]:
-    if el["type"] == "input":
-        print(f"  {el['locator']}: {el['label']}")
-
-# Fill fields
-server.fill_field("field-income-employment-bruttolohn", 142000)
-
-# Read persona documents
-docs = server.list_documents()
-for doc in docs:
-    content = server.read_document(doc)
-    print(f"{doc}: {content['type']}, {len(content['content'])} chars")
-
-# Ask the taxpayer
-answer = server.ask_user("Do you work from home regularly?")
-print(answer["answer"])
-```
-
-### 2. Local Testing with Mock
-
-The `MockBridge` (default) requires no browser, no Colab, no external services. It simulates all 6 pages with realistic field structures.
-
-```python
-from mcp_server import MCPServer
-
-server = MCPServer(persona_folder="personas/anna_meier")  # MockBridge by default
-```
-
-### 3. Playwright with Real Browser
-
-Start the ZHprivateTax simulator (Squad A's frontend), then point the Playwright bridge at it.
-
-```bash
-# Terminal 1: start the frontend
-cd zhprivatetax-simulator && npm run dev
-# → http://localhost:3000
-
-# Terminal 2: run your agent
-python my_agent.py
-```
-
-```python
-# my_agent.py
-from mcp_server import MCPServer
-from mcp_server.bridges.playwright import PlaywrightBridge
-
-bridge = PlaywrightBridge(url="http://localhost:3000", headless=False)
-server = MCPServer(persona_folder="personas/anna_meier", bridge=bridge)
-
-# Now all tools interact with the real browser
-page = server.scan_page()  # scrapes the live DOM
-server.fill_field("field-income-employment-bruttolohn", 142000)  # types into real inputs
-```
-
-### 4. Standalone MCP Server (Claude Code / Gemini CLI)
-
-Run the package as a proper MCP server that speaks JSON-RPC over stdio. This makes all 9 tools available to any MCP-compatible client.
-
-**Command line:**
-
-```bash
+# Run directly
 python -m mcp_server \
     --persona personas/anna_meier \
-    --bridge playwright \
-    --url http://localhost:3000 \
-    --no-headless \
+    --bridge mock \
     --verbose
 ```
-
-**Register with Claude Code:**
-
-```bash
-claude mcp add agentekki -- python -m mcp_server \
-    --persona personas/anna_meier \
-    --bridge playwright \
-    --url http://localhost:3000
-```
-
-**Register with Gemini CLI (via MCP config):**
-
-```json
-{
-  "mcpServers": {
-    "agentekki": {
-      "command": "python",
-      "args": ["-m", "mcp_server", "--persona", "personas/anna_meier", "--bridge", "mock"]
-    }
-  }
-}
-```
-
-**CLI options:**
 
 | Flag | Default | Description |
 |------|---------|-------------|
@@ -357,158 +291,39 @@ claude mcp add agentekki -- python -m mcp_server \
 
 ---
 
-## Agent Loop
+## Scoring
 
-The `run_agent()` function provides a ready-made perceive-think-act loop. Students implement `think(state) -> action` and plug it in.
+AgenTekki evaluates how accurately the agent filled the tax form by comparing against ground truth answers:
 
-```python
-from mcp_server import run_agent
+```bash
+# Score a single persona
+python3 -m scripts.score --persona anna_meier
 
-def think(state):
-    """Decide the next action based on current state.
-
-    Must return: {"tool": "tool_name", "args": {…}}
-    Return None or {"tool": "done"} to stop.
-    """
-    if not state["documents_read"]:
-        docs = state.get("last_result", [])
-        if not docs:
-            return {"tool": "list_documents", "args": {}}
-        return {"tool": "read_document", "args": {"filepath": docs[0]}}
-
-    # ... your strategy here ...
-    return {"tool": "submit_form", "args": {}}
-
-
-state = run_agent(
-    think_fn=think,
-    persona_folder="personas/anna_meier",
-    max_steps=50,
-)
-
-print(f"Score-relevant fields: {state['form_fields_filled']}")
+# Score all personas
+python3 -m scripts.score --all
 ```
 
-### Agent state structure
-
-The state dict passed to `think()` contains:
-
-```python
-{
-    "profile": {...},              # persona's profile.json
-    "documents_read": [...],       # filenames already processed
-    "extracted_data": {...},       # filepath → read_document result
-    "form_fields_filled": {...},   # locator → value mapping
-    "questions_asked": [...],      # [{question, answer}]
-    "searches_done": [...],        # [{tool, args}]
-    "notes": [],                   # free-form agent notes
-    "warnings": [],                # flags / inconsistencies
-    "current_page": "income",      # last known page name
-    "step_count": 7,               # current iteration
-    "max_steps": 100,              # hard limit
-    "done": False,                 # set True on submit or agent signal
-    "last_action": {...},          # previous action dict
-    "last_result": {...},          # previous tool result
-}
-```
+The scoring system compares each filled field against expected values, normalizing strings and numbers for fair comparison. Scores are displayed as percentages on the dashboard after each completed run.
 
 ---
 
-## Simulated Taxpayer (ask_user)
+## Configuration
 
-Two implementations are provided:
+All configuration is via environment variables:
 
-### Rule-based (default)
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `LLM_PROVIDER` | `gemini` | LLM backend: `ollama`, `gemini`, `openai`, `anthropic` |
+| `LLM_MODEL` | Auto per provider | Override the model name |
+| `OLLAMA_BASE_URL` | `http://localhost:11434/v1` | Ollama API endpoint |
+| `GEMINI_API_KEY` | — | Google Gemini API key |
+| `OPENAI_API_KEY` | — | OpenAI API key |
+| `ANTHROPIC_API_KEY` | — | Anthropic API key |
 
-Keyword-matching against a Q&A dictionary. Loads from `{persona_folder}/qa_pairs.json` if it exists, otherwise uses hardcoded Anna Meier defaults.
+### Ports
 
-```json
-// personas/anna_meier/qa_pairs.json
-{
-  "canteen": "Yes, Google has a subsidized canteen.",
-  "children": "No, no kids.",
-  "commute": "I take the ZVV tram. Annual pass.",
-  "donations": "CHF 200 to the Swiss Red Cross."
-}
-```
-
-### LLM-backed
-
-Uses the Anthropic or OpenAI SDK to generate in-character responses.
-
-```python
-from mcp_server import MCPServer, make_llm_ask_user
-
-ask_fn = make_llm_ask_user(
-    persona_system_prompt="You are Anna Meier, a 29-year-old software engineer at Google Zurich...",
-    model="claude-sonnet-4-5-20250929",
-)
-
-server = MCPServer(
-    persona_folder="personas/anna_meier",
-    ask_user_fn=ask_fn,
-)
-```
-
----
-
-## Frontend Contract (Squad A)
-
-The frontend (React app or plain HTML/JS) must expose a global `window.TaxPortal` object with 4 methods. All methods **must return JSON strings**.
-
-```javascript
-window.TaxPortal = {
-
-  // scanPage() → string (JSON)
-  // No parameters.
-  // Returns: {page_name, validation_errors, elements}
-  scanPage() { ... },
-
-  // fillField(locator: string, value: string|number) → string (JSON)
-  // Returns: {success, field_id, value_set, error, triggered_changes}
-  fillField(locator, value) { ... },
-
-  // clickElement(locator: string) → string (JSON)
-  // Returns: {success, locator, action, new_page}
-  clickElement(locator) { ... },
-
-  // submitForm() → string (JSON)
-  // No parameters.
-  // Returns: {success, submission_json, errors, warnings}
-  submitForm() { ... },
-};
-```
-
-> The PlaywrightBridge also works **without** `window.TaxPortal` by falling back to generic DOM scraping, but the JS API is preferred for reliability.
-
----
-
-## Configuration Reference
-
-### MCPServer constructor
-
-```python
-MCPServer(
-    persona_folder: str,              # Path to persona documents (required)
-    guides_folder: str | None,        # Path to tax guides (default: "guides/")
-    bridge: BrowserBridge | None,     # Browser bridge (default: MockBridge)
-    ask_user_fn: callable | None,     # Simulated taxpayer (default: rule-based)
-)
-```
-
-### Interaction log
-
-Every tool call is recorded in an `InteractionLog` accessible via `server.log`. On `run_agent()` completion, the log is saved to `{persona_folder}/interaction_log.json`.
-
-```python
-# Access the log
-for entry in server.log.entries:
-    print(entry["timestamp"], entry["tool"], entry["duration_ms"], "ms")
-
-# Save manually
-server.log.save("my_log.json")
-```
-
-### Scoring output
-
-On successful `submit_form()`, the submission JSON is saved to `{persona_folder}/submitted_return.json`. This file is compared against the gold standard by the scoring script (Squad D).
+| Service | URL |
+|---------|-----|
+| React Frontend | http://localhost:5173 |
+| Flask Backend | http://localhost:5001 |
+| Ollama API | http://localhost:11434 |
