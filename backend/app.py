@@ -14,6 +14,8 @@ def create_app() -> Flask:
     app.register_blueprint(personas_bp)
     app.register_blueprint(agent_bp)
 
+    app.add_url_rule("/ping", "ping", lambda: ({"status": "ok"}, 200))
+
     return app
 
 

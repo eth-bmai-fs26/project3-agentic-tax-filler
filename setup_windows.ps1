@@ -3,6 +3,11 @@
 #  Usage:  powershell -ExecutionPolicy Bypass -File setup_windows.ps1
 # ──────────────────────────────────────────────────────────────
 
+param(
+    [string]$FrontendPath = ".\frontend",
+    [string]$BackendPath  = ".\backend"
+)
+
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $RepoRoot
@@ -73,17 +78,6 @@ if (Test-CommandExists "node") {
         Write-Fail "Node.js is not installed. Please install it from https://nodejs.org/ and re-run this script."
     }
 }
-
-# pnpm
-if (Test-CommandExists "pnpm") {
-    Write-Skip "pnpm"
-} else {
-    Write-Info "Installing pnpm..."
-    npm install -g pnpm
-    Write-Ok "pnpm installed"
-}
-
-Write-Host ""
 
 # ──────────────────────────────────────────────────────────────
 #  Step 2: Python Virtual Environment & Backend Dependencies
@@ -252,59 +246,162 @@ try {
     Write-Ok "Ollama server started"
 }
 
-# Activate venv
-& $venvActivate
-
-# Start Flask backend
-Write-Info "Starting Flask backend..."
-$backendProc = Start-Process $pythonCmd -ArgumentList "-m backend.app" -WorkingDirectory $RepoRoot -PassThru -WindowStyle Hidden
-
-Start-Sleep -Seconds 1
-
-# Start React frontend
-Write-Info "Starting React frontend..."
-$frontendProc = Start-Process pnpm -ArgumentList "dev" -WorkingDirectory $frontendDir -PassThru -WindowStyle Hidden
-
-Start-Sleep -Seconds 2
-
 Write-Host ""
-Write-Host "══════════════════════════════════════════════════════════" -ForegroundColor Green
-Write-Host "  ✅ AgenTekki is running!" -ForegroundColor Green
-Write-Host "══════════════════════════════════════════════════════════" -ForegroundColor Green
-Write-Host ""
-Write-Host "   Frontend:  " -NoNewline; Write-Host "http://localhost:5173" -ForegroundColor Cyan
-Write-Host "   Backend:   " -NoNewline; Write-Host "http://localhost:5001" -ForegroundColor Cyan
-Write-Host "   Ollama:    " -NoNewline; Write-Host "http://localhost:11434" -ForegroundColor Cyan
-Write-Host "   Model:     $selectedModel"
-Write-Host ""
-Write-Host "   Open " -NoNewline; Write-Host "http://localhost:5173" -ForegroundColor Cyan -NoNewline; Write-Host " in your browser to start."
-Write-Host "   Press " -NoNewline; Write-Host "Ctrl+C" -ForegroundColor White -NoNewline; Write-Host " to stop all services."
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host "  Launching Ollama + React + Flask Application"   -ForegroundColor Cyan
+Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# Wait and cleanup on exit
-try {
-    Write-Host "  (Waiting... press Ctrl+C to stop)" -ForegroundColor DarkGray
-    while ($true) {
-        Start-Sleep -Seconds 1
-        # Check if any process has exited unexpectedly
-        if ($backendProc.HasExited -and $frontendProc.HasExited) {
-            Write-Warn "Both backend and frontend have stopped."
+# --- Validate paths ---
+if (-not (Test-Path $FrontendPath)) {
+    Write-Host "[ERROR] Frontend path not found: $FrontendPath" -ForegroundColor Red
+    exit 1
+}
+if (-not (Test-Path $BackendPath)) {
+    Write-Host "[ERROR] Backend path not found: $BackendPath" -ForegroundColor Red
+    exit 1
+}
+
+$FrontendPath = Resolve-Path $FrontendPath
+$BackendPath  = Resolve-Path $BackendPath
+
+# Create log directory
+$LogDir = Join-Path $PSScriptRoot "logs"
+if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir | Out-Null }
+
+# Track all processes for cleanup
+$processes = @()
+
+# -------------------------------------------------------
+# 1. Ollama
+# -------------------------------------------------------
+if (Get-Process -Name "ollama" -ErrorAction SilentlyContinue) {
+    Write-Host "[Ollama]   Already running, skipping..." -ForegroundColor Magenta
+    $ollamaProc = $null
+} else {
+    Write-Host "[Ollama]   Starting server..." -ForegroundColor Magenta
+    $ollamaProc = Start-Process ollama -ArgumentList "serve" `
+        -PassThru -WindowStyle Hidden `
+        -RedirectStandardOutput "$LogDir\ollama.log" `
+        -RedirectStandardError  "$LogDir\ollama-error.log"
+    $processes += $ollamaProc
+
+    # Wait until Ollama is ready
+    $timeout = 30; $elapsed = 0
+    while ($elapsed -lt $timeout) {
+        try {
+            Invoke-WebRequest -Uri "http://localhost:11434" -UseBasicParsing -TimeoutSec 2 | Out-Null
+            Write-Host "[Ollama]   Ready on http://localhost:11434" -ForegroundColor Magenta
             break
+        } catch {
+            Start-Sleep -Seconds 2
+            $elapsed += 2
         }
     }
-} finally {
-    Write-Host ""
-    Write-Host "Shutting down..." -ForegroundColor Yellow
-
-    if ($null -ne $frontendProc -and -not $frontendProc.HasExited) {
-        Stop-Process -Id $frontendProc.Id -Force -ErrorAction SilentlyContinue
+    if ($elapsed -ge $timeout) {
+        Write-Host "[Ollama]   WARNING: Did not respond within ${timeout}s" -ForegroundColor Red
     }
-    if ($null -ne $backendProc -and -not $backendProc.HasExited) {
-        Stop-Process -Id $backendProc.Id -Force -ErrorAction SilentlyContinue
-    }
-    if ($null -ne $ollamaProc -and -not $ollamaProc.HasExited) {
-        Stop-Process -Id $ollamaProc.Id -Force -ErrorAction SilentlyContinue
-    }
-
-    Write-Host "Stopped all services." -ForegroundColor Green
 }
+
+# -------------------------------------------------------
+# 2. Flask Backend
+# -------------------------------------------------------
+Write-Host "[Backend]  Starting Flask server..." -ForegroundColor Yellow
+
+$backendProc = Start-Process python -ArgumentList "-m", "backend.app" `
+    -WorkingDirectory (Split-Path $BackendPath -Parent) `
+    -PassThru -WindowStyle Hidden `
+    -RedirectStandardOutput "$LogDir\backend.log" `
+    -RedirectStandardError  "$LogDir\backend-error.log"
+$processes += $backendProc
+
+# Wait until Flask is ready
+$timeout = 30; $elapsed = 0
+while ($elapsed -lt $timeout) {
+    try {
+        Invoke-WebRequest -Uri "http://localhost:5001/ping" -UseBasicParsing | Out-Null
+        Write-Host "[Backend]  Ready on http://localhost:5001" -ForegroundColor Yellow
+        break
+    } catch {
+        Start-Sleep -Seconds 2
+        $elapsed += 2
+    }
+}
+if ($elapsed -ge $timeout) {
+    Write-Host "[Backend]  WARNING: Did not respond within ${timeout}s" -ForegroundColor Red
+    Write-Host "[Backend]  Check logs: $LogDir\backend-error.log" -ForegroundColor Red
+}
+
+# -------------------------------------------------------
+# 3. React Frontend
+# -------------------------------------------------------
+Write-Host "[Frontend] Starting React dev server..." -ForegroundColor Green
+
+$frontendProc = Start-Process cmd -ArgumentList "/c", "npm run dev" `
+    -WorkingDirectory $FrontendPath `
+    -PassThru -WindowStyle Hidden `
+    -RedirectStandardOutput "$LogDir\frontend.log" `
+    -RedirectStandardError  "$LogDir\frontend-error.log"
+$processes += $frontendProc
+
+# Wait until React is ready (longer timeout — React builds are slow)
+$timeout = 60; $elapsed = 0
+while ($elapsed -lt $timeout) {
+    try {
+        Invoke-WebRequest -Uri "http://localhost:5173" -UseBasicParsing -TimeoutSec 2 | Out-Null
+        Write-Host "[Frontend] Ready on http://localhost:5173" -ForegroundColor Green
+        break
+    } catch {
+        Start-Sleep -Seconds 2
+        $elapsed += 2
+    }
+}
+if ($elapsed -ge $timeout) {
+    Write-Host "[Frontend] WARNING: Did not respond within ${timeout}s" -ForegroundColor Red
+    Write-Host "[Frontend] Check logs: $LogDir\frontend-error.log" -ForegroundColor Red
+}
+
+# -------------------------------------------------------
+# Summary
+# -------------------------------------------------------
+Write-Host ""
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host "  All servers launched"                            -ForegroundColor Cyan
+Write-Host "  Ollama   -> http://localhost:11434"              -ForegroundColor Magenta
+Write-Host "  Flask    -> http://localhost:5001"               -ForegroundColor Yellow
+Write-Host "  React    -> http://localhost:5173"               -ForegroundColor Green
+Write-Host ""
+Write-Host "  Logs in: $LogDir"                                -ForegroundColor DarkGray
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Press Enter to stop all servers..." -ForegroundColor DarkGray
+
+# Wait for user input to shut down
+Read-Host | Out-Null
+
+# -------------------------------------------------------
+# Cleanup
+# -------------------------------------------------------
+Write-Host ""
+Write-Host "Shutting down servers..." -ForegroundColor Cyan
+
+foreach ($proc in $processes) {
+    if ($proc -and -not $proc.HasExited) {
+        try {
+            Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue
+            Write-Host "  Stopped PID $($proc.Id) ($($proc.ProcessName))" -ForegroundColor DarkGray
+        } catch {
+            Write-Host "  Could not stop PID $($proc.Id)" -ForegroundColor Red
+        }
+    }
+}
+
+# Also kill any child node processes spawned by npm start
+if ($frontendProc) {
+    Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object {
+        $_.StartTime -ge $frontendProc.StartTime
+    } | Stop-Process -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host ""
+Write-Host "All servers stopped. Goodbye!" -ForegroundColor Cyan
