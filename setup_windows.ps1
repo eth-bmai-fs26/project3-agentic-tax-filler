@@ -42,27 +42,63 @@ Write-Host "[1/6] Checking system dependencies..." -ForegroundColor White
 
 $hasWinget = Test-WingetAvailable
 
-# Python 3
-if (Test-CommandExists "python") {
-    $pyVer = & python --version 2>&1
-    Write-Skip "Python ($pyVer)"
-} elseif (Test-CommandExists "python3") {
-    $pyVer = & python3 --version 2>&1
-    Write-Skip "Python ($pyVer)"
-} else {
-    if ($hasWinget) {
-        Write-Info "Installing Python 3.13 via winget..."
-        winget install Python.Python.3.13 --accept-source-agreements --accept-package-agreements
-        # Refresh PATH
-        $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-        Write-Ok "Python installed"
-    } else {
-        Write-Fail "Python 3 is not installed. Please install it from https://www.python.org/downloads/ and re-run this script."
+$pythonInstalled = $false
+$pythonCmd = $null
+
+# Check for 'python' first
+try {
+    $version = python --version 2>&1
+    if ($version -match "Python \d+\.\d+") {
+        $pythonInstalled = $true
+        $pythonCmd = "python"
     }
+} catch {}
+
+# If not found, check for 'python3'
+if (-not $pythonInstalled) {
+    try {
+        $version = python3 --version 2>&1
+        if ($version -match "Python \d+\.\d+") {
+            $pythonInstalled = $true
+            $pythonCmd = "python3"
+        }
+    } catch {}
 }
 
-# Determine python command
-$pythonCmd = if (Test-CommandExists "python3") { "python3" } else { "python" }
+if ($pythonInstalled) {
+
+    Write-Skip "Python is already installed ($pythonCmd): $version" -ForegroundColor Green
+} else {
+    Write-Info "Python not found. Installing via winget..." -ForegroundColor Yellow
+
+    winget install --id Python.Python.3.12 --accept-source-agreements --accept-package-agreements --silent
+
+    # Refresh PATH for the current session
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+
+    # Determine which command works after install
+    try {
+        $version = python --version 2>&1
+        if ($version -match "Python \d+\.\d+") {
+            $pythonCmd = "python"
+        }
+    } catch {}
+
+    if (-not $pythonCmd) {
+        try {
+            $version = python3 --version 2>&1
+            if ($version -match "Python \d+\.\d+") {
+                $pythonCmd = "python3"
+            }
+        } catch {}
+    }
+
+    if ($pythonCmd) {
+        Write-Ok "Python installed successfully ($pythonCmd): $version"
+    } else {
+        Write-Ward "Python was installed but you may need to restart your terminal for PATH changes to take effect."
+    }
+}
 
 # Node.js
 if (Test-CommandExists "node") {
@@ -72,6 +108,8 @@ if (Test-CommandExists "node") {
     if ($hasWinget) {
         Write-Info "Installing Node.js via winget..."
         winget install OpenJS.NodeJS --accept-source-agreements --accept-package-agreements
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+	npm install -g pnpm
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
         Write-Ok "Node.js installed"
     } else {
@@ -248,7 +286,7 @@ try {
 
 Write-Host ""
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  Launching Ollama + React + Flask Application"   -ForegroundColor Cyan
+Write-Host "  Launching React + Flask Application"   -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -273,41 +311,11 @@ if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir | Out
 $processes = @()
 
 # -------------------------------------------------------
-# 1. Ollama
-# -------------------------------------------------------
-if (Get-Process -Name "ollama" -ErrorAction SilentlyContinue) {
-    Write-Host "[Ollama]   Already running, skipping..." -ForegroundColor Magenta
-    $ollamaProc = $null
-} else {
-    Write-Host "[Ollama]   Starting server..." -ForegroundColor Magenta
-    $ollamaProc = Start-Process ollama -ArgumentList "serve" `
-        -PassThru -WindowStyle Hidden `
-        -RedirectStandardOutput "$LogDir\ollama.log" `
-        -RedirectStandardError  "$LogDir\ollama-error.log"
-    $processes += $ollamaProc
-
-    # Wait until Ollama is ready
-    $timeout = 30; $elapsed = 0
-    while ($elapsed -lt $timeout) {
-        try {
-            Invoke-WebRequest -Uri "http://localhost:11434" -UseBasicParsing -TimeoutSec 2 | Out-Null
-            Write-Host "[Ollama]   Ready on http://localhost:11434" -ForegroundColor Magenta
-            break
-        } catch {
-            Start-Sleep -Seconds 2
-            $elapsed += 2
-        }
-    }
-    if ($elapsed -ge $timeout) {
-        Write-Host "[Ollama]   WARNING: Did not respond within ${timeout}s" -ForegroundColor Red
-    }
-}
-
-# -------------------------------------------------------
 # 2. Flask Backend
 # -------------------------------------------------------
-Write-Host "[Backend]  Starting Flask server..." -ForegroundColor Yellow
+Write-Info "[Backend] Starting Flask server..." 
 
+& $venvActivate
 $backendProc = Start-Process python -ArgumentList "-m", "backend.app" `
     -WorkingDirectory (Split-Path $BackendPath -Parent) `
     -PassThru -WindowStyle Hidden `
@@ -320,7 +328,7 @@ $timeout = 30; $elapsed = 0
 while ($elapsed -lt $timeout) {
     try {
         Invoke-WebRequest -Uri "http://localhost:5001/ping" -UseBasicParsing | Out-Null
-        Write-Host "[Backend]  Ready on http://localhost:5001" -ForegroundColor Yellow
+        Write-Ok "[Backend]  Ready on http://localhost:5001" -ForegroundColor Yellow
         break
     } catch {
         Start-Sleep -Seconds 2
@@ -328,16 +336,15 @@ while ($elapsed -lt $timeout) {
     }
 }
 if ($elapsed -ge $timeout) {
-    Write-Host "[Backend]  WARNING: Did not respond within ${timeout}s" -ForegroundColor Red
-    Write-Host "[Backend]  Check logs: $LogDir\backend-error.log" -ForegroundColor Red
+    Write-Warn "[Backend]  WARNING: Did not respond within ${timeout}s"
+    Write-Warn "[Backend]  Check logs: $LogDir\backend-error.log"
 }
 
 # -------------------------------------------------------
 # 3. React Frontend
 # -------------------------------------------------------
-Write-Host "[Frontend] Starting React dev server..." -ForegroundColor Green
-
-$frontendProc = Start-Process cmd -ArgumentList "/c", "npm run dev" `
+Write-Info "[Frontend] Starting React dev server..." 
+$frontendProc = Start-Process cmd -ArgumentList "/c", "pnpm run dev" `
     -WorkingDirectory $FrontendPath `
     -PassThru -WindowStyle Hidden `
     -RedirectStandardOutput "$LogDir\frontend.log" `
@@ -349,7 +356,7 @@ $timeout = 60; $elapsed = 0
 while ($elapsed -lt $timeout) {
     try {
         Invoke-WebRequest -Uri "http://localhost:5173" -UseBasicParsing -TimeoutSec 2 | Out-Null
-        Write-Host "[Frontend] Ready on http://localhost:5173" -ForegroundColor Green
+        Write-Ok "[Frontend] Ready on http://localhost:5173" 
         break
     } catch {
         Start-Sleep -Seconds 2
@@ -357,8 +364,8 @@ while ($elapsed -lt $timeout) {
     }
 }
 if ($elapsed -ge $timeout) {
-    Write-Host "[Frontend] WARNING: Did not respond within ${timeout}s" -ForegroundColor Red
-    Write-Host "[Frontend] Check logs: $LogDir\frontend-error.log" -ForegroundColor Red
+    Write-Warn "[Frontend] WARNING: Did not respond within ${timeout}s"
+    Write-Warn "[Frontend] Check logs: $LogDir\frontend-error.log"
 }
 
 # -------------------------------------------------------
@@ -378,13 +385,15 @@ Write-Host "Press Enter to stop all servers..." -ForegroundColor DarkGray
 
 # Wait for user input to shut down
 Read-Host | Out-Null
-
+ 
 # -------------------------------------------------------
 # Cleanup
 # -------------------------------------------------------
 Write-Host ""
 Write-Host "Shutting down servers..." -ForegroundColor Cyan
 
+deactivate
+ 
 foreach ($proc in $processes) {
     if ($proc -and -not $proc.HasExited) {
         try {
@@ -395,13 +404,13 @@ foreach ($proc in $processes) {
         }
     }
 }
-
+ 
 # Also kill any child node processes spawned by npm start
 if ($frontendProc) {
     Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object {
         $_.StartTime -ge $frontendProc.StartTime
     } | Stop-Process -Force -ErrorAction SilentlyContinue
 }
-
+ 
 Write-Host ""
 Write-Host "All servers stopped. Goodbye!" -ForegroundColor Cyan
