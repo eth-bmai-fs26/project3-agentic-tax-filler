@@ -1,8 +1,34 @@
+/**
+ * @file OverviewPage.tsx
+ *
+ * This page provides a bird's-eye view of the entire tax return.
+ * It summarizes every section (Personal, Income, Deductions, Wealth,
+ * Attachments, Review) in a compact grid layout, showing which fields
+ * have been filled in and which are still empty.
+ *
+ * Each item is clickable and navigates to the corresponding form page
+ * so the user can quickly jump to any section that needs attention.
+ *
+ * When the AI agent is actively filling the form, this page blocks
+ * navigation to sections the agent has not yet reached (showing a
+ * toast message instead).
+ *
+ * This page acts like a "table of contents" or "progress tracker"
+ * for the entire tax filing process.
+ */
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../context/FormContext';
 import { useSession } from '../context/SessionContext';
 
+/**
+ * Defines the exact order of all form pages in the application.
+ * This ordering is important because when the AI agent is running,
+ * we use the page's index in this array to determine whether the
+ * user is allowed to navigate to it yet (the agent fills pages
+ * sequentially, so pages ahead of the agent are still locked).
+ */
 const PAGE_ORDER_PATHS = [
   '/personal', '/personal/children', '/personal/supported', '/personal/representative',
   '/personal/gifts-received', '/personal/gifts-given', '/personal/capital-benefits', '/personal/bank-details',
@@ -13,7 +39,15 @@ const PAGE_ORDER_PATHS = [
   '/attachments', '/review',
 ];
 
-/* SVG icons for section headers */
+/**
+ * SVG icon components used as visual indicators next to section headers.
+ * Each icon represents a category of the tax form:
+ * PersonIcon   - for the Personal section
+ * IncomeIcon   - for the Income section (dollar sign)
+ * DeductionIcon - for the Deductions section (plus sign in a box)
+ * WealthIcon   - for the Wealth section (dollar sign, same as Income)
+ * CheckIcon    - for the Completion section (checkmark)
+ */
 const PersonIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
 );
@@ -30,6 +64,14 @@ const CheckIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
 );
 
+/**
+ * Formats a value for display in the overview.
+ * If the value is a valid number, formats it with Swiss locale (e.g. 1'234.56).
+ * Otherwise returns the string as-is, or empty string if falsy.
+ *
+ * @param v - The string value to format (could be a number stored as string)
+ * @returns The formatted string for display
+ */
 function fmt(v: string) {
   if (!v) return '';
   const num = Number(v);
@@ -37,6 +79,24 @@ function fmt(v: string) {
   return num.toLocaleString('de-CH');
 }
 
+/**
+ * OverviewItem - A single clickable row in the overview grid.
+ *
+ * Each item represents one form section (e.g. "Taxpayer Details",
+ * "Employment", "Commuting Costs"). It shows:
+ * - A label describing the section
+ * - An optional value summarizing what's been filled in
+ * - A status indicator (filled = green, attention = orange, empty = grey)
+ * - An "i" icon that visually indicates whether the section needs attention
+ *
+ * Clicking the item navigates to the corresponding form page.
+ *
+ * @param label   - Display text for the section name
+ * @param value   - Optional summary value (e.g. "CHF 85,000" or "2 child(ren)")
+ * @param status  - Visual status: 'filled', 'attention', or 'empty'
+ * @param link    - The route path to navigate to when clicked
+ * @param onClick - Navigation handler (may block if agent is still running)
+ */
 function OverviewItem({
   label, value, status, link, onClick,
 }: {
@@ -61,15 +121,39 @@ function OverviewItem({
   );
 }
 
+/**
+ * OverviewPage - The main overview/summary component for the tax return.
+ *
+ * Pulls all form data from FormContext and displays a summary of every
+ * section. Users can click any item to jump directly to that form page.
+ *
+ * When the AI agent is actively filling forms (`agentStatus === 'running'`),
+ * sections that the agent has not yet reached are blocked from navigation.
+ *
+ * @returns The full overview page UI with all tax return sections summarized
+ */
 export default function OverviewPage() {
+  /** Get the full form data tree from the shared FormContext */
   const { data } = useForm();
+  /** Get the agent's current status and which page index it has reached */
   const { agentStatus, agentPageIndex } = useSession();
   const navigate = useNavigate();
+  /** Toast message shown when user tries to navigate to a locked section */
   const [toast, setToast] = useState<string | null>(null);
 
+  /**
+   * Navigation handler that checks whether the user is allowed to go
+   * to the requested page. If the AI agent is currently running and the
+   * target page is ahead of where the agent has gotten to, we block
+   * navigation and show a temporary toast message instead.
+   *
+   * @param path - The route path the user wants to navigate to
+   */
   const go = (path: string) => {
     if (agentStatus === 'running') {
+      // Find the index of the target page in the ordered page list
       const idx = PAGE_ORDER_PATHS.indexOf(path);
+      // If the target page is beyond where the agent currently is, block it
       if (idx >= 0 && idx > agentPageIndex) {
         setToast('Waiting for the agent to finish filling this section...');
         setTimeout(() => setToast(null), 3000);
@@ -79,7 +163,14 @@ export default function OverviewPage() {
     navigate(path);
   };
 
+  /**
+   * Helper to check if a form value has been filled in.
+   * For booleans, returns the boolean directly.
+   * For strings, returns true only if the string is non-empty after trimming.
+   */
   const has = (v: string | boolean) => typeof v === 'boolean' ? v : !!v && v.trim() !== '';
+
+  // Build the taxpayer's full name for display in the overview
   const fullName = [data.personal.main.firstName, data.personal.main.lastName].filter(Boolean).join(' ');
 
   return (
@@ -133,13 +224,16 @@ export default function OverviewPage() {
         </div>
       </div>
 
-      {/* ===== INCOME & DEDUCTIONS ===== */}
+      {/* ===== INCOME & DEDUCTIONS =====
+           These two sections are displayed side-by-side in a grid layout.
+           Income on the left, Deductions on the right. */}
       <div className="overview-grid">
         <div className="overview-section">
           <div className="overview-section-header">
             <IncomeIcon />
             <h2>Income</h2>
           </div>
+          {/* Show total income from gross salary; displays a dash if not yet entered */}
           <div className="overview-total">
             <span className="overview-total-label">Total Income</span>
             <span className="overview-total-value">{fmt(data.income.employment.bruttolohn) || '—'}</span>
@@ -158,6 +252,8 @@ export default function OverviewPage() {
             link="/income/pensions"
             onClick={go}
           />
+          {/* Securities Income: sum up dividends + interest for the display value.
+              We convert both to numbers (defaulting to 0 if empty) then format the total. */}
           <OverviewItem
             label="Securities Income"
             value={has(data.income.investment.dividends) || has(data.income.investment.interest)
@@ -208,6 +304,9 @@ export default function OverviewPage() {
             //   const nettolohn = brutto - ahv - bvg;
             //   return Math.min(Math.max(Math.round(nettolohn * 0.03), 2000), 4000).toLocaleString('de-CH');
             // })() : undefined}
+            /* If the user chose "flat-rate" deduction type, show the auto-calculated
+               flat-rate amount (defaults to CHF 2,000 if not computed yet).
+               If "effective" (itemized) was chosen, no summary value is shown here. */
             value={data.deductions.berufsauslagen.type === 'flat-rate' ? Number(data.deductions.flatrate.amount || 2000).toLocaleString('de-CH') : undefined}
             status="filled"
             link="/deductions/professional"

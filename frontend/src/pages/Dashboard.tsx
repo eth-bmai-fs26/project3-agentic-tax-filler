@@ -1,8 +1,38 @@
+/**
+ * @file Dashboard.tsx
+ *
+ * This is the main landing page of the AgenTekki tax filing application.
+ * It serves as the "home screen" where users can:
+ *   1. See a list of available taxpayer personas (pre-configured profiles)
+ *      and click one to start filling out a tax return for that persona.
+ *   2. See previously completed tax forms along with their accuracy scores,
+ *      and download the filled-in form data as a JSON file.
+ *   3. Navigate to the "Create Persona" page to define a custom taxpayer.
+ *
+ * Data flow:
+ * - The list of available personas is fetched from the Flask backend via
+ *   the `listPersonas()` API call when the component first mounts.
+ * - Completed forms are stored in the browser's localStorage so they
+ *   persist across page refreshes. Each entry records the persona name,
+ *   a display name, the accuracy score, the date, and the raw form data.
+ *
+ * Navigation:
+ * - Clicking a persona row calls `startSession()` (from SessionContext),
+ *   which tells the backend to begin a new tax-filling session, then
+ *   navigates the user to the first form page ("/personal").
+ */
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { listPersonas, type PersonaInfo } from '../api/client';
 import { useSession } from '../context/SessionContext';
 
+/**
+ * A lookup table that maps color names to CSS gradient strings.
+ * Each persona in the backend has a `color` field (e.g. "emerald", "rose").
+ * We use this map to give each persona row a unique accent color in the UI.
+ * If the persona's color is not found in this map, we fall back to "slate".
+ */
 const ACCENT_COLORS: Record<string, string> = {
   emerald: 'linear-gradient(135deg, #059669, #10b981)',
   rose: 'linear-gradient(135deg, #e11d48, #f43f5e)',
@@ -12,26 +42,59 @@ const ACCENT_COLORS: Record<string, string> = {
   slate: 'linear-gradient(135deg, #475569, #94a3b8)',
 };
 
+/**
+ * Represents a persona whose tax form has been completed and submitted.
+ * These records are stored in localStorage so the user can revisit
+ * their completed work even after refreshing the browser.
+ */
 interface CompletedPersona {
+  /** Internal name/id of the persona (e.g. "anna_meier") */
   persona: string;
+  /** Human-readable name shown in the UI (e.g. "Anna Meier") */
   displayName: string;
+  /** Accuracy score from 0-100, or null if not yet scored */
   score: number | null;
+  /** Date string when the form was completed (e.g. "2025-12-01") */
   date: string;
+  /** The full form data object, used for JSON export/download */
   formData?: Record<string, unknown>;
 }
 
+/**
+ * Retrieves the list of completed personas from localStorage.
+ * Uses a try/catch because localStorage.getItem could return
+ * malformed JSON if it was tampered with or corrupted.
+ *
+ * @returns An array of CompletedPersona objects, or an empty array on failure
+ */
 function getCompleted(): CompletedPersona[] {
   try {
     return JSON.parse(localStorage.getItem('completedPersonas') || '[]');
   } catch { return []; }
 }
 
+/**
+ * PersonaRow - A clickable card-like row for a single persona.
+ *
+ * Displays the persona's avatar (initials), name, description, document count,
+ * and a "Start" button. When the user clicks, it triggers the onClick handler
+ * to begin a session for that persona.
+ *
+ * @param persona  - The persona data object from the backend API
+ * @param loading  - Whether this specific persona is currently being started
+ *                   (shows a spinner instead of "Start")
+ * @param onClick  - Callback fired when the user clicks the row
+ */
 function PersonaRow({ persona, loading, onClick }: {
   persona: PersonaInfo;
   loading: boolean;
   onClick: () => void;
 }) {
+  // Look up the gradient color for this persona, defaulting to slate grey
   const accent = ACCENT_COLORS[persona.color] ?? ACCENT_COLORS.slate;
+
+  // Extract initials from the display name for the avatar circle.
+  // For example, "Anna Meier" becomes "AM".
   const initials = persona.display_name
     .split(' ')
     .map(w => w[0])
@@ -153,7 +216,23 @@ function PersonaRow({ persona, loading, onClick }: {
   );
 }
 
+/**
+ * CompletedRow - Displays a single completed tax form entry.
+ *
+ * Shows the persona's name, completion date, accuracy score (color-coded),
+ * and a download button to export the filled form data as JSON.
+ *
+ * @param item - The completed persona record from localStorage
+ */
 function CompletedRow({ item }: { item: CompletedPersona }) {
+  /**
+   * Creates a downloadable JSON file from the completed form data.
+   * This uses the "Blob + temporary anchor element" pattern:
+   * 1. Create a Blob (binary large object) from the JSON string
+   * 2. Create a temporary URL pointing to that Blob
+   * 3. Create a hidden <a> element, set its href to the URL, and click it
+   * 4. Clean up by revoking the temporary URL
+   */
   const handleDownload = () => {
     if (!item.formData) return;
     const blob = new Blob([JSON.stringify(item.formData, null, 2)], { type: 'application/json' });
@@ -165,6 +244,7 @@ function CompletedRow({ item }: { item: CompletedPersona }) {
     URL.revokeObjectURL(url);
   };
 
+  // Color-code the accuracy score: green (>=80%), amber (>=50%), red (<50%)
   const scoreColor = (item.score ?? 0) >= 80 ? '#16a34a' : (item.score ?? 0) >= 50 ? '#d97706' : '#dc2626';
 
   return (
@@ -227,15 +307,37 @@ function CompletedRow({ item }: { item: CompletedPersona }) {
   );
 }
 
+/**
+ * Dashboard - The main page component that renders the full dashboard view.
+ *
+ * This is the default export and top-level component for the dashboard route.
+ * It manages the following state:
+ * - `personas`: list of all available personas fetched from the backend
+ * - `loading`: whether the initial API call is still in progress
+ * - `error`: any error message from failed API calls
+ * - `starting`: the name of the persona currently being started (for spinner)
+ * - `completed`: list of completed tax forms from localStorage
+ *
+ * @returns The full dashboard UI with hero banner, pending forms, and completed forms
+ */
 export default function Dashboard() {
+  /** All personas fetched from the backend */
   const [personas, setPersonas] = useState<PersonaInfo[]>([]);
+  /** True while the initial persona list is being loaded from the API */
   const [loading, setLoading] = useState(true);
+  /** Holds an error message string if something goes wrong, null otherwise */
   const [error, setError] = useState<string | null>(null);
+  /** Tracks which persona is currently being started (shows a loading spinner on that row) */
   const [starting, setStarting] = useState<string | null>(null);
+  /** List of completed tax forms, loaded from localStorage */
   const [completed, setCompleted] = useState<CompletedPersona[]>(getCompleted);
+  /** startSession comes from SessionContext -- it tells the backend to begin a new session */
   const { startSession } = useSession();
+  /** React Router's navigate function for programmatic page transitions */
   const navigate = useNavigate();
 
+  // On component mount, fetch the list of personas from the backend
+  // and refresh the completed list from localStorage
   useEffect(() => {
     listPersonas()
       .then(setPersonas)
@@ -244,9 +346,20 @@ export default function Dashboard() {
     setCompleted(getCompleted());
   }, []);
 
+  // Build a Set of completed persona names so we can efficiently filter them out.
+  // Personas that have already been completed should not appear in the "Pending" list.
   const completedNames = new Set(completed.map(c => c.persona));
   const pending = personas.filter(p => !completedNames.has(p.name));
 
+  /**
+   * Called when the user clicks a persona row to start filling their tax form.
+   * 1. Sets a loading state for that specific persona (spinner appears)
+   * 2. Calls startSession() to initialize the backend session
+   * 3. Navigates to the first form page ("/personal") on success
+   * 4. On failure, displays the error and removes the loading state
+   *
+   * @param persona - The persona the user wants to start working on
+   */
   const handleSelect = async (persona: PersonaInfo) => {
     setStarting(persona.name);
     try {

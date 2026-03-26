@@ -1,3 +1,29 @@
+/**
+ * @file PersonalPage.tsx
+ *
+ * This file contains all the "Personal" section form pages for the tax return.
+ * Instead of having 8 separate page files, we use a single component that
+ * renders different content based on the `sub` prop (sub-page identifier).
+ *
+ * The personal section includes these sub-pages (in order):
+ *   1. "taxpayer"        - Main taxpayer details + partner details if married
+ *   2. "children"        - List of children (dynamic add/remove rows)
+ *   3. "supported"       - Financially supported persons
+ *   4. "representative"  - Tax representative / authorized person
+ *   5. "gifts-received"  - Gifts and inheritances received
+ *   6. "gifts-given"     - Gifts and advance inheritances given
+ *   7. "capital-benefits"- Capital benefits from pension/insurance
+ *   8. "bank-details"    - Bank account info for tax refunds
+ *
+ * Each sub-page uses shared reusable components:
+ * - FormField:    renders a single labeled input field
+ * - FormSection:  wraps fields in a collapsible section with a title
+ * - AddRowTable:  renders a dynamic table where users can add/remove rows
+ * - FormNav:      renders Back/Next navigation buttons at the bottom
+ *
+ * Navigation flows linearly: taxpayer -> children -> supported -> ... -> bank-details -> income
+ */
+
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../context/FormContext';
 import FormField from '../components/FormField';
@@ -5,6 +31,10 @@ import FormSection from '../components/FormSection';
 import AddRowTable from '../components/AddRowTable';
 import FormNav from '../components/FormNav';
 
+/**
+ * Dropdown options for the marital status field.
+ * The `value` is stored in the form data, the `label` is displayed to the user.
+ */
 const maritalOptions = [
   { value: 'single', label: 'Single' },
   { value: 'married', label: 'Married' },
@@ -13,6 +43,11 @@ const maritalOptions = [
   { value: 'widowed', label: 'Widowed' },
 ];
 
+/**
+ * Dropdown options for religion/denomination field.
+ * In Switzerland, church tax depends on religious affiliation,
+ * so this is a required field in the tax return.
+ */
 const religionOptions = [
   { value: 'reformed', label: 'Reformed' },
   { value: 'catholic', label: 'Roman Catholic' },
@@ -22,48 +57,87 @@ const religionOptions = [
   { value: 'other', label: 'Other' },
 ];
 
+/**
+ * Column definitions for the children table.
+ * Each object describes one column in the AddRowTable component:
+ * - `key`:   the field name used to store the data
+ * - `label`: the column header text displayed to the user
+ * - `type`:  optional input type (e.g. 'date' renders a date picker)
+ */
 const childColumns = [
   { key: 'name', label: 'Child Name' },
   { key: 'dateOfBirth', label: 'Date of Birth', type: 'date' },
   { key: 'relationship', label: 'Relationship' },
 ];
 
+/** Column definitions for the supported persons table */
 const supportedColumns = [
   { key: 'name', label: 'Name' },
   { key: 'relationship', label: 'Relationship' },
   { key: 'contribution', label: 'Contribution (CHF)' },
 ];
 
+/** Column definitions for gifts (used for both received and given) */
 const giftColumns = [
   { key: 'description', label: 'Description' },
   { key: 'date', label: 'Date', type: 'date' },
   { key: 'amount', label: 'Amount (CHF)' },
 ];
 
+/**
+ * Props for the PersonalPage component.
+ * The `sub` prop determines which sub-page to render.
+ */
 interface PersonalPageProps {
+  /** Which sub-page to display (e.g. 'taxpayer', 'children', 'bank-details') */
   sub: string;
 }
 
+/**
+ * PersonalPage - Renders one of several personal information sub-pages.
+ *
+ * This component reads the `sub` prop to decide which sub-page to show.
+ * It uses a series of if-statements (not a switch) to match the sub-page
+ * identifier, then returns the appropriate JSX.
+ *
+ * The form data is read from and written to the shared FormContext,
+ * which is a global state container that all form pages share.
+ *
+ * @param sub - The sub-page identifier (e.g. 'taxpayer', 'children', etc.)
+ * @returns The JSX for the requested sub-page, or null if no match
+ */
 export default function PersonalPage({ sub }: PersonalPageProps) {
+  /** Access the shared form data from FormContext */
   const { data } = useForm();
   const navigate = useNavigate();
+
+  // Check if the taxpayer is married, because married taxpayers
+  // need to fill in additional partner details on the taxpayer page
   const isMarried = data.personal.main.maritalstatus === 'married';
 
+  // Build display names for the taxpayer and partner.
+  // These are used in section titles to personalize the form.
+  // If no name has been entered yet, we fall back to "Taxpayer" / "Partner".
   const fullName = [data.personal.main.firstName, data.personal.main.lastName].filter(Boolean).join(' ') || 'Taxpayer';
   const partnerName = [data.personal.partner.firstName, data.personal.partner.lastName].filter(Boolean).join(' ') || 'Partner';
 
-  /* ---- Taxpayer Details ---- */
+  /* ---- Taxpayer Details ----
+     This is the main/first sub-page where the taxpayer enters their
+     personal information: name, address, contact info, marital status, etc.
+     If the taxpayer is married, a partner section is also shown below. */
   if (sub === 'taxpayer') {
     return (
       <div>
         <h1>Taxpayer Details</h1>
 
-        {/* ── FIX: Both taxpayer and partner
-            sections render simultaneously so scanPage() can discover
-            ALL fields. Previously partner fields were behind an
-            activeTab === 'partner' condition, making them invisible
-            to the agent's scanPage() call. ── */}
+        {/* IMPORTANT DESIGN NOTE: Both taxpayer AND partner sections are
+            always rendered in the DOM (not hidden behind a tab/toggle).
+            This is intentional so the AI agent's scanPage() function can
+            discover ALL fields on the page. Previously, partner fields
+            were conditionally rendered behind an activeTab check, which
+            made them invisible to the agent. */}
 
+        {/* Section title changes based on marital status to include the taxpayer's name */}
         <FormSection title={isMarried ? `Personal Details — ${fullName}` : 'Personal Details'} id="section-personal-main">
           <div className="form-grid-3">
             <FormField page="personal" section="main" name="firstName" label="First Name" required />

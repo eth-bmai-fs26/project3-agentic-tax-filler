@@ -1,5 +1,35 @@
+/**
+ * @file ReviewPage.tsx
+ *
+ * This is the final page of the tax return where the user can review
+ * all entered data before submitting. It displays a read-only summary
+ * of every section (Personal, Income, Deductions, Wealth, Attachments)
+ * and highlights any validation warnings for missing required fields.
+ *
+ * At the bottom, the user can click "Submit & Export JSON" to download
+ * the complete form data as a JSON file. This JSON file represents
+ * the completed tax return.
+ *
+ * The page also performs basic validation, checking for commonly
+ * required fields like name, AHV number, gross salary, and
+ * salary statement upload. Warnings are shown as a banner at the top.
+ *
+ * Navigation: attachments -> review (final page)
+ */
+
 import { useForm } from '../context/FormContext';
 
+/**
+ * ReviewRow - A single label-value pair in the review summary.
+ *
+ * Renders a row with a label on the left and a value on the right.
+ * If the value is empty/falsy, the entire row is hidden (returns null)
+ * to avoid showing blank entries in the review.
+ *
+ * @param label - The field label (e.g. "Name", "Gross Salary")
+ * @param value - The field value to display (e.g. "Anna Meier", "CHF 85,000")
+ * @returns A review row div, or null if value is empty
+ */
 function ReviewRow({ label, value }: { label: string; value: string }) {
   if (!value) return null;
   return (
@@ -10,9 +40,23 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+/**
+ * ReviewPage - The final review and submission page.
+ *
+ * This component:
+ * 1. Reads the entire form data from FormContext
+ * 2. Runs basic validation checks and collects warnings
+ * 3. Displays all form data in read-only review sections
+ * 4. Provides a "Submit & Export JSON" button to download the data
+ *
+ * @returns The review page UI with all sections summarized
+ */
 export default function ReviewPage() {
   const { data } = useForm();
 
+  // Validation: check for commonly required fields and collect warning messages.
+  // These warnings are displayed as a banner at the top of the page to alert
+  // the user about potentially incomplete sections before they submit.
   const warnings: string[] = [];
   if (!data.personal.main.firstName) warnings.push('First name is missing');
   if (!data.personal.main.lastName) warnings.push('Last name is missing');
@@ -22,6 +66,11 @@ export default function ReviewPage() {
   if (!data.attachments.uploads.lohnausweis) warnings.push('Salary statement (Lohnausweis) not uploaded');
   if (!data.personal.bankdetails.iban) warnings.push('Bank details for refund not provided');
 
+  /**
+   * Exports the complete form data as a downloadable JSON file.
+   * Uses the same Blob + anchor element pattern as the Dashboard's download.
+   * The file is named "zh-tax-filing-2025.json" (zh = Zurich canton).
+   */
   const handleExport = () => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -32,6 +81,7 @@ export default function ReviewPage() {
     URL.revokeObjectURL(url);
   };
 
+  // Build the taxpayer's full name for display in the review
   const fullName = [data.personal.main.firstName, data.personal.main.lastName].filter(Boolean).join(' ');
 
   return (
@@ -47,9 +97,14 @@ export default function ReviewPage() {
         </div>
       )}
 
+      {/* --- Personal Information Section ---
+           Shows the taxpayer's basic info. Partner details are only shown
+           if the marital status is "married". Children names are displayed
+           as a comma-separated list if any children were entered. */}
       <section className="review-section">
         <h2>Personal Information</h2>
         <ReviewRow label="Name" value={fullName} />
+        {/* Build a formatted address from individual address fields */}
         <ReviewRow label="Address" value={[data.personal.main.street, data.personal.main.streetNumber, data.personal.main.zip, data.personal.main.city].filter(Boolean).join(', ')} />
         <ReviewRow label="Date of Birth" value={data.personal.main.dateofbirth} />
         <ReviewRow label="AHV Number" value={data.personal.main.ahvnumber} />
@@ -59,6 +114,7 @@ export default function ReviewPage() {
         <ReviewRow label="Employer" value={data.personal.main.employer} />
         <ReviewRow label="Phone" value={data.personal.main.phone} />
         <ReviewRow label="Email" value={data.personal.main.email} />
+        {/* Conditionally show partner details only if married */}
         {data.personal.main.maritalstatus === 'married' && (
           <>
             <ReviewRow label="Partner Name" value={[data.personal.partner.firstName, data.personal.partner.lastName].filter(Boolean).join(' ')} />
@@ -66,17 +122,23 @@ export default function ReviewPage() {
             <ReviewRow label="Partner AHV" value={data.personal.partner.ahvnumber} />
           </>
         )}
+        {/* Show children names only if any were entered */}
         {data.personal.children.length > 0 && (
           <ReviewRow label="Children" value={data.personal.children.map(c => c.name).filter(Boolean).join(', ')} />
         )}
         <ReviewRow label="Bank IBAN" value={data.personal.bankdetails.iban} />
       </section>
 
+      {/* --- Income Section ---
+           Each field is prefixed with "CHF" for display.
+           Self-employment details are only shown if the user enabled
+           the self-employment toggle on the income page. */}
       <section className="review-section">
         <h2>Income</h2>
         <ReviewRow label="Gross Salary" value={data.income.employment.bruttolohn ? `CHF ${data.income.employment.bruttolohn}` : ''} />
         <ReviewRow label="AHV Contributions" value={data.income.employment.ahvcontributions ? `CHF ${data.income.employment.ahvcontributions}` : ''} />
         <ReviewRow label="BVG Contributions" value={data.income.employment.bvgcontributions ? `CHF ${data.income.employment.bvgcontributions}` : ''} />
+        {/* Self-employment details are conditionally rendered */}
         {data.income.selfemployment.enabled && (
           <>
             <ReviewRow label="Self-Empl. Revenue" value={data.income.selfemployment.revenue ? `CHF ${data.income.selfemployment.revenue}` : ''} />
@@ -131,6 +193,10 @@ export default function ReviewPage() {
         <ReviewRow label="Other" value={data.attachments.uploads.other || 'Not uploaded'} />
       </section>
 
+      {/* Navigation buttons: Back goes to previous page via browser history,
+           Submit triggers the JSON export/download.
+           The submit button has a special id="submit-export" which the AI agent
+           uses to programmatically click it when submitting the form. */}
       <div className="page-nav">
         <button className="btn-secondary" onClick={() => window.history.back()} data-testid="nav-back" aria-label="Back">&larr; Back</button>
         <button className="btn-primary" onClick={handleExport} id="submit-export" data-testid="nav-next" aria-label="Submit">

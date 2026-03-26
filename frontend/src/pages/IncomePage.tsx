@@ -1,16 +1,57 @@
+/**
+ * @file IncomePage.tsx
+ *
+ * This file contains all the "Income" section form pages for the tax return.
+ * Like PersonalPage, it uses a single component that renders different
+ * content based on the `sub` prop.
+ *
+ * The income section includes these sub-pages (in order):
+ *   1. "employment"  - Gross salary, social contributions, self-employment
+ *   2. "pensions"    - AHV/IV pension, BVG pension, other pensions, capital withdrawals
+ *   3. "securities"  - Investment income (dividends and interest)
+ *   4. "property"    - Rental value (Eigenmietwert), rental income, maintenance costs
+ *   5. "other"       - Alimony received, miscellaneous other income
+ *
+ * Swiss-specific terminology used in this file:
+ * - Bruttolohn:      Gross salary before any deductions
+ * - AHV/IV/EO:       Swiss social security contributions (old-age, disability, loss of earnings)
+ * - BVG:             Occupational pension fund (second pillar of Swiss pension system)
+ * - Eigenmietwert:   Imputed rental value -- if you own and live in your home,
+ *                    Swiss tax law treats it as if you're renting it to yourself
+ *
+ * Navigation: bank-details -> employment -> pensions -> securities -> property -> other -> deductions
+ */
+
 import { useNavigate } from 'react-router-dom';
 import FormField from '../components/FormField';
 import FormSection from '../components/FormSection';
 import FormNav from '../components/FormNav';
 
+/**
+ * Props for the IncomePage component.
+ */
 interface IncomePageProps {
+  /** Which sub-page to display (e.g. 'employment', 'pensions', 'securities') */
   sub: string;
 }
 
+/**
+ * IncomePage - Renders one of several income-related form sub-pages.
+ *
+ * Unlike PersonalPage, this component does not need to read form data
+ * directly (no useForm() call) because the FormField components handle
+ * reading and writing form values internally via FormContext.
+ *
+ * @param sub - The sub-page identifier (e.g. 'employment', 'pensions', etc.)
+ * @returns The JSX for the requested sub-page, or null if no match
+ */
 export default function IncomePage({ sub }: IncomePageProps) {
   const navigate = useNavigate();
 
-  /* ---- Employment ---- */
+  /* ---- Employment ----
+     Main employment income page. Includes both employed and self-employed
+     income sections. The self-employment section has revenue, expenses,
+     and net income fields. */
   if (sub === 'employment') {
     return (
       <div>
@@ -43,7 +84,13 @@ export default function IncomePage({ sub }: IncomePageProps) {
     );
   }
 
-  /* ---- Pensions & Insurance ---- */
+  /* ---- Pensions & Insurance ----
+     Switzerland has a 3-pillar pension system:
+     - Pillar 1 (AHV/IV): State pension, mandatory for all workers
+     - Pillar 2 (BVG):    Occupational pension, mandatory for employed workers
+     - Pillar 3 (3a/3b):  Private pension savings (handled in deductions)
+     This page covers pension income received from Pillars 1 and 2,
+     plus capital withdrawals from pension funds. */
   if (sub === 'pensions') {
     return (
       <div>
@@ -83,7 +130,10 @@ export default function IncomePage({ sub }: IncomePageProps) {
     );
   }
 
-  /* ---- Securities Income ---- */
+  /* ---- Securities Income ----
+     Investment income from stocks, bonds, funds, etc.
+     Dividends and interest are reported separately because they
+     may be taxed differently in the Swiss tax system. */
   if (sub === 'securities') {
     return (
       <div>
@@ -106,7 +156,13 @@ export default function IncomePage({ sub }: IncomePageProps) {
     );
   }
 
-  /* ---- Property Income ---- */
+  /* ---- Property Income ----
+     If the taxpayer owns property, they must declare:
+     - Eigenmietwert (imputed rental value): the theoretical rent they
+       would pay if they rented their own home. This is a uniquely Swiss
+       concept -- homeowners are taxed on this notional income.
+     - Rental income: actual rent received from tenants
+     - Maintenance costs: deductible costs for property upkeep */
   if (sub === 'property') {
     return (
       <div>
@@ -130,7 +186,10 @@ export default function IncomePage({ sub }: IncomePageProps) {
     );
   }
 
-  /* ---- Other Income ---- */
+  /* ---- Other Income ----
+     Catches income that does not fit into the previous categories:
+     - Alimony received (taxable income in Switzerland)
+     - Any other miscellaneous income sources */
   if (sub === 'other') {
     return (
       <div>

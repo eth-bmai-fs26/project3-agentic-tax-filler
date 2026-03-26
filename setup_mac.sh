@@ -49,14 +49,33 @@ else
   ok "Homebrew installed"
 fi
 
-# Python 3
+# Python 3.10+ (required for PEP 604 type hints: X | None)
+NEED_PYTHON=false
 if command -v python3 &>/dev/null; then
   PY_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
-  skip "Python ($PY_VERSION)"
+  PY_MAJOR=$(echo "$PY_VERSION" | cut -d. -f1)
+  PY_MINOR=$(echo "$PY_VERSION" | cut -d. -f2)
+  if [ "$PY_MAJOR" -ge 3 ] && [ "$PY_MINOR" -ge 10 ]; then
+    skip "Python ($PY_VERSION)"
+  else
+    warn "Python $PY_VERSION found, but 3.10+ is required"
+    NEED_PYTHON=true
+  fi
 else
-  info "Installing Python 3 via Homebrew..."
+  NEED_PYTHON=true
+fi
+
+if [ "$NEED_PYTHON" = true ]; then
+  info "Installing Python 3.13 via Homebrew..."
   brew install python@3.13
-  ok "Python 3 installed"
+  # Ensure the Homebrew Python is used instead of the system one
+  if [ -f /opt/homebrew/bin/python3 ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+  elif [ -f /usr/local/bin/python3 ]; then
+    export PATH="/usr/local/bin:$PATH"
+  fi
+  PY_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
+  ok "Python $PY_VERSION installed"
 fi
 
 # Node.js

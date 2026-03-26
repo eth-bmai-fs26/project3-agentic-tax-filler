@@ -1,3 +1,33 @@
+/**
+ * @file WealthPage.tsx
+ *
+ * This file contains all the "Wealth" section form pages for the tax return.
+ * In Switzerland, both income AND wealth are taxed, so taxpayers must declare
+ * all their assets (and debts) at year-end.
+ *
+ * The wealth section includes these sub-pages (in order):
+ *   1. "securities"  - Securities register (stocks, bonds, funds) + bank accounts
+ *   2. "movable"     - Cash, gold, precious metals + business/corporation shares
+ *   3. "insurance"   - Life and pension insurance policies (surrender values)
+ *   4. "vehicles"    - Motor vehicles (cars, motorcycles, etc.)
+ *   5. "real-estate" - Real estate properties + other assets
+ *   6. "debts"       - Outstanding debts and liabilities
+ *
+ * Most sub-pages use the AddRowTable component for dynamic tables where
+ * the user can add multiple entries (e.g. multiple bank accounts, securities).
+ *
+ * Swiss-specific terminology:
+ * - Wertschriftenverzeichnis: Securities register (official name for the list
+ *   of all stocks, bonds, and fund positions)
+ * - ISIN: International Securities Identification Number (globally unique ID)
+ * - Steuerwert: Tax assessment value of a property (set by the canton)
+ * - Eigenmietwert: Imputed rental value of owner-occupied property
+ * - Schuldenverzeichnis: Debt register
+ *
+ * Navigation: other-deductions -> securities -> movable -> insurance ->
+ *             vehicles -> real-estate -> debts -> attachments
+ */
+
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../context/FormContext';
 import FormField from '../components/FormField';
@@ -5,6 +35,11 @@ import FormSection from '../components/FormSection';
 import AddRowTable from '../components/AddRowTable';
 import FormNav from '../components/FormNav';
 
+/**
+ * Column definitions for the securities (stocks, bonds, funds) table.
+ * Each security has a name, ISIN identifier, quantity held,
+ * total value in CHF, and gross return (dividends + interest earned).
+ */
 const securityColumns = [
   { key: 'name', label: 'Name' },
   { key: 'isin', label: 'ISIN' },
@@ -13,12 +48,22 @@ const securityColumns = [
   { key: 'grossReturn', label: 'Gross Return' },
 ];
 
+/**
+ * Column definitions for bank accounts table.
+ * The balance is reported as of December 31 (tax year end),
+ * and interest is the total earned during the year.
+ */
 const bankColumns = [
   { key: 'bankName', label: 'Bank Name' },
   { key: 'balance', label: 'Balance Dec 31' },
   { key: 'interest', label: 'Interest' },
 ];
 
+/**
+ * Column definitions for business and corporation shares table.
+ * These are shares in private companies (not publicly traded),
+ * which require separate reporting from securities.
+ */
 const businessShareColumns = [
   { key: 'date', label: 'Date', type: 'date' },
   { key: 'description', label: 'Exact Description' },
@@ -26,12 +71,14 @@ const businessShareColumns = [
   { key: 'incomeAmount', label: 'Income Amount (CHF)' },
 ];
 
+/** Column definitions for life/pension insurance policies table */
 const insuranceColumns = [
   { key: 'company', label: 'Insurance Company' },
   { key: 'policyNumber', label: 'Policy Number' },
   { key: 'surrenderValue', label: 'Surrender Value (CHF)' },
 ];
 
+/** Column definitions for motor vehicles table */
 const vehicleColumns = [
   { key: 'type', label: 'Type' },
   { key: 'brand', label: 'Brand / Model' },
@@ -39,20 +86,38 @@ const vehicleColumns = [
   { key: 'value', label: 'Value (CHF)' },
 ];
 
+/** Column definitions for the debts table */
 const debtColumns = [
   { key: 'creditor', label: 'Creditor' },
   { key: 'amount', label: 'Amount (CHF)' },
 ];
 
+/**
+ * Props for the WealthPage component.
+ */
 interface WealthPageProps {
+  /** Which sub-page to display (e.g. 'securities', 'movable', 'debts') */
   sub: string;
 }
 
+/**
+ * WealthPage - Renders one of several wealth/asset declaration sub-pages.
+ *
+ * Reads form data from FormContext to populate dynamic tables
+ * (securities, bank accounts, etc.) via AddRowTable.
+ *
+ * @param sub - The sub-page identifier
+ * @returns The JSX for the requested sub-page, or null if no match
+ */
 export default function WealthPage({ sub }: WealthPageProps) {
   const { data } = useForm();
   const navigate = useNavigate();
 
-  /* ---- Securities Register ---- */
+  /* ---- Securities Register ----
+     This sub-page combines two related tables:
+     1. Securities (stocks, bonds, funds) with ISIN codes and values
+     2. Bank accounts with year-end balances and interest earned
+     Both are part of the official "Wertschriftenverzeichnis". */
   if (sub === 'securities') {
     return (
       <div>
@@ -88,7 +153,10 @@ export default function WealthPage({ sub }: WealthPageProps) {
     );
   }
 
-  /* ---- Movable Assets ---- */
+  /* ---- Movable Assets ----
+     Covers physical valuable items: cash, gold, precious metals,
+     and shares in private businesses or corporations.
+     Note: normal household goods do NOT need to be declared. */
   if (sub === 'movable') {
     return (
       <div>
@@ -123,7 +191,10 @@ export default function WealthPage({ sub }: WealthPageProps) {
     );
   }
 
-  /* ---- Life & Pension Insurance ---- */
+  /* ---- Life & Pension Insurance ----
+     Life insurance policies and pension insurance have a "surrender value"
+     (Rueckkaufswert) which counts as part of the taxpayer's wealth.
+     This is the amount the taxpayer would receive if they cancelled the policy. */
   if (sub === 'insurance') {
     return (
       <div>
@@ -175,7 +246,12 @@ export default function WealthPage({ sub }: WealthPageProps) {
     );
   }
 
-  /* ---- Real Estate ---- */
+  /* ---- Real Estate ----
+     For each property owned, the taxpayer must declare:
+     - Address of the property
+     - Eigenmietwert: imputed rental value (for owner-occupied properties)
+     - Steuerwert: the official tax assessment value set by the canton
+     Also includes a section for any other assets not covered elsewhere. */
   if (sub === 'real-estate') {
     return (
       <div>
@@ -206,7 +282,10 @@ export default function WealthPage({ sub }: WealthPageProps) {
     );
   }
 
-  /* ---- Debts ---- */
+  /* ---- Debts ----
+     The debt register (Schuldenverzeichnis) lists all outstanding debts.
+     Debts reduce the taxpayer's net wealth, so declaring them lowers the
+     wealth tax. Common entries include mortgages and personal loans. */
   if (sub === 'debts') {
     return (
       <div>

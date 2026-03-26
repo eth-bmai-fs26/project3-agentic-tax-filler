@@ -10,9 +10,9 @@ The system supports multiple LLM backends including local models via **Ollama**,
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌────────────────┐
-│  Taxpayer    │     │  Agent Loop  │     │  React Form    │
-│  Documents   │────▶│  (LLM +      │────▶│  (auto-filled  │
-│  + Profile   │     │   MCP Tools) │     │   in real-time)│
+│  Taxpayer   │     │  Agent Loop  │     │  React Form    │
+│  Documents  │────▶│  (LLM +      │────▶│  (auto-filled  │
+│  + Profile  │     │   MCP Tools) │     │   in real-time)│
 └─────────────┘     └──────────────┘     └────────────────┘
 ```
 
@@ -41,9 +41,7 @@ bash setup_mac.sh
 ```
 
 **Windows (PowerShell):**
-```powershell
-powershell -ExecutionPolicy Bypass -File setup_windows.ps1
-```
+See PDF instructions on Windows Launch
 
 The script will:
 1. Install Python, Node.js, and pnpm if missing
@@ -63,7 +61,7 @@ Once running, open **http://localhost:5173** in your browser.
 
 ### Manual Setup
 
-If you prefer to set things up yourself:
+If you prefer to set things up yourself, which is not advised, here is how you go about it:
 
 ```bash
 # 1. Clone and enter the project
@@ -151,7 +149,8 @@ project3-agentic-tax-filler/
 │   │   ├── agent_service.py    # Session management, LLM client
 │   │   └── think_service.py    # Agent loop (perceive-think-act)
 │   └── bridges/
-│       └── flask_bridge.py     # In-memory form state bridge
+│       ├── flask_bridge.py     # In-memory form state bridge
+│       └── form_model.py       # Form schema, field definitions, page order
 │
 ├── frontend/             # React frontend (Vite + TypeScript)
 │   ├── src/
@@ -176,6 +175,180 @@ project3-agentic-tax-filler/
 └── scripts/
     └── score.py                # Evaluate agent accuracy vs ground truth
 ```
+
+---
+
+## For Students — Understanding the Codebase
+
+This section is written for readers who are new to the project or to software engineering. It explains the key ideas behind the code in plain language before you dive into individual files.
+
+### The Big Picture
+
+Think of AgenTekki as a robot tax accountant. Like a human accountant, it:
+
+1. **Reads documents** — salary slips, bank statements, pension letters
+2. **Understands the numbers** — which number goes in which tax box
+3. **Fills in the form** — types values into the correct fields
+4. **Asks questions when stuck** — "Did you have a company canteen?"
+
+The "brain" of the robot is a Large Language Model (LLM) — the same technology behind ChatGPT. The LLM reads the documents and decides what to write. The rest of the code is infrastructure: a web form for the user to see, an API to coordinate everything, and a set of "tools" the LLM can call.
+
+---
+
+### Key Concept 1 — The Agent Loop
+
+The core logic lives in `backend/services/think_service.py`. The agent follows a simple loop:
+
+```
+For each page of the tax form:
+  1. Read all the taxpayer's documents (once, at the start)
+  2. Call scan_page() → get the list of fields on this page
+  3. Ask the LLM: "Given these documents, what should I fill in?"
+  4. The LLM responds with a JSON object of field → value pairs
+  5. Call fill_field() for each pair
+  6. Move to the next page
+```
+
+This "perceive → think → act" pattern is called an **agent loop** and is the foundation of most AI agents.
+
+---
+
+### Key Concept 2 — MCP Tools
+
+MCP stands for **Model Context Protocol**. It is a standard way to give an LLM a set of "tools" it can call — similar to how you might give a calculator to a human doing maths.
+
+The 9 tools exposed in `mcp_server/server.py` are:
+
+| Tool | What it does |
+|------|-------------|
+| `scan_page()` | "What fields are on the current page?" |
+| `fill_field(locator, value)` | "Type this value into this field" |
+| `click_element(locator)` | "Click this button" |
+| `submit_form()` | "Submit the completed form" |
+| `list_documents()` | "What documents does this taxpayer have?" |
+| `read_document(filepath)` | "Read the contents of this document" |
+| `list_guides()` | "What tax guides are available?" |
+| `fetch_guide(topic)` | "Get the full text of this tax guide" |
+| `ask_user(question)` | "Ask the taxpayer a question" |
+
+The LLM decides which tools to call and in what order. The tools do the actual work. This separation means you could swap out the LLM for a different one and the tools would still work the same way.
+
+---
+
+### Key Concept 3 — The Bridge Pattern
+
+The agent needs to interact with a "form" — but what form? In different scenarios the form might be:
+
+- A real browser window running the React app (for demos)
+- A fake in-memory dictionary (for fast testing)
+- A Google Colab notebook (for students running in the cloud)
+
+To handle all these cases without rewriting the agent, the code uses a **Bridge**: an abstract interface (`mcp_server/bridges/base.py`) that defines four operations any "form" must support:
+
+```
+navigate_to_page(path)   → go to a specific page
+scan_page()              → list all fields and their current values
+fill_field(locator, val) → write a value into a field
+click_element(locator)   → click a button
+```
+
+Four concrete bridges implement this interface:
+
+| Bridge | Where the form lives |
+|--------|---------------------|
+| `FlaskBridge` | In-memory Python dict (synced to React via API) |
+| `MockBridge` | In-memory Python dict (no frontend) |
+| `PlaywrightBridge` | Real Chromium browser window |
+| `ColabBridge` | Google Colab notebook via JS injection |
+
+When you run the app normally, `FlaskBridge` is used. The agent fills an in-memory dictionary on the server, and the React frontend polls the API every 1.5 seconds to show the latest values to the user in real time.
+
+---
+
+### Key Concept 4 — The Locator Convention
+
+Every form field has a unique HTML `id` that follows this pattern:
+
+```
+field-{page}-{section}-{fieldname}
+```
+
+Example: `field-personal-main-firstName`
+
+This `id` is called a **locator**. When the agent calls `fill_field("field-personal-main-firstName", "Anna")`, the bridge:
+
+1. Splits the locator to extract the prefix: `personal-main`
+2. Looks up `personal-main` in `LOCATOR_TO_PATH` (in `form_model.py`) → `("personal", "main")`
+3. Stores the value: `form["personal"]["main"]["firstName"] = "Anna"`
+
+This convention is defined once (in `form_model.py`) and used consistently everywhere — in React's `FormField.tsx`, in `flask_bridge.py`, and in the agent's prompts.
+
+---
+
+### Key Concept 5 — Real-Time Updates via SSE
+
+The user watching the browser sees fields filling in as the agent works. How does the frontend know when a field has been updated?
+
+The answer is **Server-Sent Events (SSE)** — a one-way stream of messages from the server to the browser. When the agent fills a field, the Flask backend pushes an event into a queue. The browser, which has an open SSE connection, receives the event and the React state updates automatically.
+
+The relevant files:
+- `backend/routes/agent_routes.py` — the `/stream` endpoint that opens the SSE connection
+- `frontend/src/hooks/useSSE.ts` — the React hook that listens for SSE events
+- `frontend/src/context/SessionContext.tsx` — polls `GET /api/sessions/{id}/form` every 1.5 s to refresh the displayed form values
+
+---
+
+### Key Concept 6 — The Persona System
+
+A **persona** is a fictional Swiss taxpayer used for testing. Each one has a folder under `personas/` containing:
+
+- `profile.json` — basic info (name, AHV number, address, etc.)
+- `lohnausweis.txt` — salary certificate (the most important document)
+- `bank_statement.csv` — bank transaction history
+- Other documents as relevant (Pillar 3a, rental income, etc.)
+- `ground_truth.json` — the correct answers, used to score the agent
+- `private_notes.json` — verbal knowledge the NPC taxpayer "knows" (not in any document)
+- `qa_pairs.json` — keyword → answer pairs for the rule-based NPC simulation
+
+The `ask_user` tool simulates asking the real taxpayer a question. Three implementations exist (all in `mcp_server/ask_user.py`):
+- **Rule-based** — keyword matching from `qa_pairs.json`, no LLM needed, great for fast tests
+- **LLM-backed** — an LLM role-plays the taxpayer from a system prompt
+- **NPC with private notes** — the most realistic: an LLM role-plays using `private_notes.json` as hidden knowledge
+
+---
+
+### Key Concept 7 — Form State Management in React
+
+All form data lives in one central place: `FormContext` (`frontend/src/context/FormContext.tsx`). This is a React Context — a global state store that every component in the app can read and write without passing data through props.
+
+The form data is a deeply nested object that mirrors the Python `make_empty_form()` dictionary in `backend/bridges/form_model.py`. Both sides must stay in sync.
+
+Important things `FormContext` does:
+- Provides `updateField(page, section, name, value)` to any component
+- Auto-calculates the Berufsauslagen flat-rate deduction whenever Bruttolohn changes
+- Exposes `window.__taxPortalBridge` so the agent can manipulate the form directly when running in a browser
+- Uses `deepMerge` to apply partial updates from the API without overwriting unchanged fields
+
+---
+
+### Walking Through a Complete Agent Run
+
+Here is a step-by-step trace of what happens when you click "Start Agent" on a persona:
+
+1. **Frontend** calls `POST /api/sessions` → backend creates a session object and returns a `session_id`
+2. **Frontend** calls `POST /api/sessions/{id}/run` → backend spawns a background thread running `run_session()`
+3. **Backend thread** creates a `FlaskBridge` (empty in-memory form) and an `MCPServer` wrapping it
+4. **Backend thread** calls `think()` (in `think_service.py`), which:
+   - Reads all documents from the persona folder into memory (one LLM call per document)
+   - Iterates through `PAGE_ORDER` (28 pages)
+   - For each page: calls `scan_page()`, asks the LLM to fill it, calls `fill_field()` for each answer
+   - If the page has dynamic tables (e.g. children, securities), adds rows first
+   - If the LLM needs info not in any document, calls `ask_user()` to ask the NPC
+5. **After each `fill_field` call**, the `FlaskBridge` pushes an SSE event to the session's queue
+6. **Frontend** receives SSE events and polls `GET /api/sessions/{id}/form` every 1.5 s to refresh displayed values
+7. **When all pages are done**, the agent calls `submit_form()` → backend saves `submitted_return.json`
+8. **Frontend** calls `GET /api/sessions/{id}/score` → backend runs `score.py` and returns accuracy metrics
+9. **ScoreCard modal** appears showing the final accuracy percentage and field-by-field comparison
 
 ---
 
@@ -304,6 +477,29 @@ python3 -m scripts.score --all
 ```
 
 The scoring system compares each filled field against expected values, normalizing strings and numbers for fair comparison. Scores are displayed as percentages on the dashboard after each completed run.
+
+---
+
+## Swiss Tax Concepts Glossary
+
+For readers unfamiliar with the Swiss tax system, here are the key terms used throughout the codebase:
+
+| Term | Meaning |
+|------|---------|
+| **AHV** | Swiss state pension system (1st pillar). Every Swiss resident has an AHV number (like a social security number). |
+| **BVG** | Occupational pension fund (2nd pillar). Employer and employee both contribute. |
+| **Pillar 3a** | Voluntary private pension savings account. Contributions are tax-deductible up to an annual limit. |
+| **Lohnausweis** | Official salary certificate issued by every employer in Switzerland. Contains gross salary, AHV/BVG deductions, and other income. The most important document for tax filing. |
+| **Bruttolohn** | Gross salary before deductions. |
+| **Berufsauslagen** | Professional/work-related expenses (e.g. tools, work clothing, home office). Either declared as a flat-rate (3% of salary) or itemised. |
+| **Fahrkosten** | Commuting costs from home to workplace. |
+| **Verpflegung** | Meal/subsistence costs incurred while working away from a company canteen. |
+| **Schuldzinsen** | Interest paid on debts (e.g. mortgage interest). Deductible up to a limit. |
+| **Unterhaltsbeiträge** | Alimony/maintenance payments. Paid alimony is deductible; received alimony is taxable income. |
+| **Eigenmietwert** | Imputed rental value. Swiss law requires homeowners to declare the theoretical rent they would pay if they rented their own property — this counts as taxable income. |
+| **Steuerwert** | The official tax assessment value of real estate, set by the canton. |
+| **Zweiverdienerabzug** | "Dual-earner deduction" — a special deduction for married couples where both spouses work. |
+| **Zugangscode** | The access code mailed to taxpayers each year to log into the online tax portal. |
 
 ---
 
