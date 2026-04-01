@@ -106,13 +106,29 @@ class LLMService:
     # -- Factory classmethods -----------------------------------------------
 
     @classmethod
-    def ollama(cls, model: str = "llama3.1:8b", host: str = "http://localhost:11434") -> "LLMService":
-        """Create an LLMService backed by a local OLLAMA instance."""
+    def ollama(
+        cls,
+        model: str = "llama3.1:8b",
+        host: str = "http://localhost:11434",
+        no_think: bool | None = None,
+    ) -> "LLMService":
+        """Create an LLMService backed by a local OLLAMA instance.
+
+        Parameters
+        ----------
+        no_think : bool or None
+            If ``True``, append ``/no_think`` to the system prompt (needed
+            for thinking models like Qwen3).  If ``None`` (default),
+            auto-detect from the model name.
+        """
+        if no_think is None:
+            no_think = any(tag in model.lower() for tag in ("qwen3", "deepseek-r1"))
         return cls(
             provider="ollama",
             model=model,
             base_url=f"{host}/v1",
             api_key="unused",
+            no_think=no_think,
         )
 
     @classmethod
