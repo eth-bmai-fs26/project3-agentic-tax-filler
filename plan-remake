@@ -1,0 +1,45 @@
+I want to create a new notebook for the participants. This one should emphasize more on the agentic aspect of the agent that we are creating.
+For this purpose you should create a new file called project3_agentic_tax_filler_remake that would follow what I am saying here.
+
+  1. Hybrid approach (main deliverable — Cells 9-11 in all 3 notebooks)
+
+  The LLM does not fill one giant JSON for the entire form. Here's what actually happens:
+
+  - Navigation is code-driven — think() programmatically clicks btn-next to walk through pages: login → personal → income → deductions → wealth → review
+  - Per page, the code calls scan_page() to get the current fields, then sends only that page's fields + all persona documents + relevant tax guides to the LLM
+  - The LLM returns a per-page JSON like {"field-income-employment-bruttolohn": 142000, "field-income-ahv": 8950, "_thought": "From Lohnausweis..."}
+  - The code then calls fill_field() for each key-value pair
+  - Dynamic rows (children, bank accounts) are handled by the code detecting add-row buttons and clicking them before the LLM sees the fields
+
+  So it's one LLM call per page, not one LLM call for the whole form.
+
+This is the current implementation of the notebook. As said I want to create a new way better version that:
+- The LLM Retrieves relevant documents. Instead of taking as input the full documents, it just takes as input descriptions and names of document in order to choose which ones it needs information for
+- Plans how to fill the page in a first call. During this call it chooses what documents it wants to retrieve + reason and gives a small plan of what it wants to do (that can be then used for a cool visualization). The second call is then plan execution -> Take the plan and the content of the documents it selected and fill the json of the fill field function.
+- Use a local LLM (build a LLM service and use providers (OLLAMA for now))
+
+Have a more explanatory notebook:
+1. Simulation
+Simple HTML page
+User fills manually
+2. Plan Discovery
+Users explicitly write:
+Step-by-step actions
+Goal: understand “think function”
+3. Show Tools
+Display:
+Available documents
+Available tools
+4. Think Step
+Implement single reasoning step
+Test on one page
+5. Plan Visualization
+Show:
+LLM plan
+Decision flow
+6. Think Loop
+Full pipeline:
+Plan → Execute → Iterate
+7. Wrap-Up
+Final system behavior
+Insights
