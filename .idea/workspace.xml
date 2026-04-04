@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd6a8251-e8fc-43d6-a5f7-bde65b2f83b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/plan-remake" afterDir="false" />
-    </list>
+    <list default="true" id="cd6a8251-e8fc-43d6-a5f7-bde65b2f83b0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,6 +48,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "jupyter.settings.vcs",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -68,7 +67,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1774942082371</updated>
-      <workItem from="1774942083446" duration="14359000" />
+      <workItem from="1774942083446" duration="23055000" />
     </task>
     <servers />
   </component>
