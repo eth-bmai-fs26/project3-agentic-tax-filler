@@ -1,0 +1,42 @@
+{
+  "freelance-nebenberuf-steuern": {
+    "description": "Freelance/side-job tax rules. Covers the CHF 2,300 AHV threshold, how to declare freelance income, deductible expenses, and documentation standards.",
+    "use_when": "Taxpayer has self-employment or freelance income."
+  },
+  "homeoffice-fahrkosten-optimierung": {
+    "description": "Home office vs. commute deduction trade-off. Explains when home office deduction (CHF 3/day) is worth claiming vs. keeping full commuting deduction. Includes break-even formula.",
+    "use_when": "Taxpayer works from home part-time and has commuting costs."
+  },
+  "kinderbetreuung-abzug-maximum": {
+    "description": "Childcare cost deduction caps. Zurich cantonal max = CHF 10,100 per child. Covers qualifying expenses, age limits, and distinction from Kinderabzug.",
+    "use_when": "Taxpayer has children and childcare expenses."
+  },
+  "krankheitskosten-schwelle-5-prozent": {
+    "description": "Medical expense deduction rules. Only deductible if total exceeds 5% of net income. Formula: deductible = total medical costs - (5% x net income).",
+    "use_when": "Filling medical expense deduction fields."
+  },
+  "krypto-steuern-privat-professionell": {
+    "description": "Crypto tax rules for Zurich. Private investors pay wealth tax only (no income tax on gains). Covers when trading becomes 'professional', how to declare crypto wealth.",
+    "use_when": "Taxpayer holds or trades cryptocurrency."
+  },
+  "pensionierung-kapital-rente": {
+    "description": "Retirement income tax rules. Covers AHV/BVG pensions, capital withdrawals, Freizuegigkeitskonto, and how each is taxed differently. Capital withdrawals taxed separately at reduced rate.",
+    "use_when": "Taxpayer receives pension income or has made capital withdrawals."
+  },
+  "quellensteuer-wechsel-ordentlich": {
+    "description": "Switching from Quellensteuer to ordinary tax filing (e.g. after receiving C permit). Full-year rule: declare entire year's income even if permit changed mid-year.",
+    "use_when": "Taxpayer previously paid withholding tax (Quellensteuer)."
+  },
+  "scheidung-unterhalt-steuern": {
+    "description": "Divorce/separation tax rules. Critical distinction: spousal support IS taxable income, child support is NOT. Covers Kinderabzug after divorce, single-parent deduction.",
+    "use_when": "Taxpayer is divorced/separated or pays/receives alimony."
+  },
+  "velo-pauschale-fahrkosten": {
+    "description": "Bicycle/Velo-Pauschale commuting deduction. CHF 700 flat deduction in Zurich. Can be combined WITH public transport costs (e.g. ZVV pass + CHF 700). IMPORTANT: Must ALWAYS be added to commuting costs (Fahrkosten) for any employed taxpayer.",
+    "use_when": "Filling commuting/Fahrkosten deduction fields."
+  },
+  "verrechnungssteuer-rueckerstattung": {
+    "description": "Withholding tax (Verrechnungssteuer) refund rules. 35% withheld on Swiss investment income. Refunded automatically if income is declared honestly on tax return.",
+    "use_when": "Taxpayer has Swiss bank interest or dividends."
+  }
+}

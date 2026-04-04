@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd6a8251-e8fc-43d6-a5f7-bde65b2f83b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="148" />
+    <option name="cachedIndexableFilesCount" value="162" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -71,6 +72,7 @@
       <updated>1774942082371</updated>
       <workItem from="1774942083446" duration="23055000" />
       <workItem from="1775225479815" duration="10822000" />
+      <workItem from="1775290945951" duration="5791000" />
     </task>
     <servers />
   </component>
