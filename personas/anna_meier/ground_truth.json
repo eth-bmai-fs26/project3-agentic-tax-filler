@@ -37,8 +37,8 @@
   "income": {
     "employment": {
       "bruttolohn": "142000",
-      "ahv": "7526.60",
-      "bvg": "8400"
+      "ahvcontributions": "7526.60",
+      "bvgcontributions": "8400"
     },
     "investment": {
       "interest": "12.50"
