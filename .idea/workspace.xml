@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cd6a8251-e8fc-43d6-a5f7-bde65b2f83b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_openrouter.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_openrouter.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_solution_openrouter.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_solution_openrouter.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan-remake" beforeDir="false" afterPath="$PROJECT_DIR$/plan-remake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +76,7 @@
       <workItem from="1775225479815" duration="10822000" />
       <workItem from="1775290945951" duration="13253000" />
       <workItem from="1775925358752" duration="1248000" />
-      <workItem from="1775990505818" duration="1305000" />
+      <workItem from="1775990505818" duration="10747000" />
     </task>
     <servers />
   </component>
