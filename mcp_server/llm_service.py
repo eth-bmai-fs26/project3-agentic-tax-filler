@@ -34,13 +34,14 @@ class LLMService:
         base_url: str = "http://localhost:11434/v1",
         api_key: str = "unused",
         no_think: bool = False,
+        default_headers: dict | None = None,
     ):
         from openai import OpenAI
 
         self.provider = provider
         self.model = model
         self.no_think = no_think
-        self._client = OpenAI(api_key=api_key, base_url=base_url)
+        self._client = OpenAI(api_key=api_key, base_url=base_url, default_headers=default_headers)
         logger.info("LLMService ready — provider=%s, model=%s, url=%s", provider, model, base_url)
 
     def chat(
@@ -132,9 +133,9 @@ class LLMService:
         )
 
     @classmethod
-    def openai_compatible(cls, model: str, base_url: str, api_key: str) -> "LLMService":
+    def openai_compatible(cls, model: str, base_url: str, api_key: str, default_headers: dict | None = None) -> "LLMService":
         """Create an LLMService for any OpenAI-compatible endpoint."""
-        return cls(provider="openai", model=model, base_url=base_url, api_key=api_key)
+        return cls(provider="openai", model=model, base_url=base_url, api_key=api_key, default_headers=default_headers)
 
 
 # ---------------------------------------------------------------------------
