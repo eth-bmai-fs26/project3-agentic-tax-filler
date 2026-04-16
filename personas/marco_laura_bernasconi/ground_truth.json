@@ -8,7 +8,7 @@
       "ahvcontributions": "sum: 6254.60 + 2756 = 9010.60",
       "bvgcontributions": "sum: 7080 + 3120 = 10200",
       "berufsauslagen_flatrate": "Marco: 3% of (118000-6254.60-7080)=104665.40 -> 3139.96 -> 3140; Laura: 3% of (52000-2756-3120)=46124 -> 1383.72 -> min 2000; total 5140",
-      "verpflegung": "Marco lohnausweis 14.1=Ja->1600, Laura 14.1=Nein->3200; total 4800",
+      "verpflegung": "Marco lohnausweis 14.1=Ja->1600, Laura 14.1=Nein->3200; total 3520",
       "interest": "Zinsabschluss: 18.75 + 18.75 = 37.50",
       "schuldzinsen": "Hypothekarzins 980/month * 12 = 11760",
       "pillar3a": "Marco 4500 (Raiffeisen) + Laura 3000 (Frankly) = 7500",
@@ -19,7 +19,7 @@
       "bankbalance": "last row Dec 31 = 203644.99",
       "no_donations": "no Spende entries in bank_statement",
       "physiosuisse": "Laura's Physiosuisse membership 450 CHF - could be berufsauslagen effective, but we use flatrate mode",
-      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 5140 (same as flatrate)"
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 5126 (same as flatrate)"
     }
   },
   "personal": {
@@ -73,7 +73,7 @@
       "amount": "5140"
     },
     "verpflegung": {
-      "amount": "4800"
+      "amount": "3520"
     },
     "pillar3a": {
       "amount": "7500"
@@ -82,7 +82,7 @@
       "amount": "5900"
     },
     "kinderbetreuungskosten": {
-      "amount": "18000"
+      "amount": "10100"
     },
     "schuldzinsen": {
       "amount": "11760"
