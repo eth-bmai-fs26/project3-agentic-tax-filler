@@ -7,7 +7,7 @@
       "bruttolohn": "direct from lohnausweis field 1",
       "ahvcontributions": "direct from lohnausweis field 9",
       "bvgcontributions": "direct from lohnausweis field 10",
-      "berufsauslagen_flatrate": "3% of (135000-7155-8100)=119745, 3%=3592.35 -> 3592, within [2000,4000]",
+      "berufsauslagen_flatrate": "3% of (135000-7155-8100)=119745, 3%=3592.35 -> 3576, within [2000,4000]",
       "verpflegung": "lohnausweis 14.1 = Ja -> 1600 CHF",
       "freelance_revenue": "invoices: PC-001=5000 + PC-002=7000 + PC-003=6000 + PC-004=4000 = 22000 CHF",
       "freelance_expenses": "documented: MacBook 1800 + software subscriptions 600 + home office 300 = 2700 CHF (home office items may lack receipts)",
@@ -58,7 +58,7 @@
   },
   "deductions": {
     "flatrate": {
-      "amount": "3592"
+      "amount": "3576"
     },
     "verpflegung": {
       "amount": "1600"
@@ -74,14 +74,14 @@
       "amount": "890"
     },
     "weitereberufsauslagen": {
-      "amount": "3592",
+      "amount": "3576",
       "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
   "wealth": {
     "bankaccounts": [
       {
-        "bankName": "UBS / Kantonalbank",
+        "bankName": "UBS Switzerland AG",
         "balance": "148386.80",
         "interest": "16.80"
       }
