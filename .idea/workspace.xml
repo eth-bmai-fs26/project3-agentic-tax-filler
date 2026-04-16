@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_openrouter.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_openrouter.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_solution_openrouter.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mcp_server/notebook/project3_agentic_tax_filler_remake_solution_openrouter.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan-remake" beforeDir="false" afterPath="$PROJECT_DIR$/plan-remake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="163" />
+    <option name="cachedIndexableFilesCount" value="166" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -76,7 +75,9 @@
       <workItem from="1775225479815" duration="10822000" />
       <workItem from="1775290945951" duration="13253000" />
       <workItem from="1775925358752" duration="1248000" />
-      <workItem from="1775990505818" duration="10747000" />
+      <workItem from="1775990505818" duration="11665000" />
+      <workItem from="1776363662627" duration="2147000" />
+      <workItem from="1776367327980" duration="2620000" />
     </task>
     <servers />
   </component>

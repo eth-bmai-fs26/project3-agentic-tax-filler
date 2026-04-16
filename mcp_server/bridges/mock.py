@@ -128,8 +128,8 @@ def _build_stub_elements() -> dict[str, list[dict]]:
         "income": [
             {"type": "text", "content": "Please declare your employment income here."},
             {"type": "input", "locator": "field-income-employment-bruttolohn", "label": "1. Gross Salary (CHF)", "value": "", "required": True},
-            {"type": "input", "locator": "field-income-employment-ahv", "label": "AHV/IV/EO Contributions (CHF)", "value": "", "required": False},
-            {"type": "input", "locator": "field-income-employment-bvg", "label": "BVG Contributions (CHF)", "value": "", "required": False},
+            {"type": "input", "locator": "field-income-employment-ahvcontributions", "label": "AHV/IV/EO Contributions (CHF)", "value": "", "required": False},
+            {"type": "input", "locator": "field-income-employment-bvgcontributions", "label": "BVG Contributions (CHF)", "value": "", "required": False},
             {"type": "input", "locator": "field-income-selfemployment-revenue", "label": "Self-Employment Revenue (CHF)", "value": "", "required": False},
             {"type": "input", "locator": "field-income-selfemployment-expenses", "label": "Self-Employment Expenses (CHF)", "value": "", "required": False},
             {"type": "input", "locator": "field-income-pension-ahv", "label": "AHV Pension (CHF)", "value": "", "required": False},
