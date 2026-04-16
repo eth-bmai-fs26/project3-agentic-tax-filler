@@ -13,8 +13,8 @@
       "freizuegigkeit_interest": "900 CHF taxable interest (not in bank_statement, from separate document)",
       "securities_dividends": "8600 CHF gross dividends from UBS portfolio",
       "bank_interest": "22.50 + 22.50 = 45 CHF",
-      "verpflegung": "Thomas lohnausweis 14.1=Ja->1600, Elisabeth 14.1=Nein->3200; total 4800",
-      "berufsauslagen": "Thomas: 3% of 85152=2554.56->2555; Elisabeth: 3% of 33706=1011.18->min 2000; total 4555",
+      "verpflegung": "Thomas lohnausweis 14.1=Ja->1600, Elisabeth 14.1=Nein->3200; total 2347",
+      "berufsauslagen": "Thomas: 3% of 85152=2554.56->2555; Elisabeth: 3% of 33706=1011.18->min 2000; total 4543",
       "pillar3a": "Only Elisabeth (BVG-insured still working) = 7056 CHF. Thomas retired Aug 2025 - no further pillar 3a contributions possible after retirement.",
       "medical": "Total 5200 CHF. Threshold = 5% of reineinkommen. Gross approx 198000+, deductions reduce. Even conservatively at 5% of 150000 net = 7500 > 5200 -> NO deduction",
       "zweiverdienerabzug": "Thomas worked Jan-Aug (income-earning), Elisabeth full year -> both spouses had employment income -> 5900 CHF applies",
@@ -23,7 +23,7 @@
       "schuldzinsen": "0 (no mortgage per property assessment)",
       "freizuegigkeitskonto": "180000 CHF balance to be declared as wealth (bank account)",
       "securities_value": "420000 CHF total portfolio",
-      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 4555 (same as flatrate)"
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 4543 (same as flatrate)"
     }
   },
   "personal": {
@@ -71,10 +71,10 @@
   },
   "deductions": {
     "flatrate": {
-      "amount": "4555"
+      "amount": "4543"
     },
     "verpflegung": {
-      "amount": "4800"
+      "amount": "2347"
     },
     "pillar3a": {
       "amount": "7056"
@@ -89,7 +89,7 @@
       "amount": "0"
     },
     "weitereberufsauslagen": {
-      "amount": "4555",
+      "amount": "4543",
       "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
@@ -101,7 +101,7 @@
         "interest": "45"
       },
       {
-        "bankName": "Stiftung Auffangeinrichtung BVG (Freizügigkeit)",
+        "bankName": "Stiftung Auffangeinrichtung BVG",
         "balance": "180000",
         "interest": "900"
       }
