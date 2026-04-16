@@ -7,7 +7,7 @@
       "bruttolohn": "direct from lohnausweis field 1",
       "ahvcontributions": "direct from lohnausweis field 9",
       "bvgcontributions": "direct from lohnausweis field 10",
-      "berufsauslagen_flatrate": "calculated: 3% of (142000-7526.60-8400)=126073.40, 3%=3782.20 -> rounded=3782, within [2000,4000]",
+      "berufsauslagen_flatrate": "3% of Nettolohn per Lohnausweis field 12 (= Bruttolohn − AHV/ALV − NBU − BVG = 125505.40). 3% = 3765.16 → rounded = 3765. Range [2000, 4000].",
       "verpflegung": "lohnausweis 14.1 = Ja -> 1600 CHF",
       "fahrkosten": "ZVV Jahresabo 2840 + Velo-Pauschale 700 = 3540 CHF (prompt explicitly instructs adding CHF 700)",
       "weitereberufsauslagen": "prompt says MUST fill weitereberufsauslagen-amount with Pauschale = 3782",
@@ -46,14 +46,14 @@
   },
   "deductions": {
     "flatrate": {
-      "amount": "3782"
+      "amount": "3765"
     },
     "fahrkosten": {
       "amount": "3540",
       "description": "ZVV Jahresabo (CHF 2840) und Velo-Pauschale (CHF 700)"
     },
     "weitereberufsauslagen": {
-      "amount": "3782",
+      "amount": "3765",
       "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     },
     "verpflegung": {
