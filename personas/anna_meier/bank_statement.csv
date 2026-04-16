@@ -1,3 +1,7 @@
+# Bank: UBS Switzerland AG
+# Account holder: Anna Meier
+# IBAN: CH44 0023 0230 1234 5678 9
+# Period: 2025-01-01 to 2025-12-31
 Date,Description,Amount,Balance
 2025-01-31,Lohn Google Switzerland,+11833.33,45230.50
 2025-01-31,Miete Bederstrasse 45,-2100.00,43130.50

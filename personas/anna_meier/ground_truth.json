@@ -50,7 +50,7 @@
     },
     "fahrkosten": {
       "amount": "3540",
-      "description": "ZVV Jahresabonnement Zone 110 (CHF 2840) + Velo-Pauschale (CHF 700)"
+      "description": "ZVV Jahresabo + Velo-Pauschale"
     },
     "weitereberufsauslagen": {
       "amount": "3782",
@@ -64,13 +64,13 @@
     },
     "donations": {
       "amount": "200",
-      "recipient": "SRK (Schweizerisches Rotes Kreuz)"
+      "recipient": "SRK"
     }
   },
   "wealth": {
     "bankaccounts": [
       {
-        "bankName": "UBS / Kantonalbank",
+        "bankName": "UBS",
         "balance": "150806.68",
         "interest": "12.50"
       }
