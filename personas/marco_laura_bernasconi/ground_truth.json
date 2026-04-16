@@ -7,7 +7,7 @@
       "bruttolohn": "sum of both lohnausweise: 118000 + 52000 = 170000",
       "ahvcontributions": "sum: 6254.60 + 2756 = 9010.60",
       "bvgcontributions": "sum: 7080 + 3120 = 10200",
-      "berufsauslagen_flatrate": "Marco: 3% of (118000-6254.60-7080)=104665.40 -> 3139.96 -> 3140; Laura: 3% of (52000-2756-3120)=46124 -> 1383.72 -> min 2000; total 5140",
+      "berufsauslagen_flatrate": "Marco: 3% of (118000-6254.60-7080)=104665.40 -> 3139.96 -> 3140; Laura: 3% of (52000-2756-3120)=46124 -> 1383.72 -> min 2000; total 5126",
       "verpflegung": "Marco lohnausweis 14.1=Ja->1600, Laura 14.1=Nein->3200; total 3520",
       "interest": "Zinsabschluss: 18.75 + 18.75 = 37.50",
       "schuldzinsen": "Hypothekarzins 980/month * 12 = 11760",
@@ -70,7 +70,7 @@
   },
   "deductions": {
     "flatrate": {
-      "amount": "5140"
+      "amount": "5126"
     },
     "verpflegung": {
       "amount": "3520"
@@ -88,7 +88,7 @@
       "amount": "11760"
     },
     "weitereberufsauslagen": {
-      "amount": "5140",
+      "amount": "5126",
       "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
     }
   },
