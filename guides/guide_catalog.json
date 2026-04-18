@@ -19,6 +19,10 @@
     "description": "Crypto tax rules for Zurich. Private investors pay wealth tax only (no income tax on gains). Covers when trading becomes 'professional', how to declare crypto wealth.",
     "use_when": "Taxpayer holds or trades cryptocurrency."
   },
+  "policy_kb": {
+    "description": "Zurich tax policy reference (Wegleitung). Authoritative rules covering income classification (Lohnausweis fields, Dienstaltersgeschenke, Spesen, pensions, dividends, capital gains, alimony), deductions (Berufsauslagen Pauschale, Fahrkosten/Velo-Pauschale, Pillar 3a, Kinderbetreuung, medical 5% threshold, Zweiverdienerabzug), property (Eigenmietwert, Steuerwert, mortgage), wealth (Dec 31 valuations, Wertschriftenverzeichnis), and filing status (divorce, Quellensteuer transition).",
+    "use_when": "Default reference for any filing decision — consult for field-level rules, thresholds, caps, and avoiding double-counting."
+  },
   "pensionierung-kapital-rente": {
     "description": "Retirement income tax rules. Covers AHV/BVG pensions, capital withdrawals, Freizuegigkeitskonto, and how each is taxed differently. Capital withdrawals taxed separately at reduced rate.",
     "use_when": "Taxpayer receives pension income or has made capital withdrawals."
