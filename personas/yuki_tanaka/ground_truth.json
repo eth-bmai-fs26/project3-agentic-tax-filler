@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "persona": "yuki_tanaka",
+    "difficulty": "hard",
+    "notes": "Divorced (Oct 15, 2025) UX designer at Spotify. Single mother of Hana (5). Receives alimony (child support + spousal support) starting Nov 2025 but payments were short (1700/month instead of 2300). Has mortgage (no property documents available). KiTa receipt is blurry - amount inferred from bank statement (1450/month). German B2 course at Goethe-Institut. No Pillar 3a contributions in 2025.",
+    "_confidence": {
+      "maritalstatus": "divorced Oct 15, 2025 - files as 'divorced' for full year 2025",
+      "bruttolohn": "direct from lohnausweis field 1 = 108000",
+      "ahvcontributions": "direct from lohnausweis field 9 = 5724",
+      "bvgcontributions": "direct from lohnausweis field 10 = 6480",
+      "berufsauslagen": "3% of (108000-5724-6480)=95796 -> 2873.88 -> 2874, within [2000,4000]",
+      "verpflegung": "lohnausweis 14.1=Ja -> 1600 CHF",
+      "interest": "Zinsabschluss: 4.20 + 4.20 = 8.40 CHF",
+      "alimony_received": "Bank shows 1700 in Nov + 1700 in Dec = 3400 total received. Per decree: 1500 Kinderunterhalt + 800 Ehegattenunterhalt = 2300/month. Child support (Kinderunterhalt) is NOT taxable income for recipient. Spousal support (Ehegattenunterhalt) IS taxable. Only 2 months received. Taxable portion = 800*2 = 1600 per decree amount, but only 3400 received total and some is child support. Using conservative approach: taxable spousal = 3400 - (1500*2=3000) = 400 received. FLAGGED UNCERTAIN - use 1600 (decree amount) as the declared taxable alimony as that is what courts ordered.",
+      "alimony_taxable_UNCERTAIN": "Could be 400 (received minus child portion), 1600 (decree amount for 2 months), or 0 (if unsplit). Ground truth uses 1600 as the legally ordered spousal support amount for 2 months.",
+      "kinderbetreuung": "KiTa Regenbogen: 1450/month from bank statement * 12 = 17400 (blurry receipt, confirmed via bank)",
+      "schuldzinsen": "Hypothekarzins 1200/month * 12 = 14400 (from bank_statement, no property docs)",
+      "weiterbildung": "Goethe-Institut Deutsch B2 = 1200 CHF (language course for work)",
+      "pillar3a": "0 (no contributions in 2025 per profile brief)",
+      "bankbalance": "last row Dec 31 = 87008.20",
+      "property": "owns apartment per divorce decree (Langstrasse 88), no steuerwert document available",
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 2874 (same as flatrate)"
+    }
+  },
+  "personal": {
+    "main": {
+      "firstName": "Yuki",
+      "lastName": "Tanaka",
+      "dateofbirth": "1989-06-03",
+      "ahvnumber": "756.7745.2298.41",
+      "street": "Langstrasse",
+      "streetNumber": "88",
+      "zip": "8004",
+      "city": "Zürich",
+      "maritalstatus": "divorced",
+      "occupation": "UX Designer",
+      "employer": "Spotify AB, Zurich Branch"
+    },
+    "children": [
+      {
+        "name": "Hana Tanaka",
+        "dateOfBirth": "2020-04-11",
+        "relationship": "child"
+      }
+    ],
+    "supported": []
+  },
+  "income": {
+    "employment": {
+      "bruttolohn": "108000",
+      "ahvcontributions": "5724",
+      "bvgcontributions": "6480"
+    },
+    "alimony": {
+      "amount": "1600"
+    },
+    "investment": {
+      "interest": "8.40"
+    }
+  },
+  "deductions": {
+    "flatrate": {
+      "amount": "2874"
+    },
+    "verpflegung": {
+      "amount": "1600"
+    },
+    "kinderbetreuungskosten": {
+      "amount": "17400"
+    },
+    "schuldzinsen": {
+      "amount": "14400"
+    },
+    "weiterbildungskosten": {
+      "amount": "1200"
+    },
+    "pillar3a": {
+      "amount": "0"
+    },
+    "weitereberufsauslagen": {
+      "amount": "2874",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+    }
+  },
+  "wealth": {
+    "bankaccounts": [
+      {
+        "bankName": "UBS / Kantonalbank",
+        "balance": "87008.20",
+        "interest": "8.40"
+      }
+    ]
+  }
+}

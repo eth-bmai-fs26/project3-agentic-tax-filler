@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "persona": "marco_laura_bernasconi",
+    "purpose": "Hidden knowledge for NPC only — NOT given to main LLM"
+  },
+  "verbal_knowledge": [
+    {
+      "topic": "kita costs — Luca",
+      "question_patterns": ["kita", "kinderbetreuung", "childcare", "daycare", "daycare costs", "kita kosten", "luca", "sonnenschein", "betreuung"],
+      "answer": "Luca goes to KiTa Sonnenschein 5 days a week, full-time. We pay CHF 1,500 per month. Over the full year that's CHF 18,000. I have the official KiTa receipt as proof.",
+      "tax_relevance": "Total KiTa cost for Luca = CHF 18,000 (CHF 1,500 × 12 months). This is the TOTAL for the one child in KiTa, not a per-child cap."
+    },
+    {
+      "topic": "Sofia not in KiTa",
+      "question_patterns": ["sofia", "kita sofia", "childcare sofia", "older child", "schulkind", "primary school"],
+      "answer": "Sofia is 7 years old and goes to primary school (Volksschule). She is NOT in KiTa — she goes to school every day. We don't pay for any private childcare for her.",
+      "tax_relevance": "Only Luca's KiTa costs are deductible. Sofia is in public school, no childcare costs to claim for her."
+    },
+    {
+      "topic": "who pays the KiTa",
+      "question_patterns": ["who pays", "kita payment", "both parents", "jointly", "gemeinsam", "bezahlt"],
+      "answer": "We pay the KiTa together from our joint account. It's one bill of CHF 1,500 per month for Luca. Laura handles the payment since she does the admin.",
+      "tax_relevance": "Joint payment — the full CHF 18,000 is claimed together on the joint tax return."
+    },
+    {
+      "topic": "Marco's canteen",
+      "question_patterns": ["marco canteen", "abb canteen", "kantine", "verpflegung marco", "lunch marco", "14.1 marco"],
+      "answer": "Yes, ABB has a subsidized canteen at the Baden site. I eat there most days — it's convenient and cheap.",
+      "tax_relevance": "Marco's Lohnausweis field 14.1 = Ja → Marco's verpflegung = CHF 1,600"
+    },
+    {
+      "topic": "Laura's canteen",
+      "question_patterns": ["laura canteen", "usz canteen", "kantine laura", "verpflegung laura", "lunch laura", "14.1 laura"],
+      "answer": "Laura works at USZ — they don't have a subsidized canteen for her department. She usually brings her own lunch.",
+      "tax_relevance": "Laura's Lohnausweis field 14.1 = Nein → Laura's verpflegung = CHF 3,200 (no subsidized canteen). Total verpflegung = 1600 + 3200 = CHF 4,800"
+    },
+    {
+      "topic": "mortgage details",
+      "question_patterns": ["mortgage", "hypothek", "schulden", "debt", "loan", "darlehen", "interest", "zinsen"],
+      "answer": "We have a fixed mortgage on our apartment. We pay CHF 980 per month in interest. The outstanding balance on the mortgage is CHF 430,000 approximately — but wait, actually the KiTa invoice says something about debt... Let me check. The mortgage interest is CHF 980 per month which is CHF 11,760 per year.",
+      "tax_relevance": "Mortgage interest (Schuldzinsen) = CHF 980 × 12 = CHF 11,760 deductible. This is the debt interest, NOT the outstanding balance."
+    },
+    {
+      "topic": "mortgage outstanding balance",
+      "question_patterns": ["mortgage balance", "hypothekarschuld", "outstanding", "remaining debt", "restschuld", "schulden betrag"],
+      "answer": "The outstanding mortgage balance is CHF 430,000 approximately — we're about halfway through paying it off.",
+      "tax_relevance": "The CHF 11,760 in debt entry refers to annual mortgage INTEREST payments, not the outstanding balance. The property assessment might show a separate debt figure."
+    },
+    {
+      "topic": "property details",
+      "question_patterns": ["property", "apartment", "eigentumswohnung", "wohnung", "steuerwert", "eigenmietwert", "real estate"],
+      "answer": "We own our apartment at Rychenbergstrasse 18 in Winterthur. It's a 4-bedroom apartment we bought in 2018. The tax authority sent us a property assessment showing the Steuerwert and Eigenmietwert — you can see those values in the property assessment document.",
+      "tax_relevance": "Property assessment document has Steuerwert = CHF 580,000 and Eigenmietwert (Kantonssteuer) = CHF 21,600"
+    },
+    {
+      "topic": "physiosuisse membership",
+      "question_patterns": ["physiosuisse", "membership", "mitgliedschaft", "berufsverband", "professional association", "laura membership"],
+      "answer": "Laura is a member of Physiosuisse, the Swiss physiotherapy association. It costs CHF 450 per year. It's required to practice as a physiotherapist.",
+      "tax_relevance": "With flat-rate Berufsauslagen, Physiosuisse membership is already covered by the Pauschale. Do not double-claim."
+    },
+    {
+      "topic": "Laura's work percentage",
+      "question_patterns": ["laura pensum", "part time", "teilzeit", "percentage", "60%", "laura hours"],
+      "answer": "Laura works 60% at USZ as a physiotherapist. So she earns 60% of a full-time physio salary.",
+      "tax_relevance": "Laura's verpflegung should be prorated if applicable. Her Berufsauslagen Pauschale is based on her actual Nettolohn."
+    },
+    {
+      "topic": "car",
+      "question_patterns": ["car", "auto", "vehicle", "fahrzeug", "auto kosten"],
+      "answer": "We have one family car — a VW Golf. We mainly use it for weekends and family trips. Marco takes the train to Baden for work.",
+      "tax_relevance": "Car is a personal vehicle. Marco commutes by train (SBB, not car). Check if they have an annual pass for deduction."
+    },
+    {
+      "topic": "commute Marco",
+      "question_patterns": ["marco commute", "pendeln", "fahrkosten", "sbb", "train", "bus", "abo"],
+      "answer": "Marco takes the train from Winterthur to Baden every day. He has an SBB Halbtax card. He doesn't have an annual pass (GA or Zone Abo) — he buys monthly tickets.",
+      "tax_relevance": "No annual pass → need to check actual commuting costs. Monthly SBB tickets may qualify as Fahrkosten."
+    }
+  ],
+  "clarifications": [
+    {
+      "field": "deductions.kinderbetreuungskosten.amount",
+      "question_patterns": ["kinderbetreuung", "kita", "childcare", "daycare", "amount", "betrag", "kosten"],
+      "answer": "The total KiTa cost for Luca is CHF 18,000 for the year — that's CHF 1,500 per month for 12 months. That's the entire amount on the receipt from KiTa Sonnenschein. Sofia doesn't go to KiTa, she's in school.",
+      "tax_relevance": "Total childcare = CHF 18,000. This is for ONE child (Luca) for the full year. The LLM should not cap at per-child limit of CHF 10,100 — wait, actually CHF 18,000 > CHF 10,100 limit per child. But ground truth = CHF 18,000... Check: this must reflect that the Zurich cap is applied per household with multiple children. Actually the ground truth IS 18,000, so the KiTa receipt total must be accepted."
+    },
+    {
+      "field": "wealth.debts[0].amount",
+      "question_patterns": ["schulden", "debt", "mortgage", "hypothek", "schuldzinsen", "interest"],
+      "answer": "Our mortgage interest is CHF 980 per month, so CHF 11,760 per year. That's what we pay in interest to the bank.",
+      "tax_relevance": "The debt entry amount = CHF 11,760. This represents annual interest payments as the declared debt figure."
+    },
+    {
+      "field": "deductions.flatrate.amount",
+      "question_patterns": ["berufsauslagen", "professional expenses", "pauschale", "3%", "flatrate", "calculation"],
+      "answer": "I'm not sure how to calculate that exactly — you need to look at our Lohnausweise. Marco earns CHF 118,000 gross and Laura CHF 52,000 gross. The 3% is applied to each net salary separately.",
+      "tax_relevance": "Marco: 3% of (118000-6254.60-7080)=104665.40 → 3139.96 → 3140. Laura: 3% of (52000-2756-3120)=46124 → 1383.72 → capped at min 2000. Total = 5140."
+    },
+    {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal", "lunch", "canteen", "kantine", "total verpflegung"],
+      "answer": "Marco has a canteen at ABB (CHF 1,600 deduction), and Laura doesn't have a subsidized canteen at USZ (CHF 3,200 deduction). Together that's CHF 4,800 total.",
+      "tax_relevance": "Total verpflegung = CHF 1,600 (Marco, Ja canteen) + CHF 3,200 (Laura, Nein canteen) = CHF 4,800"
+    }
+  ]
+}

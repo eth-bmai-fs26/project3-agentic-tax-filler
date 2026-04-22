@@ -1,0 +1,5 @@
+VERIFICATION_REPORT.md
+__pycache__/
+.venv/
+.claude
+logs

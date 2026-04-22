@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "persona": "thomas_elisabeth_widmer",
+    "score_percent": 95.2,
+    "total_errors": 2,
+    "purpose": "llm_prompt_hints: errors where info WAS in docs — study these to improve the main LLM prompt. missing_information: info NOT in any document — add to NPC private knowledge once the NPC is implemented."
+  },
+  "llm_prompt_hints": [
+    {
+      "field": "income.capitalwithdrawals.amount",
+      "correct_value": "250000",
+      "got": null,
+      "error_type": "missing",
+      "hint": "Field 'income.capitalwithdrawals.amount' was left empty but should be '250000'. Check all documents.",
+      "cause": "info_in_documents"
+    },
+    {
+      "field": "deductions.flatrate.amount",
+      "correct_value": "4555",
+      "got": "3566",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.flatrate.amount' was filled as '3566' but the correct value is '4555'.",
+      "cause": "info_in_documents"
+    }
+  ],
+  "missing_information": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Marco Bernasconi",
+  "partner_name": "Laura Bernasconi",
+  "address": "Rychenbergstrasse 18, 8400 Winterthur",
+  "date_of_birth": "1987-05-22",
+  "partner_date_of_birth": "1987-11-03",
+  "ahv_number": "756.8821.4455.12",
+  "partner_ahv_number": "756.8821.4455.34",
+  "zivilstand": "verheiratet",
+  "nationality": "CH",
+  "permit": null,
+  "children": [
+    {"name": "Sofia Bernasconi", "date_of_birth": "2018-03-15"},
+    {"name": "Luca Bernasconi", "date_of_birth": "2022-08-20"}
+  ],
+  "brief": "We're a married couple living in Winterthur. I (Marco) work as a project manager at ABB in Baden. My wife Laura works part-time (60%) as a physiotherapist at Universitätsspital Zürich. We have two kids — Sofia (7) and Luca (3). Luca goes to KiTa. We own our apartment and have a mortgage. I'm not sure we're claiming everything we can."
+}

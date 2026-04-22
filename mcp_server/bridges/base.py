@@ -68,5 +68,19 @@ class BrowserBridge(ABC):
     def is_available(self) -> bool:
         """Whether the bridge is ready to accept commands."""
 
+    def notify_ask_user(self, question: str, answer: str) -> None:
+        """Display an ask_user conversation exchange in the frontend popup.
+
+        Default implementation is a no-op.  Override in bridges that
+        support a live frontend (ColabBridge, PlaywrightBridge).
+
+        Parameters
+        ----------
+        question : str
+            The question the main LLM posed to the taxpayer NPC.
+        answer : str
+            The NPC's answer to the question.
+        """
+
     def close(self):
         """Release resources (browser, connections).  Override if needed."""

@@ -1,0 +1,28 @@
+=== LOHNAUSWEIS / CERTIFICAT DE SALAIRE ===
+Steuerperiode: 2025
+
+Arbeitgeber: Universitätsspital Zürich (USZ)
+Adresse:     Rämistrasse 100, 8091 Zürich
+
+Arbeitnehmerin: Laura Bernasconi
+AHV-Nr:         756.8821.4455.34
+
+ 1. Lohn (brutto)                          CHF   52,000.00
+ 2. Gehaltsnebenleistungen                 CHF        0.00
+ 3. Unentgeltliche Befoerderung            Nein
+ 4. Kantinenverpflegung                    Nein
+ 5. Andere Gehaltsnebenleistungen          CHF        0.00
+ 6. Dienstaltersgeschenke                  CHF        0.00
+ 7. Verwaltungsratsentschaedigungen        CHF        0.00
+ 8. Weitere Leistungen                     CHF        0.00
+ 9. Beitraege AHV/IV/EO/ALV               CHF    2,756.00
+    Beitraege NBU                          CHF      208.00
+10. BVG ordentlich                         CHF    3,120.00
+    Einkauf BVG                            CHF        0.00
+11. Beitraege an Vorsorge (Saeulen 3a)     CHF        0.00
+12. Nettolohn                              CHF   45,916.00
+13. Pauschalspesen                         CHF        0.00
+14. Weitere Gehaltsnebenleistungen         CHF        0.00
+    14.1 Kantinenverpflegung/Lunch-Checks: Nein
+
+15. Bemerkungen: Pensum 60%

@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "persona": "anna_meier",
+    "score_percent": 96.3,
+    "total_errors": 1,
+    "purpose": "llm_prompt_hints: errors where info WAS in docs — study these to improve the main LLM prompt. missing_information: info NOT in any document — add to NPC private knowledge once the NPC is implemented."
+  },
+  "llm_prompt_hints": [
+    {
+      "field": "deductions.weitereberufsauslagen.amount",
+      "correct_value": "3782",
+      "got": "3765",
+      "error_type": "wrong_value",
+      "hint": "Field 'deductions.weitereberufsauslagen.amount' was filled as '3765' but the correct value is '3782'.",
+      "cause": "info_in_documents"
+    }
+  ],
+  "missing_information": []
+}

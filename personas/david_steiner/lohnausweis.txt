@@ -1,0 +1,28 @@
+=== LOHNAUSWEIS / CERTIFICAT DE SALAIRE ===
+Steuerperiode: 2025
+
+Arbeitgeber: Universität Zürich (UZH)
+Adresse:     Rämistrasse 71, 8006 Zürich
+
+Arbeitnehmer: David Steiner
+AHV-Nr:       756.1122.3344.55
+
+ 1. Lohn (brutto)                          CHF   48,000.00
+ 2. Gehaltsnebenleistungen                 CHF        0.00
+ 3. Unentgeltliche Befoerderung            Nein
+ 4. Kantinenverpflegung                    Ja
+ 5. Andere Gehaltsnebenleistungen          CHF        0.00
+ 6. Dienstaltersgeschenke                  CHF        0.00
+ 7. Verwaltungsratsentschaedigungen        CHF        0.00
+ 8. Weitere Leistungen                     CHF        0.00
+ 9. Beitraege AHV/IV/EO/ALV               CHF    2,472.00
+    Beitraege NBU                          CHF        0.00
+10. BVG ordentlich                         CHF    1,800.00
+    Einkauf BVG                            CHF        0.00
+11. Beitraege an Vorsorge (Saeulen 3a)     CHF        0.00
+12. Nettolohn                              CHF   43,728.00
+13. Pauschalspesen                         CHF        0.00
+14. Weitere Gehaltsnebenleistungen         CHF        0.00
+    14.1 Kantinenverpflegung/Lunch-Checks: Ja
+
+15. Bemerkungen: Teilzeitstelle 60% als Lehrassistent / Doktorand

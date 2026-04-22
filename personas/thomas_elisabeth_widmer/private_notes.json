@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "persona": "thomas_elisabeth_widmer",
+    "purpose": "Hidden knowledge for NPC only — NOT given to main LLM"
+  },
+  "verbal_knowledge": [
+    {
+      "topic": "pension capital withdrawal",
+      "question_patterns": ["capital withdrawal", "kapitalbezug", "kapitalleistung", "lump sum", "pensionskasse", "250000", "einmalig", "auszahlung"],
+      "answer": "When I retired in August, I took a partial capital withdrawal from my Pensionskasse — CHF 250,000 as a one-time lump sum. This is documented in the Pensionskasse confirmation letter. It's taxed separately from regular income.",
+      "tax_relevance": "income.capitalwithdrawals.amount = CHF 250,000. This must be declared on the separate Kapitalbezüge form, taxed at reduced rate. This is often missed by the LLM."
+    },
+    {
+      "topic": "retirement date",
+      "question_patterns": ["retirement", "pensionierung", "retired", "when retired", "last day work", "rentenbeginn"],
+      "answer": "I retired on August 31, 2025, after 35 years at Zurich Insurance. The pension payments started on September 1st. So I was employed for 8 months (January to August) and received pension for 4 months (September to December).",
+      "tax_relevance": "Employment income covers Jan-Aug 2025 only. BVG pension income = CHF 3,200 × 4 months = CHF 12,800. AHV pension starts separately."
+    },
+    {
+      "topic": "freizügigkeitskonto",
+      "question_patterns": ["freizügigkeit", "vested benefits", "freizügigkeitskonto", "180000", "declare", "deklarieren", "muss ich"],
+      "answer": "I still have a Freizügigkeitskonto with CHF 180,000 that I haven't drawn down yet — it's at Stiftung Auffangeinrichtung BVG. It earns interest. Yes, I need to declare the balance as wealth and the interest as income.",
+      "tax_relevance": "Freizügigkeitskonto: balance CHF 180,000 = wealth. Interest CHF 900 = income. Declared separately from main bank account."
+    },
+    {
+      "topic": "Thomas's canteen",
+      "question_patterns": ["thomas canteen", "zurich insurance canteen", "kantine", "verpflegung thomas", "lunch thomas", "14.1 thomas"],
+      "answer": "Yes, Zurich Insurance had a subsidized canteen. I used it regularly during my employment there.",
+      "tax_relevance": "Thomas Lohnausweis field 14.1 = Ja → Thomas verpflegung = CHF 1,600 (prorated for 8 months? Actually per Lohnausweis for the period worked)"
+    },
+    {
+      "topic": "Elisabeth's canteen",
+      "question_patterns": ["elisabeth canteen", "bibliothek canteen", "kantine elisabeth", "verpflegung elisabeth", "14.1 elisabeth"],
+      "answer": "Elisabeth works at the Zentralbibliothek — they don't have a subsidized canteen there. She brings lunch from home.",
+      "tax_relevance": "Elisabeth Lohnausweis field 14.1 = Nein → Elisabeth verpflegung = CHF 3,200. Total = 1600 + 3200 = CHF 4,800."
+    },
+    {
+      "topic": "property ownership",
+      "question_patterns": ["property", "house", "küsnacht", "seestrasse", "eigentum", "real estate", "mortgage", "hypothek"],
+      "answer": "We own our home in Küsnacht outright — the mortgage is completely paid off. We bought the house decades ago and paid off the last installment several years ago.",
+      "tax_relevance": "No mortgage outstanding balance. No Schuldzinsen deduction. Property still has Eigenmietwert and Steuerwert from assessment."
+    },
+    {
+      "topic": "medical expenses",
+      "question_patterns": ["medical", "arzt", "doctor", "krankheit", "krankenkosten", "gesundheit", "spital", "hospital", "receipts"],
+      "answer": "We had quite a few medical bills this year — my hip operation and Elisabeth's dental work. Total came to about CHF 5,200. We have all the receipts. But our accountant friend mentioned the 5% threshold — I'm not sure if we clear it.",
+      "tax_relevance": "Medical costs CHF 5,200. Must exceed 5% of net income to be deductible. Given combined income ~CHF 198,000+, net income after deductions likely > CHF 100,000, so 5% threshold > CHF 5,000. May clear the threshold only marginally. Ground truth = CHF 0 deduction (below threshold)."
+    },
+    {
+      "topic": "car",
+      "question_patterns": ["car", "auto", "vehicle", "fahrzeug", "BMW", "driving"],
+      "answer": "We have a car — a BMW 3 series. We use it mainly for personal trips, not for commuting. Elisabeth cycles to the library.",
+      "tax_relevance": "Vehicle is for personal use, not commuting. No Fahrkosten from car."
+    },
+    {
+      "topic": "securities portfolio",
+      "question_patterns": ["securities", "portfolio", "aktien", "wertschriften", "ubs", "dividends", "investments", "stocks"],
+      "answer": "We have a securities portfolio at UBS worth about CHF 420,000. We received about CHF 8,600 in dividends this year from Swiss and foreign companies.",
+      "tax_relevance": "Securities value = CHF 420,000 for wealth declaration. Dividends = CHF 8,600 income."
+    },
+    {
+      "topic": "Pillar 3a",
+      "question_patterns": ["pillar 3a", "säule 3a", "3a", "vorsorge", "pension", "contribution"],
+      "answer": "After I retired, I can no longer contribute to Pillar 3a. Elisabeth still works and contributes CHF 7,056 to her 3a account — the maximum for someone with BVG coverage.",
+      "tax_relevance": "Only Elisabeth's 3a = CHF 7,056 can be deducted. Thomas retired Aug 2025 and cannot make further 3a contributions."
+    },
+    {
+      "topic": "AHV pension",
+      "question_patterns": ["ahv pension", "ahv rente", "state pension", "first pillar", "erste säule", "rentenbescheinigung"],
+      "answer": "I receive AHV pension of CHF 2,390 per month, starting from September. For 4 months that's CHF 9,560 in 2025. The Rentenbescheinigung document shows this.",
+      "tax_relevance": "AHV pension income = CHF 2,390 × 4 = CHF 9,560"
+    },
+    {
+      "topic": "Elisabeth's income",
+      "question_patterns": ["elisabeth income", "librarian salary", "lohnausweis elisabeth", "bibliothek", "zb zürich"],
+      "answer": "Elisabeth still works full-time as a librarian at the Zentralbibliothek. Her Lohnausweis shows her full-year income.",
+      "tax_relevance": "Elisabeth's income is from her Lohnausweis — full year employment."
+    }
+  ],
+  "clarifications": [
+    {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal deduction", "canteen", "kantine", "14.1", "lunch"],
+      "answer": "Thomas had a canteen at Zurich Insurance — field 14.1 on his Lohnausweis says Ja, so CHF 1,600 for him. Elisabeth works at the Zentralbibliothek where there's no subsidized canteen — her 14.1 says Nein, so that's CHF 3,200 for her. Together CHF 4,800.",
+      "tax_relevance": "Total verpflegung = CHF 1,600 (Thomas) + CHF 3,200 (Elisabeth) = CHF 4,800"
+    },
+    {
+      "field": "income.capitalwithdrawals.amount",
+      "question_patterns": ["capital withdrawal", "kapitalbezug", "kapitalleistung", "lump sum", "pensionskasse withdrawal"],
+      "answer": "I withdrew CHF 250,000 from my Pensionskasse when I retired. It's a one-time lump sum payment documented in the Pensionskasse letter. This is taxed separately — I believe it goes on a separate form for Kapitalleistungen.",
+      "tax_relevance": "income.capitalwithdrawals.amount = CHF 250,000. Shown in pensionskasse_thomas.txt. This is the most commonly missed field."
+    },
+    {
+      "field": "deductions.flatrate.amount",
+      "question_patterns": ["berufsauslagen", "professional expenses", "pauschale", "3%", "calculation", "thomas berufsauslagen", "elisabeth berufsauslagen"],
+      "answer": "For the professional expense deduction — Thomas worked 8 months and Elisabeth works full-time. You need to calculate 3% of each person's net salary separately and then add them together. The minimum is CHF 2,000 per person.",
+      "tax_relevance": "Thomas: 3% of (96000-5088-5760)=85152 → 2554.56 → 2555. Elisabeth: 3% of (38000-2014-2280)=33706 → 1011.18 → min 2000. Total = 4555."
+    },
+    {
+      "field": "wealth.bankaccounts",
+      "question_patterns": ["bank", "kontostand", "freizügigkeit", "vested benefits", "savings", "account"],
+      "answer": "We have two accounts to declare: our main UBS savings account, and my Freizügigkeitskonto at Stiftung Auffangeinrichtung BVG with CHF 180,000. Both need to be listed with their year-end balances and interest earned.",
+      "tax_relevance": "Two bank accounts: main UBS (see bank_statement.csv for balance and interest) and Freizügigkeitskonto CHF 180,000 (interest CHF 900 from freizuegigkeitskonto_thomas.txt)"
+    }
+  ]
+}

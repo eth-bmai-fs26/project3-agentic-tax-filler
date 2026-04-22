@@ -1,0 +1,90 @@
+{
+  "_meta": {
+    "persona": "priya_chakraborty",
+    "difficulty": "hard",
+    "notes": "Data scientist at Swiss Re with freelance ML consulting side income and Interactive Brokers foreign investment portfolio. Complex: self-employment income + foreign dividends + German course weiterbildung + capital gains (not taxable in CH for private investors).",
+    "_confidence": {
+      "bruttolohn": "direct from lohnausweis field 1",
+      "ahvcontributions": "direct from lohnausweis field 9",
+      "bvgcontributions": "direct from lohnausweis field 10",
+      "berufsauslagen_flatrate": "3% of (135000-7155-8100)=119745, 3%=3592.35 -> 3592, within [2000,4000]",
+      "verpflegung": "lohnausweis 14.1 = Ja -> 1600 CHF",
+      "freelance_revenue": "invoices: PC-001=5000 + PC-002=7000 + PC-003=6000 + PC-004=4000 = 22000 CHF",
+      "freelance_expenses": "documented: MacBook 1800 + software subscriptions 600 + home office 300 = 2700 CHF (home office items may lack receipts)",
+      "freelance_netincome": "22000 - 2700 = 19300 CHF",
+      "pillar3a": "Finpension confirmation = 7056 CHF",
+      "interest": "bank_statement Zinsabschluss: 8.40 + 8.40 = 16.80 CHF",
+      "dividends": "IB statement gross USD 1200 - needs CHF conversion; approximately CHF 1056 at 0.88 rate (rate not in docs - flagged uncertain)",
+      "capital_gains": "USD 3200 realized gains - NOT taxable in CH for private investors (no professional trading)",
+      "donations": "Spende MSF 500 CHF (>= 100 CHF threshold)",
+      "weiterbildung": "Migros Klubschule Deutsch B2 = 890 CHF (work-related language course)",
+      "bankbalance": "last row Dec 31 = 148386.80",
+      "no_zvv": "no ZVV receipt found - no fahrkosten claimed",
+      "weitereberufsauslagen": "prompt explicitly requires filling weitereberufsauslagen-amount with Pauschale = 3592 (same as flatrate)"
+    }
+  },
+  "personal": {
+    "main": {
+      "firstName": "Priya",
+      "lastName": "Chakraborty",
+      "dateofbirth": "1991-09-12",
+      "ahvnumber": "756.9934.7712.58",
+      "street": "Militärstrasse",
+      "streetNumber": "76",
+      "zip": "8004",
+      "city": "Zürich",
+      "maritalstatus": "single",
+      "occupation": "Data Scientist",
+      "employer": "Swiss Re Management Ltd."
+    },
+    "children": [],
+    "supported": []
+  },
+  "income": {
+    "employment": {
+      "bruttolohn": "135000",
+      "ahvcontributions": "7155",
+      "bvgcontributions": "8100"
+    },
+    "selfemployment": {
+      "enabled": true,
+      "revenue": "22000",
+      "expenses": "2700",
+      "netincome": "19300"
+    },
+    "investment": {
+      "interest": "16.80"
+    }
+  },
+  "deductions": {
+    "flatrate": {
+      "amount": "3592"
+    },
+    "verpflegung": {
+      "amount": "1600"
+    },
+    "pillar3a": {
+      "amount": "7056"
+    },
+    "donations": {
+      "amount": "500",
+      "recipient": "Médecins Sans Frontières"
+    },
+    "weiterbildungskosten": {
+      "amount": "890"
+    },
+    "weitereberufsauslagen": {
+      "amount": "3592",
+      "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+    }
+  },
+  "wealth": {
+    "bankaccounts": [
+      {
+        "bankName": "UBS / Kantonalbank",
+        "balance": "148386.80",
+        "interest": "16.80"
+      }
+    ]
+  }
+}

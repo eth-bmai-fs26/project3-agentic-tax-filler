@@ -1,0 +1,248 @@
+{
+  "success": true,
+  "submission_json": {
+    "login": {
+      "auth": {
+        "ahvnumber": "",
+        "zugangscode": ""
+      }
+    },
+    "personal": {
+      "main": {
+        "firstName": "Marco",
+        "lastName": "Bernasconi",
+        "dateofbirth": "1987-05-22",
+        "street": "Rychenbergstrasse",
+        "streetNumber": "18",
+        "apartment": "",
+        "zip": "8400",
+        "city": "Winterthur",
+        "phone": "",
+        "email": "",
+        "ahvnumber": "756.8821.4455.12",
+        "maritalstatus": "married",
+        "religion": "",
+        "occupation": "Project Manager",
+        "employer": "ABB Schweiz AG",
+        "workplace": ""
+      },
+      "partner": {
+        "firstName": "Laura",
+        "lastName": "Bernasconi",
+        "dateofbirth": "1987-11-03",
+        "ahvnumber": "756.8821.4455.34",
+        "occupation": "Physiotherapist",
+        "employer": "Universitätsspital Zürich (USZ)",
+        "religion": ""
+      },
+      "children": [
+        {
+          "name": "Sofia Bernasconi",
+          "dateOfBirth": "2018-03-15",
+          "relationship": "child"
+        },
+        {
+          "name": "Luca Bernasconi",
+          "dateOfBirth": "2022-08-20",
+          "relationship": "child"
+        }
+      ],
+      "supported": [
+        {
+          "name": "",
+          "relationship": "",
+          "contribution": ""
+        }
+      ],
+      "representative": {
+        "name": "",
+        "address": "",
+        "phone": ""
+      },
+      "giftsreceived": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "giftsgiven": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "capitalbenefits": {
+        "amount": "",
+        "description": ""
+      },
+      "bankdetails": {
+        "iban": "",
+        "bankname": "",
+        "accountholder": ""
+      }
+    },
+    "income": {
+      "employment": {
+        "bruttolohn": "170000",
+        "ahvcontributions": "9010.60",
+        "bvgcontributions": "10200"
+      },
+      "selfemployment": {
+        "enabled": false,
+        "revenue": "",
+        "expenses": "",
+        "netincome": ""
+      },
+      "pension": {
+        "ahvpension": "",
+        "bvgpension": "",
+        "otherpension": ""
+      },
+      "capitalwithdrawals": {
+        "amount": ""
+      },
+      "investment": {
+        "dividends": "",
+        "interest": "37.50"
+      },
+      "alimony": {
+        "amount": ""
+      },
+      "otherincome": {
+        "description": "",
+        "amount": ""
+      },
+      "rental": {
+        "eigenmietwert": "21600",
+        "rentalincome": "",
+        "maintenancecosts": ""
+      }
+    },
+    "deductions": {
+      "berufsauslagen": {
+        "type": "flat-rate"
+      },
+      "flatrate": {
+        "amount": "4000"
+      },
+      "effective": [],
+      "fahrkosten": {
+        "amount": "",
+        "description": ""
+      },
+      "verpflegung": {
+        "amount": "3520"
+      },
+      "weitereberufsauslagen": {
+        "amount": "5140",
+        "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+      },
+      "pillar3a": {
+        "amount": "7500"
+      },
+      "insurance": {
+        "amount": ""
+      },
+      "schuldzinsen": {
+        "amount": "11760"
+      },
+      "unterhaltsbeitraege": {
+        "amount": "",
+        "recipient": ""
+      },
+      "kinderbetreuungskosten": {
+        "amount": "10100"
+      },
+      "weiterbildungskosten": {
+        "amount": ""
+      },
+      "donations": {
+        "amount": "",
+        "recipient": ""
+      },
+      "medical": {
+        "amount": ""
+      },
+      "zweiverdienerabzug": {
+        "amount": "5900"
+      },
+      "otherdeductions": {
+        "description": "",
+        "amount": ""
+      }
+    },
+    "wealth": {
+      "movableassets": {
+        "cashgold": ""
+      },
+      "businessshares": [
+        {
+          "date": "",
+          "description": "",
+          "wealthAmount": "",
+          "incomeAmount": ""
+        }
+      ],
+      "securities": [
+        {
+          "name": "",
+          "isin": "",
+          "quantity": "",
+          "value": "",
+          "grossReturn": ""
+        }
+      ],
+      "bankaccounts": [
+        {
+          "bankName": "Raiffeisen / ZKB",
+          "balance": "203644.99",
+          "interest": "37.50"
+        }
+      ],
+      "insurances": [
+        {
+          "company": "",
+          "policyNumber": "",
+          "surrenderValue": ""
+        }
+      ],
+      "vehicles": [
+        {
+          "type": "",
+          "brand": "",
+          "year": "",
+          "value": ""
+        }
+      ],
+      "realestate": {
+        "eigenmietwert": "21600",
+        "steuerwert": "580000",
+        "address": "Rychenbergstrasse 18, 8400 Winterthur"
+      },
+      "otherassets": {
+        "description": "",
+        "value": ""
+      },
+      "debts": [
+        {
+          "creditor": "Hypothek",
+          "amount": ""
+        }
+      ]
+    },
+    "attachments": {
+      "uploads": {
+        "lohnausweis": "",
+        "bankstatements": "",
+        "pillar3a": "",
+        "deductions": "",
+        "property": "",
+        "other": ""
+      }
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "persona": "anna_meier",
+    "purpose": "Hidden knowledge for NPC only — NOT given to main LLM"
+  },
+  "verbal_knowledge": [
+    {
+      "topic": "canteen",
+      "question_patterns": ["canteen", "mensa", "kantine", "lunch", "verpflegung", "14.1", "subsidized", "subventioniert"],
+      "answer": "Yes, Google has a subsidized canteen. I eat there almost every day — it's really good and cheap.",
+      "tax_relevance": "Confirms Lohnausweis field 14.1 = Ja → verpflegung deduction CHF 1,600 applies"
+    },
+    {
+      "topic": "commute",
+      "question_patterns": ["commute", "pendeln", "tram", "fahrkosten", "zvv", "bike", "velo", "bicycle", "fahrad"],
+      "answer": "I take the tram to work every day — I have a ZVV annual pass for all zones in Zurich. I also sometimes cycle on nice days but I don't have a separate bike I use just for commuting.",
+      "tax_relevance": "ZVV Jahresabo CHF 2,840 is deductible. The Velo-Pauschale CHF 700 is added per prompt instructions. Total fahrkosten = CHF 3,540."
+    },
+    {
+      "topic": "home office",
+      "question_patterns": ["home office", "homeoffice", "work from home", "remote", "zuhause arbeiten", "heimarbeit"],
+      "answer": "I occasionally work from home — maybe once or twice a month if I have deep work to do. Google doesn't mandate home office days, it's flexible.",
+      "tax_relevance": "Home office is not regular or employer-required, so no home office deduction applies. Fahrkosten stands as-is."
+    },
+    {
+      "topic": "bike",
+      "question_patterns": ["bike", "bicycle", "velo", "fahrrad", "cycling"],
+      "answer": "I have a personal bike I use on weekends but I don't use it for commuting to work regularly. My main commute is by ZVV tram.",
+      "tax_relevance": "No dedicated work-commute bicycle — Velo-Pauschale may still apply per Zurich rules if distance qualifies."
+    },
+    {
+      "topic": "side income",
+      "question_patterns": ["side income", "nebeneinkommen", "freelance", "self-employed", "selbständig", "nebenberuf"],
+      "answer": "No, I only work at Google. No freelance work on the side.",
+      "tax_relevance": "No self-employment income to declare."
+    },
+    {
+      "topic": "car",
+      "question_patterns": ["car", "auto", "vehicle", "fahrzeug", "driving"],
+      "answer": "No, I don't own a car. I live in Zurich city so I don't need one.",
+      "tax_relevance": "No vehicle wealth to declare."
+    },
+    {
+      "topic": "property",
+      "question_patterns": ["property", "eigentum", "apartment", "wohnung", "own", "buy", "mortgage", "hypothek"],
+      "answer": "I rent my apartment at Bederstrasse 45. I don't own any property.",
+      "tax_relevance": "No real estate, no Eigenmietwert, no mortgage interest deduction."
+    },
+    {
+      "topic": "pillar 3a",
+      "question_patterns": ["pillar 3a", "säule 3a", "3a", "viac", "vorsorge", "pension"],
+      "answer": "Yes, I maxed out my VIAC 3a this year. I contribute the maximum allowed every year.",
+      "tax_relevance": "VIAC confirmation = CHF 7,056 (maximum for BVG-insured employees)"
+    },
+    {
+      "topic": "donations",
+      "question_patterns": ["donation", "spende", "charity", "wohltätig", "SRK", "red cross"],
+      "answer": "I donated CHF 200 to the Swiss Red Cross (SRK) in March. That's the only donation I made this year.",
+      "tax_relevance": "CHF 200 to SRK qualifies (above CHF 100 threshold). Shows in bank statement March 2025."
+    },
+    {
+      "topic": "medical expenses",
+      "question_patterns": ["medical", "arzt", "doctor", "krankheit", "krankenversicherung", "health", "gesundheit"],
+      "answer": "No major medical expenses this year. Just the normal Krankenkasse premiums.",
+      "tax_relevance": "No medical deduction to claim."
+    },
+    {
+      "topic": "crypto",
+      "question_patterns": ["crypto", "bitcoin", "krypto", "ethereum", "blockchain", "nft"],
+      "answer": "No, I don't invest in crypto. I keep it simple with a savings account.",
+      "tax_relevance": "No crypto wealth or income to declare."
+    },
+    {
+      "topic": "securities",
+      "question_patterns": ["stocks", "shares", "aktien", "securities", "wertschriften", "portfolio", "invest", "dividends"],
+      "answer": "I don't have any investment portfolio — just a regular savings account at the bank.",
+      "tax_relevance": "No securities to declare. Only bank interest income."
+    }
+  ],
+  "clarifications": [
+    {
+      "field": "deductions.fahrkosten.amount",
+      "question_patterns": ["fahrkosten", "commute cost", "zvv", "annual pass", "velo", "bike", "bicycle", "transport"],
+      "answer": "I have a ZVV Jahresabonnement — the annual pass for all zones in Zurich. I paid CHF 2,840 for it. I also sometimes cycle to work, so there might be a Velo-Pauschale on top of that.",
+      "tax_relevance": "Fahrkosten = ZVV Jahresabo CHF 2,840 + Velo-Pauschale CHF 700 = CHF 3,540 total"
+    },
+    {
+      "field": "deductions.verpflegung.amount",
+      "question_patterns": ["verpflegung", "meal deduction", "canteen", "kantine", "14.1", "lunch deduction"],
+      "answer": "Google has a subsidized canteen — I eat there every day. I think that means I get the CHF 1,600 verpflegung deduction. Field 14.1 on my Lohnausweis is marked as Ja.",
+      "tax_relevance": "verpflegung = CHF 1,600 (Lohnausweis 14.1 = Ja)"
+    },
+    {
+      "field": "deductions.weitereberufsauslagen.amount",
+      "question_patterns": ["weitereberufsauslagen", "professional expenses", "berufsauslagen", "3%", "nettolohn", "pauschale"],
+      "answer": "I'm not exactly sure what the Pauschale calculation is — you'd need to calculate 3% of my net salary from the Lohnausweis.",
+      "tax_relevance": "3% of Nettolohn (field 12 = CHF 125,505.40) = CHF 3,765.16 → rounded to CHF 3,782 when using brutto minus AHV minus BVG. Ground truth = 3782."
+    },
+    {
+      "field": "wealth.bankaccounts[0].balance",
+      "question_patterns": ["bank balance", "kontostand", "savings", "sparguthaben", "how much money"],
+      "answer": "I have one savings account. The balance at year-end was about CHF 150,000 — you can see the exact amount in my bank statement.",
+      "tax_relevance": "Last row of bank_statement.csv Dec 31 = CHF 150,806.68"
+    }
+  ]
+}

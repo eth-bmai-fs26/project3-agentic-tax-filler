@@ -1,0 +1,243 @@
+{
+  "success": true,
+  "submission_json": {
+    "login": {
+      "auth": {
+        "ahvnumber": "",
+        "zugangscode": ""
+      }
+    },
+    "personal": {
+      "main": {
+        "firstName": "Yuki",
+        "lastName": "Tanaka",
+        "dateofbirth": "1989-06-03",
+        "street": "Langstrasse",
+        "streetNumber": "88",
+        "apartment": "",
+        "zip": "8004",
+        "city": "Zürich",
+        "phone": "",
+        "email": "",
+        "ahvnumber": "756.7745.2298.41",
+        "maritalstatus": "divorced",
+        "religion": "",
+        "occupation": "UX Designer",
+        "employer": "Spotify AB, Zurich Branch",
+        "workplace": ""
+      },
+      "partner": {
+        "firstName": "",
+        "lastName": "",
+        "dateofbirth": "",
+        "ahvnumber": "",
+        "occupation": "",
+        "employer": "",
+        "religion": ""
+      },
+      "children": [
+        {
+          "name": "Hana Tanaka",
+          "dateOfBirth": "2020-04-11",
+          "relationship": "child"
+        }
+      ],
+      "supported": [
+        {
+          "name": "",
+          "relationship": "",
+          "contribution": ""
+        }
+      ],
+      "representative": {
+        "name": "",
+        "address": "",
+        "phone": ""
+      },
+      "giftsreceived": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "giftsgiven": [
+        {
+          "description": "",
+          "date": "",
+          "amount": ""
+        }
+      ],
+      "capitalbenefits": {
+        "amount": "",
+        "description": ""
+      },
+      "bankdetails": {
+        "iban": "",
+        "bankname": "",
+        "accountholder": ""
+      }
+    },
+    "income": {
+      "employment": {
+        "bruttolohn": "108000",
+        "ahvcontributions": "5724",
+        "bvgcontributions": "6480"
+      },
+      "selfemployment": {
+        "enabled": false,
+        "revenue": "",
+        "expenses": "",
+        "netincome": ""
+      },
+      "pension": {
+        "ahvpension": "",
+        "bvgpension": "",
+        "otherpension": ""
+      },
+      "capitalwithdrawals": {
+        "amount": ""
+      },
+      "investment": {
+        "dividends": "",
+        "interest": "8.40"
+      },
+      "alimony": {
+        "amount": "1600"
+      },
+      "otherincome": {
+        "description": "",
+        "amount": ""
+      },
+      "rental": {
+        "eigenmietwert": "",
+        "rentalincome": "",
+        "maintenancecosts": ""
+      }
+    },
+    "deductions": {
+      "berufsauslagen": {
+        "type": "flat-rate"
+      },
+      "flatrate": {
+        "amount": "2874"
+      },
+      "effective": [],
+      "fahrkosten": {
+        "amount": "",
+        "description": ""
+      },
+      "verpflegung": {
+        "amount": "1600"
+      },
+      "weitereberufsauslagen": {
+        "amount": "2861",
+        "description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+      },
+      "pillar3a": {
+        "amount": "0"
+      },
+      "insurance": {
+        "amount": ""
+      },
+      "schuldzinsen": {
+        "amount": "14400"
+      },
+      "unterhaltsbeitraege": {
+        "amount": "",
+        "recipient": ""
+      },
+      "kinderbetreuungskosten": {
+        "amount": "10100"
+      },
+      "weiterbildungskosten": {
+        "amount": "1200"
+      },
+      "donations": {
+        "amount": "",
+        "recipient": ""
+      },
+      "medical": {
+        "amount": ""
+      },
+      "zweiverdienerabzug": {
+        "amount": ""
+      },
+      "otherdeductions": {
+        "description": "Alleinerziehenden-Abzug (gemäss Scheidungsurteil, alleinige Obhut)",
+        "amount": "5900"
+      }
+    },
+    "wealth": {
+      "movableassets": {
+        "cashgold": ""
+      },
+      "businessshares": [
+        {
+          "date": "",
+          "description": "",
+          "wealthAmount": "",
+          "incomeAmount": ""
+        }
+      ],
+      "securities": [
+        {
+          "name": "",
+          "isin": "",
+          "quantity": "",
+          "value": "",
+          "grossReturn": ""
+        }
+      ],
+      "bankaccounts": [
+        {
+          "bankName": "UBS / Kantonalbank",
+          "balance": "87008.20",
+          "interest": "8.40"
+        }
+      ],
+      "insurances": [
+        {
+          "company": "",
+          "policyNumber": "",
+          "surrenderValue": ""
+        }
+      ],
+      "vehicles": [
+        {
+          "type": "",
+          "brand": "",
+          "year": "",
+          "value": ""
+        }
+      ],
+      "realestate": {
+        "eigenmietwert": "",
+        "steuerwert": "",
+        "address": "Langstrasse 88, 8004 Zürich"
+      },
+      "otherassets": {
+        "description": "",
+        "value": ""
+      },
+      "debts": [
+        {
+          "creditor": "Hypothekarbank",
+          "amount": ""
+        }
+      ]
+    },
+    "attachments": {
+      "uploads": {
+        "lohnausweis": "",
+        "bankstatements": "",
+        "pillar3a": "",
+        "deductions": "",
+        "property": "",
+        "other": ""
+      }
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

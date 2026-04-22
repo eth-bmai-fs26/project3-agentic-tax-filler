@@ -37,23 +37,40 @@ class ColabBridge(BrowserBridge):
         return self._colab_available
 
     def scan_page(self) -> dict:
-        return self._call("JSON.stringify(window.TaxPortal.scanPage())")
+        return self._call("(window.TaxPortal.scanPage())")
 
     def fill_field(self, locator: str, value: Any) -> dict:
         value_json = json.dumps(value, ensure_ascii=False)
         return self._call(
-            f"JSON.stringify(window.TaxPortal.fillField("
+            f"(window.TaxPortal.fillField("
             f"{json.dumps(locator)}, {value_json}))"
         )
 
     def click_element(self, locator: str) -> dict:
         return self._call(
-            f"JSON.stringify(window.TaxPortal.clickElement("
+            f"(window.TaxPortal.clickElement("
             f"{json.dumps(locator)}))"
         )
 
     def submit_form(self) -> dict:
-        return self._call("JSON.stringify(window.TaxPortal.submitForm())")
+        return self._call("(window.TaxPortal.submitForm())")
+
+    def notify_ask_user(self, question: str, answer: str) -> None:
+        """Push an ask_user exchange to the React frontend popup via eval_js.
+
+        Calls ``window.TaxPortal.notifyAskUser(question, answer)`` in the
+        Colab output cell that rendered the frontend HTML.
+        """
+        q = json.dumps(question)
+        a = json.dumps(answer)
+        js = (
+            f"window.TaxPortal && typeof window.TaxPortal.notifyAskUser === 'function' "
+            f"&& window.TaxPortal.notifyAskUser({q}, {a})"
+        )
+        try:
+            self._eval_js(js)
+        except Exception as exc:
+            logger.warning("notify_ask_user eval_js failed: %s", exc)
 
     # -- internal --------------------------------------------------------
 

@@ -1,0 +1,28 @@
+=== LOHNAUSWEIS / CERTIFICAT DE SALAIRE ===
+Steuerperiode: 2025
+
+Arbeitgeber: Migros-Genossenschafts-Bund
+Adresse:     Limmatstrasse 152, 8005 Zürich
+
+Arbeitnehmer: Sophie Müller
+AHV-Nr:       756.4455.6677.88
+
+ 1. Lohn (brutto)                          CHF   95,000.00
+ 2. Gehaltsnebenleistungen                 CHF        0.00
+ 3. Unentgeltliche Befoerderung            Nein
+ 4. Kantinenverpflegung                    Ja
+ 5. Andere Gehaltsnebenleistungen          CHF        0.00
+ 6. Dienstaltersgeschenke                  CHF        0.00
+ 7. Verwaltungsratsentschaedigungen        CHF        0.00
+ 8. Weitere Leistungen                     CHF        0.00
+ 9. Beitraege AHV/IV/EO/ALV               CHF    4,893.00
+    Beitraege NBU                          CHF        0.00
+10. BVG ordentlich                         CHF    4,200.00
+    Einkauf BVG                            CHF        0.00
+11. Beitraege an Vorsorge (Saeulen 3a)     CHF        0.00
+12. Nettolohn                              CHF   85,907.00
+13. Pauschalspesen                         CHF        0.00
+14. Weitere Gehaltsnebenleistungen         CHF        0.00
+    14.1 Kantinenverpflegung/Lunch-Checks: Ja
+
+15. Bemerkungen: Kinderzulage CHF 2,400.00 (in Bruttolohn enthalten)

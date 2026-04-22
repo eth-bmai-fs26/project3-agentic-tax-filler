@@ -1,0 +1,15 @@
+=== INVOICE ===
+Invoice No: PC-2025-003
+Date: 2025-08-30
+
+From: Priya Chakraborty, Militärstrasse 76, 8004 Zürich
+To:   Swisscom Digital Technology SA, Alte Tiefenaustrasse 6, 3050 Bern
+
+Description: NLP chatbot proof-of-concept (June–August 2025)
+Hours: 48 hours @ CHF 125/h
+
+Amount:          CHF  6,000.00
+VAT:             Exempt (below CHF 100,000 threshold)
+
+Payment terms: 30 days net
+IBAN: CH93 0076 2011 6238 5295 7

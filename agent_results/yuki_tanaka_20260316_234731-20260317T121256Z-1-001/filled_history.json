@@ -1,0 +1,71 @@
+{
+  "personal": {
+    "field-personal-main-firstName": "Yuki",
+    "field-personal-main-lastName": "Tanaka",
+    "field-personal-main-dateofbirth": "1989-06-03",
+    "field-personal-main-street": "Langstrasse",
+    "field-personal-main-streetNumber": "88",
+    "field-personal-main-zip": "8004",
+    "field-personal-main-city": "Zürich",
+    "field-personal-main-maritalstatus": "divorced",
+    "field-personal-main-ahvnumber": "756.7745.2298.41",
+    "field-personal-main-occupation": "UX Designer",
+    "field-personal-main-employer": "Spotify AB, Zurich Branch"
+  },
+  "personal/children": {
+    "field-personal-children-0-name": "Hana Tanaka",
+    "field-personal-children-0-dateOfBirth": "2020-04-11",
+    "field-personal-children-0-relationship": "child"
+  },
+  "income": {
+    "field-income-employment-bruttolohn": "108000",
+    "field-income-employment-ahvcontributions": "5724",
+    "field-income-employment-bvgcontributions": "6480"
+  },
+  "income/securities-income": {
+    "field-income-investment-interest": "8.40"
+  },
+  "income/property-income": {
+    "field-income-rental-eigenmietwert": "",
+    "field-income-rental-rentalincome": "",
+    "field-income-rental-maintenancecosts": ""
+  },
+  "income/other": {
+    "field-income-alimony-amount": "1600"
+  },
+  "deductions": {
+    "field-deductions-verpflegung-amount": "1600"
+  },
+  "deductions/professional": {
+    "field-deductions-weitereberufsauslagen-amount": "2861",
+    "field-deductions-weitereberufsauslagen-description": "Berufsauslagen-Pauschale (3% des Nettolohns)",
+    "field-deductions-weiterbildungskosten-amount": "1200"
+  },
+  "deductions/debt-interest": {
+    "field-deductions-schuldzinsen-amount": "14400"
+  },
+  "deductions/alimony": {
+    "field-deductions-kinderbetreuungskosten-amount": "10100"
+  },
+  "deductions/insurance": {
+    "field-deductions-pillar3a-amount": "0"
+  },
+  "deductions/medical": {
+    "field-deductions-medical-amount": ""
+  },
+  "deductions/other": {
+    "field-deductions-otherdeductions-description": "Alleinerziehenden-Abzug (gemäss Scheidungsurteil, alleinige Obhut)",
+    "field-deductions-otherdeductions-amount": "5900"
+  },
+  "wealth": {
+    "field-wealth-bankaccounts-0-bankName": "UBS / Kantonalbank",
+    "field-wealth-bankaccounts-0-balance": "87008.20",
+    "field-wealth-bankaccounts-0-interest": "8.40"
+  },
+  "wealth/real-estate": {
+    "field-wealth-realestate-address": "Langstrasse 88, 8004 Zürich"
+  },
+  "wealth/debts": {
+    "field-wealth-debts-0-creditor": "Hypothekarbank"
+  }
+}

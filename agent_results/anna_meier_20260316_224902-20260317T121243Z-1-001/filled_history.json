@@ -1,0 +1,47 @@
+{
+  "personal": {
+    "field-personal-main-firstName": "Anna",
+    "field-personal-main-lastName": "Meier",
+    "field-personal-main-dateofbirth": "1996-07-14",
+    "field-personal-main-street": "Bederstrasse",
+    "field-personal-main-streetNumber": "45",
+    "field-personal-main-zip": "8002",
+    "field-personal-main-city": "Zürich",
+    "field-personal-main-maritalstatus": "single",
+    "field-personal-main-ahvnumber": "756.1234.5678.90",
+    "field-personal-main-occupation": "Software Engineer",
+    "field-personal-main-employer": "Google Switzerland GmbH"
+  },
+  "income": {
+    "field-income-employment-bruttolohn": "142000",
+    "field-income-employment-ahvcontributions": "7526.60",
+    "field-income-employment-bvgcontributions": "8400"
+  },
+  "income/securities-income": {
+    "field-income-investment-interest": "12.50"
+  },
+  "deductions": {
+    "field-deductions-fahrkosten-amount": "3540",
+    "field-deductions-fahrkosten-description": "ZVV Jahresabonnement Zone 110 (CHF 2840) + Velo-Pauschale (CHF 700)",
+    "field-deductions-verpflegung-amount": "1600"
+  },
+  "deductions/professional": {
+    "field-deductions-weitereberufsauslagen-amount": "3765",
+    "field-deductions-weitereberufsauslagen-description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+  },
+  "deductions/debt-interest": {
+    "field-deductions-schuldzinsen-amount": ""
+  },
+  "deductions/insurance": {
+    "field-deductions-pillar3a-amount": "7056"
+  },
+  "deductions/other": {
+    "field-deductions-donations-amount": "200",
+    "field-deductions-donations-recipient": "SRK (Schweizerisches Rotes Kreuz)"
+  },
+  "wealth": {
+    "field-wealth-bankaccounts-0-bankName": "UBS / Kantonalbank",
+    "field-wealth-bankaccounts-0-balance": "150806.68",
+    "field-wealth-bankaccounts-0-interest": "12.50"
+  }
+}

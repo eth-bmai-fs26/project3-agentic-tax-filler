@@ -1,0 +1,231 @@
+{
+  "login": {
+    "auth": {
+      "ahvnumber": "",
+      "zugangscode": ""
+    }
+  },
+  "personal": {
+    "main": {
+      "firstName": "Anna",
+      "lastName": "Meier",
+      "dateofbirth": "1990-05-10",
+      "street": "Musterstrasse",
+      "streetNumber": "123",
+      "apartment": "45",
+      "zip": "8000",
+      "city": "Zürich",
+      "phone": "044-1234567",
+      "email": "anna.meier@example.com",
+      "ahvnumber": "123456-7890",
+      "maritalstatus": "single",
+      "religion": "",
+      "occupation": "Software Engineer",
+      "employer": "Tech Solutions AG",
+      "workplace": "Hauptstrasse 42"
+    },
+    "partner": {
+      "firstName": "Peter",
+      "lastName": "Schmidt",
+      "dateofbirth": "1992-11-22",
+      "ahvnumber": "987654-3210",
+      "occupation": "Data Analyst",
+      "employer": "Data Insights GmbH",
+      "religion": "catholic"
+    },
+    "children": [
+      {
+        "name": "Anna Meier",
+        "dateOfBirth": "1996-07-14",
+        "relationship": ""
+      }
+    ],
+    "supported": [
+      {
+        "name": "Anna Meier",
+        "relationship": "Tochter",
+        "contribution": "7056"
+      }
+    ],
+    "representative": {
+      "name": "Anna Meier",
+      "address": "Bederstrasse 45, 8002 Zürich",
+      "phone": "044-1234567"
+    },
+    "giftsreceived": [
+      {
+        "description": "Gift from VIAC - Terzo Vorsorgestiftung der WIR Bank",
+        "date": "2026-01-15",
+        "amount": "7056"
+      }
+    ],
+    "giftsgiven": [
+      {
+        "description": "Gift from VIAC - Terzo Vorsorgestiftung der WIR Bank",
+        "date": "2026-01-15",
+        "amount": "7056"
+      }
+    ],
+    "capitalbenefits": {
+      "amount": "7056",
+      "description": "Gift from VIAC - Terzo Vorsorgestiftung der WIR Bank"
+    },
+    "bankdetails": {
+      "iban": "CH1200000000000000000",
+      "bankname": "Zürcher Kantonalbank",
+      "accountholder": "Anna Meier"
+    }
+  },
+  "income": {
+    "employment": {
+      "bruttolohn": "12000.00",
+      "ahvcontributions": "3000.00",
+      "bvgcontributions": "8000.00"
+    },
+    "selfemployment": {
+      "enabled": false,
+      "revenue": "",
+      "expenses": "",
+      "netincome": ""
+    },
+    "pension": {
+      "ahvpension": "3000.00",
+      "bvgpension": "8000.00",
+      "otherpension": "0.00"
+    },
+    "capitalwithdrawals": {
+      "amount": "0.00"
+    },
+    "investment": {
+      "dividends": "",
+      "interest": ""
+    },
+    "alimony": {
+      "amount": "0.00"
+    },
+    "otherincome": {
+      "description": "Gift from VIAC - Terzo Vorsorgestiftung der WIR Bank",
+      "amount": "7056.00"
+    },
+    "rental": {
+      "eigenmietwert": "15000",
+      "rentalincome": "0",
+      "maintenancecosts": "0"
+    }
+  },
+  "deductions": {
+    "berufsauslagen": {
+      "type": "flat-rate"
+    },
+    "flatrate": {
+      "amount": "3000"
+    },
+    "effective": [],
+    "fahrkosten": {
+      "amount": "0.00",
+      "description": "Public Transport Pass"
+    },
+    "verpflegung": {
+      "amount": "1600.00"
+    },
+    "weitereberufsauslagen": {
+      "amount": "0",
+      "description": ""
+    },
+    "pillar3a": {
+      "amount": "7056"
+    },
+    "insurance": {
+      "amount": ""
+    },
+    "schuldzinsen": {
+      "amount": ""
+    },
+    "unterhaltsbeitraege": {
+      "amount": "",
+      "recipient": ""
+    },
+    "kinderbetreuungskosten": {
+      "amount": "0"
+    },
+    "weiterbildungskosten": {
+      "amount": "0"
+    },
+    "donations": {
+      "amount": "7056",
+      "recipient": "VIAC - Terzo Vorsorgestiftung der WIR Bank"
+    },
+    "medical": {
+      "amount": ""
+    },
+    "zweiverdienerabzug": {
+      "amount": "0"
+    },
+    "otherdeductions": {
+      "description": "Gift from VIAC - Terzo Vorsorgestiftung der WIR Bank",
+      "amount": "7056"
+    }
+  },
+  "wealth": {
+    "movableassets": {
+      "cashgold": "15000"
+    },
+    "businessshares": [],
+    "securities": [
+      {
+        "name": "UBS Group AG",
+        "isin": "CH0022908163",
+        "quantity": "10",
+        "value": "50000",
+        "grossReturn": "0"
+      }
+    ],
+    "bankaccounts": [
+      {
+        "bankName": "Zürcher Kantonalbank",
+        "balance": "15000",
+        "interest": "0"
+      }
+    ],
+    "insurances": [
+      {
+        "company": "",
+        "policyNumber": "",
+        "surrenderValue": ""
+      }
+    ],
+    "vehicles": [
+      {
+        "type": "Car",
+        "brand": "BMW",
+        "year": "2023",
+        "value": "35000"
+      }
+    ],
+    "realestate": {
+      "eigenmietwert": "15000",
+      "steuerwert": "0",
+      "address": "No property details provided."
+    },
+    "otherassets": {
+      "description": "Wealth from UBS Group AG (Investments)",
+      "value": "50000"
+    },
+    "debts": [
+      {
+        "creditor": "",
+        "amount": ""
+      }
+    ]
+  },
+  "attachments": {
+    "uploads": {
+      "lohnausweis": "",
+      "bankstatements": "",
+      "pillar3a": "",
+      "deductions": "",
+      "property": "",
+      "other": ""
+    }
+  }
+}

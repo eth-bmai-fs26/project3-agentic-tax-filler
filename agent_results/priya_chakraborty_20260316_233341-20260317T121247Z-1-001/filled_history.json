@@ -1,0 +1,65 @@
+{
+  "personal": {
+    "field-personal-main-firstName": "Priya",
+    "field-personal-main-lastName": "Chakraborty",
+    "field-personal-main-dateofbirth": "1991-09-12",
+    "field-personal-main-street": "Militärstrasse",
+    "field-personal-main-streetNumber": "76",
+    "field-personal-main-zip": "8004",
+    "field-personal-main-city": "Zürich",
+    "field-personal-main-maritalstatus": "single",
+    "field-personal-main-ahvnumber": "756.9934.7712.58",
+    "field-personal-main-occupation": "Data Scientist",
+    "field-personal-main-employer": "Swiss Re Management Ltd."
+  },
+  "personal/bank-details": {
+    "field-personal-bankdetails-iban": "CH93 0076 2011 6238 5295 7",
+    "field-personal-bankdetails-accountholder": "Priya Chakraborty"
+  },
+  "income": {
+    "field-income-employment-bruttolohn": "135000",
+    "field-income-employment-ahvcontributions": "7155",
+    "field-income-employment-bvgcontributions": "8100",
+    "field-income-selfemployment-revenue": "22000",
+    "field-income-selfemployment-expenses": "2700",
+    "field-income-selfemployment-netincome": "19300"
+  },
+  "income/securities-income": {
+    "field-income-investment-dividends": "1056",
+    "field-income-investment-interest": "16.80"
+  },
+  "deductions": {
+    "field-deductions-verpflegung-amount": "1600"
+  },
+  "deductions/professional": {
+    "field-deductions-weitereberufsauslagen-amount": "3592",
+    "field-deductions-weitereberufsauslagen-description": "Berufsauslagen-Pauschale (3% des Nettolohns)",
+    "field-deductions-weiterbildungskosten-amount": "890"
+  },
+  "deductions/debt-interest": {
+    "field-deductions-schuldzinsen-amount": ""
+  },
+  "deductions/insurance": {
+    "field-deductions-pillar3a-amount": "7056"
+  },
+  "deductions/medical": {
+    "field-deductions-medical-amount": ""
+  },
+  "deductions/other": {
+    "field-deductions-donations-amount": "500",
+    "field-deductions-donations-recipient": "Médecins Sans Frontières"
+  },
+  "wealth": {
+    "field-wealth-bankaccounts-0-bankName": "UBS / Kantonalbank",
+    "field-wealth-bankaccounts-0-balance": "148386.80",
+    "field-wealth-bankaccounts-0-interest": "16.80",
+    "field-wealth-securities-0-name": "US Equities Portfolio (AAPL, MSFT)",
+    "field-wealth-securities-0-quantity": "1",
+    "field-wealth-securities-0-value": "33616",
+    "field-wealth-securities-0-grossReturn": "765.60",
+    "field-wealth-securities-1-name": "VTI ETF",
+    "field-wealth-securities-1-quantity": "1",
+    "field-wealth-securities-1-value": "5984",
+    "field-wealth-securities-1-grossReturn": "387.20"
+  }
+}

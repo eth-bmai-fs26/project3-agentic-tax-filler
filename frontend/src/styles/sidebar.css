@@ -1,0 +1,156 @@
+/* Modern sidebar for form editing pages */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #fff;
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 8px 0 64px;
+}
+
+/* Back link */
+.sidebar-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin: 4px 12px 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: calc(100% - 24px);
+  text-align: left;
+}
+
+.sidebar-back:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-primary);
+}
+
+/* Section groups */
+.sidebar-section {
+  padding: 0 0 4px;
+}
+
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px 6px 16px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: color 0.15s;
+  gap: 8px;
+}
+
+.sidebar-section-header:hover {
+  color: var(--color-text);
+}
+
+.sidebar-section-header .section-status {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sidebar-section-header .section-status-filled {
+  background: var(--color-primary);
+}
+
+.sidebar-section-header .section-status-error {
+  background: var(--color-error);
+}
+
+.sidebar-section-header .section-status-empty {
+  border: 1.5px solid #d1d5db;
+  background: transparent;
+}
+
+.sidebar-section-arrow {
+  color: var(--color-text-secondary);
+  transition: transform 0.2s;
+  margin-left: auto;
+  font-size: 0.6rem;
+}
+
+.sidebar-section-arrow.open {
+  transform: rotate(90deg);
+}
+
+/* Sub-items */
+.sidebar-items {
+  list-style: none;
+  padding: 0 10px 4px;
+}
+
+.sidebar-items li {
+  margin: 1px 0;
+}
+
+.sidebar-items a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.12s, color 0.12s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar-items a:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
+.sidebar-items a.active {
+  color: var(--color-primary);
+  font-weight: 600;
+  background: var(--color-primary-light);
+}
+
+/* Status dots */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot-empty {
+  border: 1.5px solid #d1d5db;
+  background: transparent;
+}
+
+.status-dot-progress {
+  background: var(--color-primary);
+  opacity: 0.5;
+}
+
+.status-dot-complete {
+  background: var(--color-success);
+}
+
+.status-dot-error {
+  background: var(--color-error);
+}

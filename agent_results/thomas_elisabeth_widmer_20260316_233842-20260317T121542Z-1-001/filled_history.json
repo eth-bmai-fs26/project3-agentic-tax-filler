@@ -1,0 +1,129 @@
+{
+  "personal": {
+    "field-personal-main-firstName": "Thomas",
+    "field-personal-main-lastName": "Widmer",
+    "field-personal-main-dateofbirth": "1961-04-18",
+    "field-personal-main-street": "Seestrasse",
+    "field-personal-main-streetNumber": "142",
+    "field-personal-main-zip": "8700",
+    "field-personal-main-city": "Küsnacht",
+    "field-personal-main-maritalstatus": "married",
+    "field-personal-main-ahvnumber": "756.3312.8847.65",
+    "field-personal-main-occupation": "Retired (former Risk Manager)",
+    "field-personal-main-employer": "Zurich Insurance Group AG",
+    "field-personal-partner-firstName": "Elisabeth",
+    "field-personal-partner-lastName": "Widmer",
+    "field-personal-partner-dateofbirth": "1964-08-30",
+    "field-personal-partner-ahvnumber": "756.3312.8847.87",
+    "field-personal-partner-occupation": "Librarian",
+    "field-personal-partner-employer": "Zentralbibliothek Zürich (ZB)"
+  },
+  "personal/capital-benefits": {
+    "field-personal-capitalbenefits-description": "Kapitalbezug Pensionskasse Zurich Insurance",
+    "field-personal-capitalbenefits-amount": "250000"
+  },
+  "income": {
+    "field-income-employment-bruttolohn": "134000",
+    "field-income-employment-ahvcontributions": "7102",
+    "field-income-employment-bvgcontributions": "8040"
+  },
+  "income/pensions": {
+    "field-income-pension-ahvpension": "9560",
+    "field-income-pension-bvgpension": "12800"
+  },
+  "income/securities-income": {
+    "field-income-investment-dividends": "8600",
+    "field-income-investment-interest": "945"
+  },
+  "income/property-income": {
+    "field-income-rental-eigenmietwert": "32400"
+  },
+  "income/other": {
+    "field-income-alimony-amount": "",
+    "field-income-otherincome-description": "",
+    "field-income-otherincome-amount": ""
+  },
+  "deductions": {
+    "field-deductions-verpflegung-amount": "4800"
+  },
+  "deductions/professional": {
+    "field-deductions-berufsauslagen-type": "flat-rate",
+    "field-deductions-weitereberufsauslagen-amount": "4555",
+    "field-deductions-weitereberufsauslagen-description": "Berufsauslagen-Pauschale (3% des Nettolohns)"
+  },
+  "deductions/debt-interest": {
+    "field-deductions-schuldzinsen-amount": "0"
+  },
+  "deductions/alimony": {
+    "field-deductions-zweiverdienerabzug-amount": "5900"
+  },
+  "deductions/insurance": {
+    "field-deductions-pillar3a-amount": "7056"
+  },
+  "deductions/medical": {
+    "field-deductions-medical-amount": "0"
+  },
+  "wealth": {
+    "field-wealth-bankaccounts-0-bankName": "UBS Switzerland AG",
+    "field-wealth-bankaccounts-0-balance": "646271.84",
+    "field-wealth-bankaccounts-0-interest": "45",
+    "field-wealth-bankaccounts-1-bankName": "Stiftung Auffangeinrichtung BVG (Freizügigkeit)",
+    "field-wealth-bankaccounts-1-balance": "180000",
+    "field-wealth-bankaccounts-1-interest": "900",
+    "field-wealth-securities-0-name": "Nestlé SA",
+    "field-wealth-securities-0-isin": "CH0038863350",
+    "field-wealth-securities-0-quantity": "500",
+    "field-wealth-securities-0-value": "52500",
+    "field-wealth-securities-0-grossReturn": "3000",
+    "field-wealth-securities-1-name": "Novartis AG",
+    "field-wealth-securities-1-isin": "CH0012005267",
+    "field-wealth-securities-1-quantity": "400",
+    "field-wealth-securities-1-value": "38000",
+    "field-wealth-securities-1-grossReturn": "1360",
+    "field-wealth-securities-2-name": "Roche Holding AG",
+    "field-wealth-securities-2-isin": "CH0012032048",
+    "field-wealth-securities-2-quantity": "150",
+    "field-wealth-securities-2-value": "42750",
+    "field-wealth-securities-2-grossReturn": "1425",
+    "field-wealth-securities-3-name": "Zurich Insurance Group AG",
+    "field-wealth-securities-3-isin": "CH0011075394",
+    "field-wealth-securities-3-quantity": "120",
+    "field-wealth-securities-3-value": "62400",
+    "field-wealth-securities-3-grossReturn": "2880",
+    "field-wealth-securities-4-name": "Swiss Re AG",
+    "field-wealth-securities-4-isin": "CH0126881561",
+    "field-wealth-securities-4-quantity": "80",
+    "field-wealth-securities-4-value": "9200",
+    "field-wealth-securities-4-grossReturn": "480",
+    "field-wealth-securities-5-name": "UBS Group AG",
+    "field-wealth-securities-5-isin": "CH0244767585",
+    "field-wealth-securities-5-quantity": "600",
+    "field-wealth-securities-5-value": "17400",
+    "field-wealth-securities-5-grossReturn": "420",
+    "field-wealth-securities-6-name": "iShares Core SPI (CH)",
+    "field-wealth-securities-6-isin": "CH0237935652",
+    "field-wealth-securities-6-quantity": "200",
+    "field-wealth-securities-6-value": "36800",
+    "field-wealth-securities-6-grossReturn": "590",
+    "field-wealth-securities-7-name": "Vanguard FTSE All-World ETF",
+    "field-wealth-securities-7-isin": "IE00BK5BQT80",
+    "field-wealth-securities-7-quantity": "450",
+    "field-wealth-securities-7-value": "55350",
+    "field-wealth-securities-7-grossReturn": "1125",
+    "field-wealth-securities-8-name": "UBS ETF SMI",
+    "field-wealth-securities-8-isin": "CH0017142719",
+    "field-wealth-securities-8-quantity": "300",
+    "field-wealth-securities-8-value": "39600",
+    "field-wealth-securities-8-grossReturn": "792",
+    "field-wealth-securities-9-name": "CS / UBS Money Market Fund",
+    "field-wealth-securities-9-isin": "CH0102295455",
+    "field-wealth-securities-9-quantity": "1000",
+    "field-wealth-securities-9-value": "66000",
+    "field-wealth-securities-9-grossReturn": "528"
+  },
+  "wealth/real-estate": {
+    "field-wealth-realestate-address": "Seestrasse 142, 8700 Küsnacht",
+    "field-wealth-realestate-eigenmietwert": "32400",
+    "field-wealth-realestate-steuerwert": "1200000"
+  }
+}

@@ -1,0 +1,32 @@
+=== ERFOLGSRECHNUNG / SELBSTÄNDIGE ERWERBSTÄTIGKEIT ===
+Steuerperiode: 2025
+
+Steuerpflichtige: Elena Rossi
+AHV-Nr:           756.2233.4455.66
+Tätigkeit:        Selbständige Gastronomin, Inhaberin "Ristorante Bella Vista"
+Adresse Betrieb:  Seefeldstrasse 90, 8008 Zürich
+
+Betriebsertrag:
+  Umsatzerlöse Gastronomie                CHF  268,000.00
+  Catering & Events                       CHF   12,000.00
+  Total Ertrag                            CHF  280,000.00
+
+Betriebsaufwand:
+  Warenaufwand (Lebensmittel & Getränke)  CHF   84,000.00
+  Personalaufwand                         CHF   72,000.00
+  Mietaufwand Geschäftslokal              CHF   24,000.00
+  Versicherungen                          CHF    3,200.00
+  Energie & Nebenkosten                   CHF    4,800.00
+  Abschreibungen                          CHF    3,500.00
+  Werbung & Marketing                     CHF    1,800.00
+  Übriger Betriebsaufwand                 CHF    1,700.00
+  Total Aufwand                           CHF  195,000.00
+
+Reingewinn                                CHF   85,000.00
+
+AHV-Beiträge Selbständige:               CHF    8,245.00
+BVG (freiwillig):                         CHF    6,000.00
+
+Bemerkungen:
+- Zusätzlich Mieteinnahmen aus Liegenschaft Forchstrasse 22, 8008 Zürich:
+  Bruttomietertrag CHF 36,000.00 / Liegenschaftsunterhalt CHF 4,200.00
